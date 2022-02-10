@@ -4,8 +4,8 @@
              x:Class="Mosaik.id.RegisterPage">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.25*"/>
-            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -29,7 +29,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="End">
                 <Label
-                    Text="Placeholder slogan klo emg butuh"
+                    Text="Create your account below"
                     FontSize="Medium"
                     FontAttributes="Italic"/>
             </StackLayout>

@@ -37,7 +37,8 @@ namespace Mosaik.id
         }
         private void SignUp_Label_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("ToDo!", "Redirect ke Sign Up", "OK");
+            //DisplayAlert("ToDo!", "Redirect ke Sign Up", "OK");
+            Navigation.PushAsync(new RegisterPage());
         }
 
         private void ShowPassword(object sender, EventArgs e)

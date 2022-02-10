@@ -4,8 +4,8 @@
              x:Class="Mosaik.id.LoginPage">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.25*"/>
-            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
