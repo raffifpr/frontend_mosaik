@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
-namespace MyProject
+namespace Mosaik.id
 {
     public partial class BrowserMosaik : ContentPage
     {
