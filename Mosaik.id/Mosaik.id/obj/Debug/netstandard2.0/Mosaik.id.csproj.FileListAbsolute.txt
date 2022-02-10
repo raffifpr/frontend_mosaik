@@ -29,3 +29,4 @@ H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\ne
 H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.dll
 H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\ref\Mosaik.id.dll
 H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.pdb
+C:\Users\Nicholas Chen\source\repos\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\LoginPage.xaml.g.cs

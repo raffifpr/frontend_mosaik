@@ -1,2 +1,2 @@
-AdbTarget=-s RR8M30814DK
+AdbTarget=-s emulator-5554
 AdbOptions=

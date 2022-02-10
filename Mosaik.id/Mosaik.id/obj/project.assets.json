@@ -525,19 +525,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Eru Ds\\.nuget\\packages\\": {}
+    "C:\\Users\\Nicholas Chen\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\Project\\College\\Semester 6\\Proyek PPL\\Mosaik\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
+      "projectUniqueName": "C:\\Users\\Nicholas Chen\\source\\repos\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
       "projectName": "Mosaik.id",
-      "projectPath": "H:\\Project\\College\\Semester 6\\Proyek PPL\\Mosaik\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
-      "packagesPath": "C:\\Users\\Eru Ds\\.nuget\\packages\\",
-      "outputPath": "H:\\Project\\College\\Semester 6\\Proyek PPL\\Mosaik\\Mosaik.id\\Mosaik.id\\obj\\",
+      "projectPath": "C:\\Users\\Nicholas Chen\\source\\repos\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
+      "packagesPath": "C:\\Users\\Nicholas Chen\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nicholas Chen\\source\\repos\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Eru Ds\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nicholas Chen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

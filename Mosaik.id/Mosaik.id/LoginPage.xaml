@@ -29,7 +29,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="End">
                 <Label
-                    Text="Placeholder slogan klo emg butuh"
+                    Text="Log in into your account"
                     FontSize="Medium"
                     FontAttributes="Italic"/>
             </StackLayout>
@@ -44,14 +44,26 @@
             <Entry
                 x:Name="username"
                 Placeholder="Username"/>
-            <FlexLayout Direction="Column">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
                 <Entry
-                x:Name="password"
-                Placeholder="Password"
-                IsPassword="True" />
-                <Button Text="Show" Clicked="ShowPassword" FlexLayout.AlignSelf="End"/>
-            </FlexLayout>
-
+                        x:Name="password"
+                        Placeholder="Password"
+                        IsPassword="True"
+                        Grid.Row="0"
+                        Grid.Column="0"/>
+                <Button x:Name="showPasswordBtn" 
+                        Text="Show" 
+                        Clicked="ShowPassword"
+                        Grid.Row="0"
+                        Grid.Column="1"/>
+            </Grid>
 
             <Button
                 Text="Log In"
@@ -61,7 +73,7 @@
                 TextColor="Blue">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer 
-                        Tapped="Login_Button_Clicked"
+                        Tapped="SignUp_Label_Clicked"
                         NumberOfTapsRequired="1" />
                 </Label.GestureRecognizers>
             </Label>
