@@ -13,3 +13,19 @@ C:\Users\Nicholas Chen\source\repos\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik
 C:\Users\Nicholas Chen\source\repos\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.dll
 C:\Users\Nicholas Chen\source\repos\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\ref\Mosaik.id.dll
 C:\Users\Nicholas Chen\source\repos\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.pdb
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\bin\Debug\netstandard2.0\Mosaik.id.deps.json
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\bin\Debug\netstandard2.0\Mosaik.id.dll
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\bin\Debug\netstandard2.0\ref\Mosaik.id.dll
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\bin\Debug\netstandard2.0\Mosaik.id.pdb
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.csproj.AssemblyReference.cache
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.GeneratedMSBuildEditorConfig.editorconfig
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\App.xaml.g.cs
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\LoginPage.xaml.g.cs
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.AssemblyInfoInputs.cache
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.AssemblyInfo.cs
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.csproj.CoreCompileInputs.cache
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\XamlC.stamp
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.dll
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\ref\Mosaik.id.dll
+H:\Project\College\Semester 6\Proyek PPL\Mosaik\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.pdb
