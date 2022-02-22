@@ -1,13 +1,16 @@
-namespace Mosaik.idAPI
+using System.ComponentModel.DataAnnotations;
+
+namespace Mosaik.idAPI.Models
 {
     public class MosaikItem
     {
-        public DateTime Date { get; set; }
+        [Required]
+        public string FullName{ get; set; }
 
-        public int TemperatureC { get; set; }
+        [Required]
+        public string Email{ get; set; }
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-        public string? Summary { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 }

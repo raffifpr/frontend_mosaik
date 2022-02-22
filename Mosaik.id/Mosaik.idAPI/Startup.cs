@@ -1,4 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Mosaik.idAPI.Interfaces;
+using Mosaik.idAPI.Services;
 
 namespace Mosaik.idAPI
 {
@@ -13,12 +20,28 @@ namespace Mosaik.idAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<>(); //add mosaikrepo & 
+            services.AddSingleton<IMosaikRepository, MosaikRepository>();
+            services.AddControllers();    
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHttpsRedirection();
+            }
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

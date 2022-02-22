@@ -1,33 +1,26 @@
+using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Mosaik.idAPI.Models;
+using Mosaik.idAPI.Interfaces;
 
 namespace Mosaik.idAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MosaikController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        private readonly IMosaikRepository _repository;
 
-        private readonly ILogger<MosaikController> _logger;
-
-        public MosaikController(ILogger<MosaikController> logger)
+        public MosaikController(IMosaikRepository mosaikRepository)
         {
-            _logger = logger;
+            _repository = mosaikRepository;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<MosaikItem> Get()
+        [HttpGet]
+        public IActionResult List()
         {
-            return Enumerable.Range(1, 5).Select(index => new MosaikItem
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return Ok(_repository.All);
         }
     }
 }
