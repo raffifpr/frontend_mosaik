@@ -1,4 +1,5 @@
-﻿using Mosaik.idAPI.Models;
+﻿using System.Collections.Generic;
+using Mosaik.idAPI.Models;
 
 namespace Mosaik.idAPI.Interfaces
 {
