@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
-namespace Mosaik.id
+namespace MyProject
 {
     public partial class BrowserMosaik : ContentPage
     {
-
         void Button_Clicked(object sender, EventArgs e)
         {
             bool CheckURLValid(String source)
@@ -46,7 +46,7 @@ namespace Mosaik.id
             InitializeComponent();
             var link = new Entry {};
             var url = new Entry { };
-
+            //this.BindingContext = new MyViewModel();
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
@@ -73,6 +73,12 @@ namespace Mosaik.id
         {
             Loading.IsVisible = true;
             url.Text = e.Url;
+            HistoryList.ItemsSource = history;
+
+            // ObservableCollection allows items to be added after ItemsSource
+            // is set and the UI will react to changes
+            history.Add(new History { Link = url.Text });
+            history.Add(new History { AccessedTime = DateTime.Now.ToString() });
         }
 
         private void Browser_Navigated(object sender, WebNavigatedEventArgs e)
@@ -105,6 +111,79 @@ namespace Mosaik.id
                 SearchBar.IsVisible = true;
             }
         }
+        public class History
+        {
+            public string AccessedTime { get; set; }
+            public string Link { get; set; }
+        }
+
+        ObservableCollection<History> history = new ObservableCollection<History>();
+        public ObservableCollection<History> Historys { get { return history; } }
+
+        private void Button_Clicked_3(object sender, EventArgs e)
+        {
+            Header.IsVisible = false;
+            Browser.IsVisible = false;
+            SearchBar.IsVisible = false;
+            Histori.IsVisible=true;
+            HistoryList.IsVisible=true;
+        }
+
+        private void HistoryList_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var tappedItem = "link";
+            try
+            {
+                tappedItem = ((History)e.Item).Link.ToString();
+                Header.IsVisible = false;
+                Browser.IsVisible = true;
+                SearchBar.IsVisible = true;
+                Histori.IsVisible = false;
+                Browser.Source = tappedItem;
+            }
+            catch (Exception ex)
+            {
+                if (ex is Exception) {
+                    
+                } 
+                else {
+                    Header.IsVisible = false;
+                    Browser.IsVisible = true;
+                    SearchBar.IsVisible = true;
+                    Histori.IsVisible = false;
+                    tappedItem = ((History)e.Item).Link.ToString(); 
+                    Browser.Source = tappedItem; 
+                }
+            }
+
+        }
+        private void Button_Clicked_4(object sender, EventArgs e)
+        {
+            Header.IsVisible = true;
+            Browser.IsVisible = false;
+            SearchBar.IsVisible = false;
+            Histori.IsVisible = false;
+        }
+        //public class MyViewModel
+        //{
+        //    public ICommand NaviCommand { protected set; get; }
+        //    public ObservableCollection<History> history { get; set; }
+        //    public MyViewModel()
+        //    {
+        //        history = new ObservableCollection<History>();
+        //        NaviCommand = new Command<History>((key) =>
+        //        {
+        //            History person = key as History;
+
+        //        });
+        //        history.Add(new History() { Link = "test1"});
+        //    }
+        //}
+        //public class History
+        //{
+        //    public string Link { get; set; }
+        //}
+
     }
 
 }
