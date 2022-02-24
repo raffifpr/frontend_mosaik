@@ -982,20 +982,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nicholas Chen\\.nuget\\packages\\": {}
+    "C:\\Users\\Kahfi Zulkifli\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nicholas Chen\\source\\repos\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj",
       "projectName": "Mosaik.id.iOS",
-      "projectPath": "C:\\Users\\Nicholas Chen\\source\\repos\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj",
-      "packagesPath": "C:\\Users\\Nicholas Chen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nicholas Chen\\source\\repos\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\obj\\",
+      "projectPath": "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj",
+      "packagesPath": "C:\\Users\\Kahfi Zulkifli\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\Nicholas Chen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kahfi Zulkifli\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1008,8 +1008,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\Nicholas Chen\\source\\repos\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
-              "projectPath": "C:\\Users\\Nicholas Chen\\source\\repos\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj"
+            "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
+              "projectPath": "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj"
             }
           }
         }
