@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mosaik.id.HomePage">
+    <StackLayout>
+        <StackLayout>
+            <StackLayout x:Name="Header" 
+                         BackgroundColor="AliceBlue" 
+                         HeightRequest="1000" 
+                         WidthRequest="1000" 
+                         IsVisible="true">
+                <Frame BackgroundColor="LightGreen" 
+                       HeightRequest="100" 
+                       WidthRequest="100" 
+                       Padding="24" 
+                       CornerRadius="0" 
+                       IsVisible="true">
+                    <Label Text="Welcome to Mosaik.id :)" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="White" 
+                           FontSize="36"/>
+                </Frame>
+                <Label Text="Hi, Anak!" 
+                       FontSize="Title" 
+                       FontAttributes="Bold" 
+                       Padding="30,50,30,0"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="M" 
+                           VerticalOptions="Center" 
+                           FontAttributes="Bold" 
+                           FontSize="Title" 
+                           TextDecorations="Underline" 
+                           TextColor="Red" 
+                           Padding="5,0,0,0"/>
+                    <Entry x:Name="link" 
+                           Placeholder="Seach Mosaik or type a URL" 
+                           ClearButtonVisibility="WhileEditing" 
+                           Keyboard="Url" 
+                           WidthRequest="300"/>
+                </StackLayout>
+                <Button Text="Search" 
+                        BackgroundColor="Yellow" 
+                        Clicked="GoBrowsing" 
+                        HeightRequest="50" 
+                        WidthRequest="50"/>
+                <!--<Button Text="History"
+                        Clicked="Button_Clicked_3"/>-->
+                <Button Text="History"
+                        Clicked="GoToHistoryPage"/>
+            </StackLayout>
+        </StackLayout>
+        <!--<StackLayout x:Name="Histori" IsVisible="False">
+            <Button 
+            Text="Back" 
+            HeightRequest="40"             
+            WidthRequest="40" 
+            Clicked = "Button_Clicked_4"/>
+            <ListView          
+                x:Name="HistoryList"
+                ItemsSource="{Binding history}"                                  
+                ItemTapped="HistoryList_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        --><!--<ViewCell>
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <Label Text="{Binding AccessedTime}"/>
+                                    <Label Text="{Binding Link}"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>--><!--
+                        <TextCell Text="{Binding AccessedTime}" Detail="{Binding Link}" />
+                        --><!--Command="{Binding Path=BindingContext.NaviCommand, Source={x:Reference Name=HistoryList}}"-->
+                        <!--CommandParameter="{Binding .}"--><!--
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>-->
+    </StackLayout>
+    
+</ContentPage>
