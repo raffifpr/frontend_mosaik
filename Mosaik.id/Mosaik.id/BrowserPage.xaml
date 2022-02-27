@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mosaik.id.BrowserPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout x:Name="SearchBar"   
+                         Orientation="Horizontal">
+                <Button Text="&lt;" 
+                            HeightRequest="40" 
+                            WidthRequest="40" 
+                            Clicked = "PreviousPage"/>
+                <Entry x:Name="url" 
+                           WidthRequest="268" 
+                           HeightRequest="40" 
+                           ReturnType="Search" 
+                           Completed="url_Completed" 
+                           ClearButtonVisibility="WhileEditing"/>
+                <Button Text="&gt;" 
+                            HeightRequest="40" 
+                            WidthRequest="40" 
+                            Clicked = "NextPage"/>
+            </StackLayout>  
+            <ActivityIndicator x:Name="Loading" 
+                               IsRunning="True" />
+            <WebView x:Name="Browser" 
+                     HeightRequest="1000" 
+                     WidthRequest="1000"  
+                     Navigating="Browser_Navigating"
+                     Navigated="Browser_Navigated"/>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
