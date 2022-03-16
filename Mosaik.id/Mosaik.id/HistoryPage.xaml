@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mosaik.id.HistoryPage">
+    <StackLayout Margin="20,35,20,20">
+        <!--<Entry x:Name="nameEntry"
+               Placeholder="Enter name" />
+        <Entry x:Name="ageEntry"
+               Placeholder="Enter age" />
+        <Button Text="Add to Database"
+                Clicked="OnButtonClicked" />-->
+        <ListView x:Name="Sejarah"
+            ItemTapped="History_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!--<Label Text="{Binding Link}"
+                               FontSize="Medium" />
+                    <Label Text="{Binding AccessedTime}"
+                               TextColor="Silver"
+                               FontSize="Small" />-->
+                    <TextCell Text="{Binding Link}" Detail="{Binding AccessedTime}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

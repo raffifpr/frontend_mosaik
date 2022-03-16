@@ -1,27 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mosaik.id.BrowserMosaik">
+             x:Class="Mosaik.id.HomePage">
     <StackLayout>
         <StackLayout>
-            <StackLayout x:Name="SearchBar" 
-                         Orientation="Horizontal"
-                         IsVisible="false">
-                <Button Text="&lt;" 
-                        HeightRequest="40" 
-                        WidthRequest="40" 
-                        Clicked = "Button_Clicked_1"/>
-                <Entry x:Name="url" 
-                       WidthRequest="268" 
-                       HeightRequest="40" 
-                       ReturnType="Search" 
-                       Completed="url_Completed" 
-                       ClearButtonVisibility="WhileEditing"/>
-                <Button Text="&gt;" 
-                        HeightRequest="40" 
-                        WidthRequest="40" 
-                        Clicked = "Button_Clicked_2"/>
-            </StackLayout>
             <StackLayout x:Name="Header" 
                          BackgroundColor="AliceBlue" 
                          HeightRequest="1000" 
@@ -56,26 +38,18 @@
                            Keyboard="Url" 
                            WidthRequest="300"/>
                 </StackLayout>
-
                 <Button Text="Search" 
                         BackgroundColor="Yellow" 
-                        Clicked="Button_Clicked" 
+                        Clicked="GoBrowsing" 
                         HeightRequest="50" 
                         WidthRequest="50"/>
+                <!--<Button Text="History"
+                        Clicked="Button_Clicked_3"/>-->
                 <Button Text="History"
-                        Clicked="Button_Clicked_3"/>
+                        Clicked="GoToHistoryPage"/>
             </StackLayout>
-            <ActivityIndicator x:Name="Loading" 
-                               IsRunning="True" 
-                               IsVisible="false" />
-            <WebView x:Name="Browser" 
-                     HeightRequest="1000" 
-                     WidthRequest="1000" 
-                     IsVisible="false" 
-                     Navigating="Browser_Navigating"
-                     Navigated="Browser_Navigated"/>
         </StackLayout>
-        <StackLayout x:Name="Histori" IsVisible="False">
+        <!--<StackLayout x:Name="Histori" IsVisible="False">
             <Button 
             Text="Back" 
             HeightRequest="40"             
@@ -87,21 +61,21 @@
                 ItemTapped="HistoryList_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <!--<ViewCell>
+                        --><!--<ViewCell>
                             <ViewCell.View>
                                 <StackLayout>
                                     <Label Text="{Binding AccessedTime}"/>
                                     <Label Text="{Binding Link}"/>
                                 </StackLayout>
                             </ViewCell.View>
-                        </ViewCell>-->
+                        </ViewCell>--><!--
                         <TextCell Text="{Binding AccessedTime}" Detail="{Binding Link}" />
-                        <!--Command="{Binding Path=BindingContext.NaviCommand, Source={x:Reference Name=HistoryList}}"-->
-                        <!--CommandParameter="{Binding .}"-->
+                        --><!--Command="{Binding Path=BindingContext.NaviCommand, Source={x:Reference Name=HistoryList}}"-->
+                        <!--CommandParameter="{Binding .}"--><!--
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+        </StackLayout>-->
     </StackLayout>
     
 </ContentPage>

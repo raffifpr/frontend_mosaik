@@ -29,7 +29,7 @@ namespace Mosaik.id
             else if (username.Text.Equals("Admin") && password.Text.Equals("1234"))
             {
                 //DisplayAlert("ToDo!", "Redirect ke Browser", "OK");
-                Navigation.PushAsync(new BrowserMosaik());
+                Navigation.PushAsync(new HomePage());
             }
             else
             {
