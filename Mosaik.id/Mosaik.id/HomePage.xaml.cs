@@ -15,11 +15,11 @@ namespace Mosaik.id
         public string sauce = "";
         public HomePage()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             
             var link = new Entry { };
             var url = new Entry { };
-            //this.BindingContext = new MyViewModel();
         }
         void GoBrowsing(object sender, EventArgs e)
         {
@@ -36,100 +36,76 @@ namespace Mosaik.id
                 if (!Regex.IsMatch(link.Text, @"^https?:\/\/", RegexOptions.IgnoreCase))
                     link.Text = "https://" + link.Text;
                 sauce = link.Text;
-                //Header.IsVisible = false;
-                //Browser.IsVisible = true;
-                //SearchBar.IsVisible = true;
             }
             else
             {
                 sauce = "https://www.google.com/search?q=" + link.Text;
-                //Header.IsVisible = false;
-                //Browser.IsVisible = true;
-                //SearchBar.IsVisible = true;
             }
+            link.Text = "";
             Navigation.PushAsync(new BrowserPage(sauce));
         }      
-        
-
-        
-        //public class History
-        //{
-        //    public string AccessedTime { get; set; }
-        //    public string Link { get; set; }
-        //}
-
-        //ObservableCollection<History> history = new ObservableCollection<History>();
-        //public ObservableCollection<History> Historys { get { return history; } }
-
-        //private void Button_Clicked_3(object sender, EventArgs e)
-        //{
-        //    Header.IsVisible = false;
-        //    Browser.IsVisible = false;
-        //    SearchBar.IsVisible = false;
-        //    Histori.IsVisible=true;
-        //    HistoryList.IsVisible=true;
-        //}
-
-        //private void HistoryList_ItemTapped(object sender, ItemTappedEventArgs e)
-        //{
-        //    var tappedItem = "link";
-        //    try
-        //    {
-        //        tappedItem = ((History)e.Item).Link.ToString();
-        //        Header.IsVisible = false;
-        //        Browser.IsVisible = true;
-        //        SearchBar.IsVisible = true;
-        //        Histori.IsVisible = false;
-        //        Browser.Source = tappedItem;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        if (ex is Exception) {
-                    
-        //        } 
-        //        else {
-        //            Header.IsVisible = false;
-        //            Browser.IsVisible = true;
-        //            SearchBar.IsVisible = true;
-        //            Histori.IsVisible = false;
-        //            tappedItem = ((History)e.Item).Link.ToString(); 
-        //            Browser.Source = tappedItem; 
-        //        }
-        //    }
-
-        //}
-        //private void Button_Clicked_4(object sender, EventArgs e)
-        //{
-        //    Header.IsVisible = true;
-        //    Browser.IsVisible = false;
-        //    SearchBar.IsVisible = false;
-        //    Histori.IsVisible = false;
-        //}
 
         private void GoToHistoryPage(object sender, EventArgs e)
         {
             Navigation.PushAsync(new HistoryPage());
         }
-        //public class MyViewModel
-        //{
-        //    public ICommand NaviCommand { protected set; get; }
-        //    public ObservableCollection<History> history { get; set; }
-        //    public MyViewModel()
-        //    {
-        //        history = new ObservableCollection<History>();
-        //        NaviCommand = new Command<History>((key) =>
-        //        {
-        //            History person = key as History;
+        protected override bool OnBackButtonPressed()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Exit", "Do you want to exit?", "Yes", "No");
+                if (result) await this.Navigation.PopAsync();
+            });
+            return true;
+        }
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+                if (width > height)
+                {
+                //Landscape
+                StackLv2.Margin = new Thickness(30, -620, 30, 0);
+                StackLv3.Margin = new Thickness(0, -50, 0, 0);
+                StackLv5_2.IsVisible = true;
+                StackLv5.IsVisible = false;
+                History_Button.Margin = new Thickness(0, 0, 0, 0);
+                Title.FontSize = 34;
+                Title.Padding = new Thickness(0, 44, 0, 0);
+                SubTitle.FontSize = 26;
+                SubTitle.Padding = new Thickness(27, 0, 0, 0);
+                SubTitile2.FontSize = 18;
+                FrameLv1.WidthRequest = 600;
+                FrameLv1.MinimumWidthRequest = 600;
+                FrameLv1.HeightRequest = 20;
+                FrameLv1.MinimumHeightRequest = 20;
 
-        //        });
-        //        history.Add(new History() { Link = "test1"});
-        //    }
-        //}
-        //public class History
-        //{
-        //    public string Link { get; set; }
-        //}
+                link.WidthRequest = 600;
+                link.Margin = new Thickness(0, -25, 0, -25);
+            }
+                else
+                {
+                //Portrait
+                StackLv2.Margin = new Thickness(30, 36, 30, 0);
+                StackLv3.Margin = new Thickness(0, 0, 0, 0);
+                StackLv5_2.IsVisible = false;
+                StackLv5.IsVisible = true;
+                History_Button.Margin = new Thickness(0, 0, 0, 50);
+                Title.FontSize = 48;
+                Title.Padding = new Thickness(0, 44, 0, 0);
+                SubTitle.FontSize = 36;
+                SubTitle.Padding = new Thickness(27, 71, 0, 0);
+                SubTitile2.FontSize = 22;
+                FrameLv1.WidthRequest = 313;
+                FrameLv1.MinimumWidthRequest = 313;
+                FrameLv1.HeightRequest = 62;
+                FrameLv1.MinimumHeightRequest = 40;
 
+                link.WidthRequest = 250;
+                link.Margin = new Thickness(0, 0, 0, 0);
+
+                }
+            
+        }
     }
 
 }
