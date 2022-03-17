@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,43 +10,35 @@ namespace Mosaik.id
         public LoginPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
-        private void Login_Button_Clicked(object sender, EventArgs e)
-        {
-            if (username.Text == null || username.Text == "")
-            {
-                DisplayAlert(null, "Please Enter Your Username", "OK");
-            }
-            else if (password.Text == null || password.Text == "")
-            {
-                DisplayAlert(null, "Please Enter Your Password", "OK");
-            }
-            else if (username.Text.Equals("Admin") && password.Text.Equals("1234"))
-            {
-                //DisplayAlert("ToDo!", "Redirect ke Browser", "OK");
-                Navigation.PushAsync(new HomePage());
-            }
-            else
-            {
-                DisplayAlert(null, "Username doesn't exist or wrong password", "OK");
-            }
-        }
-        private void SignUp_Label_Clicked(object sender, EventArgs e)
-        {
-            //DisplayAlert("ToDo!", "Redirect ke Sign Up", "OK");
+
+        private void SignupClicked(object sender, EventArgs e){
             Navigation.PushAsync(new RegisterPage());
         }
 
-        private void ShowPassword(object sender, EventArgs e)
+        private void ContinueClicked(object sender, EventArgs e)
         {
-            password.IsPassword = !password.IsPassword;
-            if (showPasswordBtn.Text.Equals("Show"))
+            usernameFrame.BorderColor = Color.Transparent;
+            passwordFrame.BorderColor = Color.Transparent;
+            errorUsernameLabel.IsVisible = false;
+            errorPasswordLabel.IsVisible = false;
+
+            if (usernameEntry.Text == null || usernameEntry.Text == String.Empty)
             {
-                showPasswordBtn.Text = "Hide";
+                usernameFrame.BorderColor = Color.Red;
+                errorUsernameLabel.IsVisible = true;
+            }
+            else if (passwordEntry.Text == null || passwordEntry.Text == String.Empty)
+            {
+                passwordFrame.BorderColor = Color.Red;
+                errorPasswordLabel.IsVisible = true;
             }
             else
             {
-                showPasswordBtn.Text = "Show";
+                //TODO: navigate ke homePage
+                Navigation.PushAsync(new HomePage());
+                //tampilkan modal kalo error
             }
         }
     }

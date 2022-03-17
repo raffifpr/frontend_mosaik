@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {}
+    "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
+    "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
+        "projectUniqueName": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
         "projectName": "Mosaik.id",
-        "projectPath": "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
-        "packagesPath": "C:\\Users\\Kahfi Zulkifli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kahfi Zulkifli\\Tubes\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\obj\\",
+        "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
+        "packagesPath": "C:\\Users\\Nicholas Chen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kahfi Zulkifli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nicholas Chen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,6 +46,10 @@
               "version": "[2.0.3, )",
               "autoReferenced": true
             },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
             "Xamarin.Essentials": {
               "target": "Package",
               "version": "[1.7.0, )"
@@ -53,6 +57,10 @@
             "Xamarin.Forms": {
               "target": "Package",
               "version": "[5.0.0.2196, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.8.116, )"
             }
           },
           "imports": [
@@ -65,7 +73,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
