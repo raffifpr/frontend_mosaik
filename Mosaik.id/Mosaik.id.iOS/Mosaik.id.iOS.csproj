@@ -140,7 +140,7 @@
     <BundleResource Include="Resources\LoginBG.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\right arrow.png" />
+    <BundleResource Include="Resources\rightArrow.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\SignupBG.png" />

@@ -2530,3 +2530,13 @@ C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik
 C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\stamp\_GenerateJavaStubs.stamp
 C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\trashicon.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\addnewicon.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\emailicon.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\loginbg.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\minusicon.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\passwordicon.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\profileicon.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\repasswordicon.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\rightarrow.png
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\repo\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id.Android\obj\Debug\120\res\drawable\signupbg.png
