@@ -2,34 +2,87 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mosaik.id.BrowserPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <StackLayout x:Name="SearchBar"   
-                         Orientation="Horizontal">
-                <Button Text="&lt;" 
-                            HeightRequest="40" 
-                            WidthRequest="40" 
-                            Clicked = "PreviousPage"/>
-                <Entry x:Name="url" 
-                           WidthRequest="268" 
-                           HeightRequest="40" 
-                           ReturnType="Search" 
-                           Completed="url_Completed" 
-                           ClearButtonVisibility="WhileEditing"/>
-                <Button Text="&gt;" 
-                            HeightRequest="40" 
-                            WidthRequest="40" 
-                            Clicked = "NextPage"/>
-            </StackLayout>  
-            <ActivityIndicator x:Name="Loading" 
-                               IsRunning="True" />
-            <WebView x:Name="Browser" 
-                     HeightRequest="1000" 
-                     WidthRequest="1000"  
-                     Navigating="Browser_Navigating"
-                     Navigated="Browser_Navigated"/>
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <ImageButton Source="Home.png"
+                         Margin="5,5,0,0"
+                       HorizontalOptions="Start"
+                         WidthRequest="25"
+                         HeightRequest="25"
+                         BackgroundColor="#FFF0F0F0"
+                         Clicked="HomeButton_Clicked">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Scale"
+                            Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
 
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Scale"
+                            Value="0.8" />
+                            </VisualState.Setters>
+                        </VisualState>
+
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </ImageButton>
+            <Frame
+               BackgroundColor="#FFFFFFFF" 
+               CornerRadius="30"
+               Margin="0,5,5,0"
+                   BorderColor="#F2E39F1B"
+                   HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal"
+                             Margin="-10,-20,0,-20">
+                    <Image Source="Magnifier.png"
+                       WidthRequest="15"
+                       HeightRequest="15"/>
+                    <Entry x:Name="url" 
+                        HorizontalOptions="FillAndExpand"
+                        ReturnType="Search" 
+                        Completed="url_Completed" 
+                        ClearButtonVisibility="WhileEditing"
+                           FontSize="Small"/>
+                </StackLayout>
+            </Frame>
+            <ImageButton Source="Right_Arrow.png"
+                         Margin="0,5,5,0"
+                         HorizontalOptions="End"
+                         WidthRequest="25"
+                         HeightRequest="25"
+                         BackgroundColor="Black"
+                         Clicked="NextPage">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Scale"
+                            Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Scale"
+                            Value="0.8" />
+                            </VisualState.Setters>
+                        </VisualState>
+
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </ImageButton>
         </StackLayout>
-
-    </ContentPage.Content>
+        <ActivityIndicator x:Name="Loading" 
+                            IsRunning="True" />
+        <WebView x:Name="Browser" 
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                    Navigating="Browser_Navigating"
+                    Navigated="Browser_Navigated"
+                 IsVisible="true"/>
+    </StackLayout>
 </ContentPage>
