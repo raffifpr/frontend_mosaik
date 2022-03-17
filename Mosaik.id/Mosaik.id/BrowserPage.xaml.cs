@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using Xamarin.Forms;
 using System.Collections.ObjectModel;
 
 namespace Mosaik.id
@@ -23,6 +17,7 @@ namespace Mosaik.id
     {
         public BrowserPage(string sauce)
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             Browser.Source = sauce;
         }
@@ -34,7 +29,7 @@ namespace Mosaik.id
             }
             else
             {
-
+                Navigation.PushAsync(new HomePage());
             }
         }
 
@@ -71,13 +66,28 @@ namespace Mosaik.id
                 if (!Regex.IsMatch(url.Text, @"^https?:\/\/", RegexOptions.IgnoreCase))
                     url.Text = "https://" + url.Text;
                 Browser.Source = url.Text;
-                Browser.IsVisible = true;
-                SearchBar.IsVisible = true;
             }
             else
             {
                 Browser.Source = "https://www.google.com/search?q=" + url.Text;
             }
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            if (Browser.CanGoBack)
+            {
+                Browser.GoBack();
+            }
+            else
+            {
+                return base.OnBackButtonPressed();
+            }
+            return true;
+        }
+
+        private void HomeButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HomePage());
         }
     }
 }
