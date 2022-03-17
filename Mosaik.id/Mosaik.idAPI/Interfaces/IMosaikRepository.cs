@@ -5,12 +5,16 @@ namespace Mosaik.idAPI.Interfaces
 {
     public interface IMosaikRepository
     {
-        bool IsAccountValid(MosaikItem mosaikItem);
+        // bool IsAccountValid(MosaikItem mosaikItem);
 
-        IEnumerable<MosaikItem> All { get; }
+        Task<IEnumerable<MosaikItem>> getAll();
 
-        void InsertAccount(MosaikItem mosaikItem);
+        Task InsertAccount(MosaikItem mosaikItem);
 
-        bool CheckUsernameUsed(string Email);
+        Task<bool> AuthenticateAccount(string Email, string password);
+
+        // bool CheckUsernameUsed(string Email);
+
+        // bool DoesItemExist(int ID);
     }
 }

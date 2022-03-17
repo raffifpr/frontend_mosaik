@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Mosaik.idAPI.Interfaces;
 using Mosaik.idAPI.Services;
+using Mosaik.idAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mosaik.idAPI
 {
@@ -20,7 +22,10 @@ namespace Mosaik.idAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IMosaikRepository, MosaikRepository>();
+            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
+            services.AddScoped<IMosaikRepository, MosaikRepository>();
+            services.AddScoped<IMosaikHistoryRepository, MosaikHistoryRepository>();
             services.AddControllers();    
         }
 

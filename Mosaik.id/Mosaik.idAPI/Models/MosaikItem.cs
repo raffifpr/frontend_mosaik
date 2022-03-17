@@ -5,6 +5,9 @@ namespace Mosaik.idAPI.Models
     public class MosaikItem
     {
         [Required]
+        public int ID { get; set; }
+
+        [Required]
         public string FullName{ get; set; }
 
         [Required]
