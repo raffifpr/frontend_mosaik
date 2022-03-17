@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mosaik.id.SignupSupervisorPage">
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="450"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="SignupBG.png" Aspect="AspectFill" Grid.RowSpan="3" />
+
+            <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0"
+                         HorizontalOptions="FillAndExpand" Padding="20, 30, 20, 0">
+                <Label Text="Just one last step!" FontSize="22" TextColor="White"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Add the E-mail of the account you want to monitor" FontSize="22" TextColor="White" FontAttributes="Bold"
+                       HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Padding="10,0"/>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand"
+                Padding="30, 20, 30, 0">
+                <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout x:Name="EmailStackLayout">
+                        <Frame
+                            CornerRadius="50"
+                            BackgroundColor="#DFDFDF"
+                            Padding="20, 12, 30, 12">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="AddMoreAccount"
+                                    NumberOfTapsRequired="1"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="AddNewIcon"/>
+                                <Label 
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="#DFDFDF"
+                                    VerticalTextAlignment="Center"
+                                    Text="Add more account to monitor"
+                                    FontSize="15"
+                                    TextColor="Black"/>
+                            </StackLayout>
+                        </Frame>
+                        <Label x:Name="SkipLabel"
+                            Text="You may also skip this part and add accounts to supervise later" 
+                            HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
+                            TextColor="White"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="TCCheckbox"
+                        IsChecked="false" Color="White" VerticalOptions="Center"/>
+                    <Label Text="I agree with the Terms and Condition" TextColor="White" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TCLabelPressed"
+                                NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label x:Name="errorTCLabel" Padding="0,-5,0,0"
+                    Text="Please check this first to continue" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+
+                <Button 
+                        HorizontalOptions="FillAndExpand"
+                        Text="Create Account"
+                        TextColor="White"
+                        FontSize="15"
+                        CornerRadius="30"
+                        BackgroundColor="#E39F1B"
+                        Padding="20"
+                        Clicked="CreateButton"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="FillAndExpand"
+                         Padding="30, 0, 30, 0">
+                <Label
+                        Text="Or"
+                        FontSize="15"
+                        TextColor="White"
+                        HorizontalOptions="CenterAndExpand"/>
+                <Label
+                        Text="Already have an account?"
+                        FontSize="15"
+                        TextColor="White"
+                        HorizontalOptions="CenterAndExpand"/>
+                <Button
+                        Text="Log In Account"
+                        TextColor="White"
+                        FontSize="15"
+                        CornerRadius="30"
+                        Padding="20"
+                        BackgroundColor="#99DFDFDF"
+                        Clicked="LoginClicked"/>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

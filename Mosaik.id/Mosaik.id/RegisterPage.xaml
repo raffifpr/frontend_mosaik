@@ -1,61 +1,250 @@
-﻿
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mosaik.id.RegisterPage">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="410"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <StackLayout
-            Grid.Row="0"
-            Grid.Column="0"
-            Padding="25"
-            HorizontalOptions="Center"
-            VerticalOptions="End">
-            <StackLayout
-                HorizontalOptions="Center"
-                VerticalOptions="End">
-                <Label
-                    Text="Mosaik.id"
-                    FontSize="Large"
-                    FontAttributes="Bold"/>
+            <Image Source="SignupBG.png" Aspect="AspectFill" Grid.RowSpan="4" Grid.ColumnSpan="2" />
+
+            <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                         HorizontalOptions="FillAndExpand" Padding="20, 30, 20, 0" Margin="0">
+                <Label Text="Let's get started!" FontSize="22" TextColor="White"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Fill in Your New Account Detail Below" FontSize="24" TextColor="White" FontAttributes="Bold"
+                       HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Padding="10,0"/>
             </StackLayout>
-            <StackLayout
-                HorizontalOptions="Center"
-                VerticalOptions="End">
-                <Label
-                    Text="Create your account below"
-                    FontSize="Medium"
-                    FontAttributes="Italic"/>
+
+            <!--Tab Button-->
+            <StackLayout Margin="0"
+                Orientation="Vertical" Padding="30,0,0,0" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand">
+                <Button Text="User Account" TextColor="White" FontSize="15" CornerRadius="20" HeightRequest="40"
+                        BackgroundColor="#E39F1B" FontAttributes="Bold"
+                        x:Name="UserAccountButton" Clicked="UserAccountClicked"/>
             </StackLayout>
-        </StackLayout>
+            <StackLayout Margin="0"
+                Orientation="Vertical" Padding="0,0,30,0" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand">
+                <Button Text="Supervisor Account" TextColor="White" FontSize="15" CornerRadius="20" HeightRequest="40"
+                        BackgroundColor="#00000000"
+                        x:Name="SupervisorAccountButton" Clicked="SupervisorAccountClicked"/>
+            </StackLayout>
 
-        <StackLayout
-            Grid.Row="1"
-            Grid.Column="0"
-            Padding="25"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="Start">
-            <Entry
-                x:Name="fullname"
-                Placeholder="Full Name"/>
-            <Entry
-                x:Name="email"
-                Placeholder="Email Address"/>
-            <Entry
-                x:Name="password"
-                Placeholder="Password"
-                IsPassword="True"/>
-            <Button
-                Text="Sign Up"
-                Clicked="Sign_Up_Button_Clicked"/>
-            
-        </StackLayout>
+            <!--Details Tab-->
+            <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand"
+                         Padding="30, 20, 30, 0"
+                         x:Name="UserAccountTab">
+                <Frame x:Name="UserUsernameFrame"
+                        CornerRadius="50"
+                        BackgroundColor="White"
+                        Padding="20, 12, 30, 12">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="profileIcon"/>
+                        <Entry x:Name="UserUsernameEntry"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Placeholder="username"
+                                FontSize="15"
+                                TextColor="Black"
+                               PlaceholderColor="#6F6F6F"/>
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="errorUserUsernameLabel" Padding="0,-5,0,0"
+                    Text="Input your username" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <Frame x:Name="UserEmailFrame"
+                        CornerRadius="50"
+                        BackgroundColor="White"
+                        Padding="20, 12, 30, 12">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="emailIcon"/>
+                        <Entry x:Name="UserEmailEntry"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Placeholder="email@example.com"
+                                FontSize="15"
+                               TextColor="Black"
+                               PlaceholderColor="#6F6F6F"/>
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="errorUserEmailLabel" Padding="0,-5,0,0"
+                    Text="Input your email" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <Frame x:Name="UserPasswordFrame"
+                        CornerRadius="50"
+                        BackgroundColor="White"
+                        Padding="20, 12, 30, 12">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="passwordIcon"/>
+                        <Entry x:Name="UserPasswordEntry"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Placeholder="password"
+                                FontSize="15"
+                                IsPassword="True"
+                               TextColor="Black"
+                               PlaceholderColor="#6F6F6F"/>
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="errorUserPasswordLabel" Padding="0,-5,0,0"
+                    Text="Input your password" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <Frame x:Name="UserRePasswordFrame"
+                        CornerRadius="50"
+                        BackgroundColor="White"
+                        Padding="20, 12, 30, 12">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="repasswordIcon"/>
+                        <Entry x:Name="UserRePasswordEntry"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Placeholder="re-enter password"
+                                FontSize="15"
+                                IsPassword="True"
+                               TextColor="Black"
+                               PlaceholderColor="#6F6F6F"/>
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="errorUserRePasswordLabel" Padding="0,-5,0,0"
+                    Text="Password doesn't match" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="TCCheckbox"
+                        IsChecked="false" Color="White" VerticalOptions="Center"/>
+                    <Label Text="I agree with the Terms and Condition" TextColor="White" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TCLabelPressed"
+                                NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label x:Name="errorTCLabel" Padding="0,-5,0,0"
+                    Text="Please check this first to continue" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <Button 
+                        HorizontalOptions="FillAndExpand"
+                        Text="Create Account"
+                        TextColor="White"
+                        FontSize="15"
+                        CornerRadius="30"
+                        BackgroundColor="#E39F1B"
+                        Padding="20"
+                        Clicked="UserCreateButton"/>
+            </StackLayout>
 
-    </Grid>
+
+            <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand"
+                         Padding="30, 20, 30, 0"
+                         x:Name="SupervisorAccountTab" IsVisible="false">
+                <Frame x:Name="SupervisorUsernameFrame"
+                        CornerRadius="50"
+                        BackgroundColor="White"
+                        Padding="20, 12, 30, 12">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="profileIcon"/>
+                        <Entry x:Name="SupervisorUsernameEntry"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Placeholder="username"
+                                FontSize="15"
+                               TextColor="Black"
+                               PlaceholderColor="#6F6F6F"/>
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="errorSupervisorUsernameLabel" Padding="0,-5,0,0"
+                    Text="Input your username" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <Frame x:Name="SupervisorEmailFrame"
+                        CornerRadius="50"
+                        BackgroundColor="White"
+                        Padding="20, 12, 30, 12">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="emailIcon"/>
+                        <Entry x:Name="SupervisorEmailEntry"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Placeholder="email@example.com"
+                                FontSize="15"
+                               TextColor="Black"
+                               PlaceholderColor="#6F6F6F"/>
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="errorSupervisorEmailLabel" Padding="0,-5,0,0"
+                    Text="Input your email" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <Frame x:Name="SupervisorPasswordFrame"
+                        CornerRadius="50"
+                        BackgroundColor="White"
+                        Padding="20, 12, 30, 12">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="passwordIcon"/>
+                        <Entry x:Name="SupervisorPasswordEntry"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Placeholder="password"
+                                FontSize="15"
+                                IsPassword="True"
+                               TextColor="Black"
+                               PlaceholderColor="#6F6F6F"/>
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="errorSupervisorPasswordLabel" Padding="0,-5,0,0"
+                    Text="Input your password" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <Frame x:Name="SupervisorRePasswordFrame"
+                        CornerRadius="50"
+                        BackgroundColor="White"
+                        Padding="20, 12, 30, 12">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="repasswordIcon"/>
+                        <Entry x:Name="SupervisorRePasswordEntry"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Placeholder="re-enter password"
+                                FontSize="15"
+                                IsPassword="True"
+                               TextColor="Black"
+                               PlaceholderColor="#6F6F6F"/>
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="errorSupervisorRePasswordLabel" Padding="0,-5,0,0"
+                    Text="Password doesn't match" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                <Button
+                        HorizontalOptions="FillAndExpand"
+                        Text="Continue"
+                        TextColor="White"
+                        ImageSource="rightArrow"
+                        ContentLayout="Right, 10"
+                        FontSize="15"
+                        CornerRadius="30"
+                        BackgroundColor="#E39F1B"
+                        Padding="20"
+                        Clicked="SupervisorCreateButton"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand"
+                         Padding="30, 0, 30, 0">
+                <Label
+                        Text="Or"
+                        FontSize="15"
+                        TextColor="White"
+                        HorizontalOptions="CenterAndExpand"/>
+                <Label
+                        Text="Already have an account?"
+                        FontSize="15"
+                        TextColor="White"
+                        HorizontalOptions="CenterAndExpand"/>
+                <Button
+                        Text="Log In Account"
+                        TextColor="White"
+                        FontSize="15"
+                        CornerRadius="30"
+                        Padding="20"
+                        BackgroundColor="#99DFDFDF"
+                        Clicked="LoginClicked"/>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -133,4 +133,34 @@
       <Name>Mosaik.id</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\minusIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\LoginBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rightArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\SignupBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trashIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\AddNewIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\emailIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\repasswordIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\passwordIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\profileIcon.png" />
+  </ItemGroup>
 </Project>
