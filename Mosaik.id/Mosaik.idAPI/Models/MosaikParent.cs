@@ -2,13 +2,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mosaik.idAPI.Models
 {
-    public class MosaikItem
+    public class MosaikParent
     {
         [Required]
-        public int ID { get; set; }
+        public int MosaikParentID { get; set; }
 
         [Required]
-        public string FullName{ get; set; }
+        public string Username{ get; set; }
 
         [Required]
         public string Email{ get; set; }

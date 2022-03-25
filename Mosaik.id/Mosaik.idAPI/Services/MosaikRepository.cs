@@ -17,30 +17,26 @@ namespace Mosaik.idAPI.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<MosaikItem>> getAll()
+        public async Task<IEnumerable<MosaikParent>> getAll()
         {
-            return await _context.MosaikItems.ToListAsync();
+            return await _context.MosaikParents.ToListAsync();
         }
 
-        // public bool IsAccountValid(MosaikItem mosaikItem)
-        // {
-        //     return _items.Any(item => item.Email == mosaikItem.Email
-        //     && item.Password == mosaikItem.Password);
-        // }
-
-        public async Task InsertAccount(MosaikItem mosaikItem)
+        public async Task InsertAccount(MosaikParent mosaikParent)
         {
-            _context.MosaikItems.Add(mosaikItem);
+            _context.MosaikParents.Add(mosaikParent);
             await _context.SaveChangesAsync();
-            // if (!CheckUsernameUsed(mosaikItem.Email))
-            // {
-            //     _items.Add(mosaikItem);
-            // }
+        }
+
+        public async Task InsertAccount(MosaikChild mosaikChild)
+        {
+            _context.MosaikChildren.Add(mosaikChild);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> AuthenticateAccount(string Email, string password)
         {
-            var list = await _context.MosaikItems.ToListAsync();
+            var list = await _context.MosaikParents.ToListAsync();
             foreach (var mosaikItem in list)
             {
                 if (mosaikItem.Email == Email)
@@ -57,28 +53,5 @@ namespace Mosaik.idAPI.Services
             }
             return false;
         }
-
-        // public bool CheckUsernameUsed(string Email)
-        // {
-        //     return _items.Any(item => item.Email == Email);
-        // }
-        // public bool DoesItemExist(int id)
-        // {
-        //     return _items.Any(item => item.ID == id);
-        // }
-        // private void InitializeData()
-        // {
-        //     _items = new List<MosaikItem>();
-
-        //     var item1 = new MosaikItem
-        //     {
-        //         FullName = "Learn app development",
-        //         Email = "Take Microsoft Learn Courses",
-        //         Password = "password",
-        //         ID = 500,
-        //     };
-
-        //     _items.Add(item1);
-        // }
     }
 }

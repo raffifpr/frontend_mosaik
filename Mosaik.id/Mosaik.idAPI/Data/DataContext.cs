@@ -12,6 +12,9 @@ namespace Mosaik.idAPI.Data
  
         public DbSet<MosaikHistory> MosaikHistories { get; init; }
 
-        public DbSet<MosaikItem> MosaikItems {get; init; }
+        public DbSet<MosaikChild> MosaikChildren {get; init; }
+        public DbSet<MosaikParent> MosaikParents {get; init; }
+        public DbSet<MosaikParentChild> MosaikParentsChildren {get; init; }
+        public DbSet<MosaikChildRestrict> MosaikChildRestricts {get; init;}
     }
 }

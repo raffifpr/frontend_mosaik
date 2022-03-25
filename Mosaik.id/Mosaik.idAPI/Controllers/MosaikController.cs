@@ -34,7 +34,7 @@ namespace Mosaik.idAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MosaikItem>>> GetMosaikItems()
+        public async Task<ActionResult<IEnumerable<MosaikParent>>> GetMosaikItems()
         {
             var mosaikItems = await _repository.getAll();
             return Ok(mosaikItems);
@@ -47,17 +47,31 @@ namespace Mosaik.idAPI.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> CreateAccount (CreateAccountDto createAccountDto)
+        [HttpPost("parent")]
+        public async Task<ActionResult> CreateParentAccount (CreateAccountDto createAccountDto)
         {
-            MosaikItem mosaikItem = new()
+            MosaikParent mosaikParent = new()
             {
-                ID = createAccountDto.userID,
-                FullName = createAccountDto.FullName,
+                MosaikParentID = createAccountDto.userID,
+                Username = createAccountDto.FullName,
                 Email = createAccountDto.Email,
                 Password = createAccountDto.Password
             };
-            await _repository.InsertAccount(mosaikItem);
+            await _repository.InsertAccount(mosaikParent);
+            return Ok();
+        }
+
+        [HttpPost("child")]
+        public async Task<ActionResult> CreateChildAccount (CreateAccountDto createAccountDto)
+        {
+            MosaikChild mosaikChild = new()
+            {
+                MosaikChildID = createAccountDto.userID,
+                Username = createAccountDto.FullName,
+                Email = createAccountDto.Email,
+                Password = createAccountDto.Password
+            };
+            await _repository.InsertAccount(mosaikChild);
             return Ok();
         }
 

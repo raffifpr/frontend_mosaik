@@ -8,7 +8,10 @@ namespace Mosaik.idAPI.Data
     public interface IDataContext
     {
         DbSet<MosaikHistory> MosaikHistories { get; init; }
-        DbSet<MosaikItem> MosaikItems {get; init; }
+        DbSet<MosaikChild> MosaikChildren {get; init; }
+        DbSet<MosaikParent> MosaikParents {get; init; }
+        DbSet<MosaikParentChild> MosaikParentsChildren {get; init; }
+        DbSet<MosaikChildRestrict> MosaikChildRestricts {get; init;}
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
