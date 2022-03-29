@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj": {}
+    "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj": {
+    "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj",
+        "projectUniqueName": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj",
         "projectName": "Mosaik.id.iOS",
-        "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj",
+        "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\Mosaik.id.iOS.csproj",
         "packagesPath": "C:\\Users\\Nicholas Chen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\obj\\",
+        "outputPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.iOS\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
@@ -28,8 +28,8 @@
         "frameworks": {
           "xamarinios10": {
             "projectReferences": {
-              "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
-                "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj"
+              "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
+                "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj"
               }
             }
           }
@@ -61,14 +61,14 @@
         }
       }
     },
-    "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
+    "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
+        "projectUniqueName": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
         "projectName": "Mosaik.id",
-        "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
+        "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj",
         "packagesPath": "C:\\Users\\Nicholas Chen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\obj\\",
+        "outputPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nicholas Chen\\AppData\\Roaming\\NuGet\\NuGet.Config",

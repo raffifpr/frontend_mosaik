@@ -13,6 +13,13 @@ namespace Mosaik.id
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height); //must be called
+            if (height < 700) { rowHeight.Height = 600; }
+            else { rowHeight.Height = height; }
+        }
+
         private void SignupClicked(object sender, EventArgs e){
             Navigation.PushAsync(new RegisterPage());
         }

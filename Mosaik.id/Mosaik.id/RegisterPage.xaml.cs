@@ -13,6 +13,16 @@ namespace Mosaik.id
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height); //must be called
+            if (height < 740) { rowHeight.Height = 740; }
+            else { rowHeight.Height = height; }
+
+            if (width < height) { BodyStackLayout.Padding = new Thickness(0, 20, 0, 0); }
+            else { BodyStackLayout.Padding = new Thickness(0, 0, 0, 0); }
+        }
+
         private void UserAccountClicked(object sender, EventArgs e)
         {
             UserAccountButton.BackgroundColor = Color.FromRgba(227, 159, 27, 255);

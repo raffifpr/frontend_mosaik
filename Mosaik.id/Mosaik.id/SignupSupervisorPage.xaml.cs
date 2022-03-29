@@ -13,10 +13,35 @@ namespace Mosaik.id
     public partial class SignupSupervisorPage : ContentPage
     {
         int errorMsgIndex = -1;
+        double bodyOrientationHeight = 0;
+        double bodyTempHeight = 0;
+        double bodyHeightLimit = 280;
+
+        double pageMinHeight = 700;
         public SignupSupervisorPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height); //must be called
+            if (height < pageMinHeight) { rowHeight.Height = pageMinHeight; }
+            else { rowHeight.Height = height; }
+
+            //body height config
+            if (bodyOrientationHeight != 0) { bodyTempHeight -= bodyOrientationHeight; }
+            if (width < height)
+            {
+                bodyOrientationHeight = 280;
+            }
+            else
+            {
+                bodyOrientationHeight = 150;
+            }
+            bodyTempHeight = bodyTempHeight + bodyOrientationHeight;
+            if (bodyTempHeight <= bodyHeightLimit) { bodyHeight.Height = bodyTempHeight; }
         }
 
         private void TCLabelPressed(object sender, EventArgs e)
@@ -114,12 +139,29 @@ namespace Mosaik.id
             // add entry email sbg children ke EmailStackLayout
             SkipLabel.IsVisible = false;
             EmailStackLayout.Children.Insert(EmailStackLayout.Children.Count - 2, emailEntryFrame);
+            // increase body height if possible
+            bodyTempHeight += emailEntryFrame.Height;
+            if (bodyTempHeight <= bodyHeightLimit)
+            {
+                bodyHeight.Height = bodyTempHeight;
+                //pageMinHeight += emailEntryFrame.Height;
+            }
         }
 
         private void RemoveEntryFrame(object sender, EventArgs e)
         {
+            // find frame to delete
             var img = (Image)sender;
             var frame = (Frame)img.Parent.Parent;
+
+            // decrease body height if needed
+            bodyTempHeight -= frame.Height;
+            if (bodyTempHeight <= bodyHeightLimit)
+            {
+                bodyHeight.Height = bodyTempHeight;
+                //pageMinHeight -= frame.Height;
+            }
+
             var stacklayout = (StackLayout)frame.Parent;
             stacklayout.Children.Remove(frame);
             if (stacklayout.Children.Count == 2)
