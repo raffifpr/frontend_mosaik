@@ -15,21 +15,6 @@ namespace Mosaik.idAPI.Services
         {
             _context = context;
         }
-
-        // private void InitializeData()
-        // {
-        //     _historyItems = new List<MosaikHistory>();
-
-        //     var item1 = new MosaikHistory
-        //     {
-        //         ID = 500,
-        //         Link = "www.google.com",
-        //         AccessedTime = "2000-15-01-15:30:45",
-        //     };
-
-        //     _historyItems.Add(item1);
-        // }
-
         public async Task<IEnumerable<MosaikHistory>> getAll()
         {
             return await _context.MosaikHistories.ToListAsync();
@@ -38,6 +23,11 @@ namespace Mosaik.idAPI.Services
         public async Task InsertHistory(MosaikHistory mosaikHistory)
         {
             _context.MosaikHistories.Add(mosaikHistory);
+            await _context.SaveChangesAsync();
+        }
+        public async Task InsertDateHistory(MosaikDateHistory mosaikDateHistory)
+        {
+            _context.MosaikDateHistories.Add(mosaikDateHistory);
             await _context.SaveChangesAsync();
         }
     }

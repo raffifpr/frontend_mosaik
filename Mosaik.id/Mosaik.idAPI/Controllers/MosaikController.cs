@@ -26,11 +26,21 @@ namespace Mosaik.idAPI.Controllers
     {
         private readonly IMosaikRepository _repository;
         private readonly IMosaikHistoryRepository _historyRepository;
+        private readonly IMosaikChildRepository _childRepository;
+        private readonly IMosaikParentRepository _parentRepository;
+        private readonly IMosaikRestrictRepository _restrictRepository;
 
-        public MosaikController(IMosaikRepository mosaikRepository, IMosaikHistoryRepository mosaikHistoryRepository)
+        public MosaikController(IMosaikRepository mosaikRepository, 
+                                IMosaikHistoryRepository mosaikHistoryRepository,
+                                IMosaikChildRepository mosaikChildRepository,
+                                IMosaikParentRepository mosaikParentRepository,
+                                IMosaikRestrictRepository mosaikRestrictRepository)
         {
             _repository = mosaikRepository;
             _historyRepository = mosaikHistoryRepository;
+            _childRepository = mosaikChildRepository;
+            _parentRepository = mosaikParentRepository;
+            _restrictRepository = mosaikRestrictRepository;
         }
 
         [HttpGet]
@@ -88,5 +98,60 @@ namespace Mosaik.idAPI.Controllers
             await _historyRepository.InsertHistory(mosaikHistory);
             return Ok();
         }
-    }
+
+        [HttpPost("restrict")]
+        public async Task<ActionResult> CreateRestrict (CreateRestrictDto createRestrictDto)
+        {
+            MosaikChildRestrict mosaikChildRestrict = new()
+            {
+                MosaikChildRestrictID = createRestrictDto.MosaikChildRestrictID,
+                ChildID = createRestrictDto.ChildID,
+                Link = createRestrictDto.Link,
+                Notif = createRestrictDto.Notif
+            };
+            await _restrictRepository.InsertRestrictedLink(mosaikChildRestrict);
+            return Ok();
+        }
+
+        [HttpDelete("restrict/{id}")]
+        public async Task<ActionResult> DeleteLink (int id)
+        {
+            await _restrictRepository.DeleteRestrictedLink(id);
+            return Ok();
+        }
+
+        [HttpPut("restrict/{id}")]
+        public async Task<ActionResult> UpdateNotif(bool notif, UpdateNotifDto updateNotifDto)
+        {
+            MosaikChildRestrict mosaikChildRestrict = new()
+            {
+                MosaikChildRestrictID = updateNotifDto.childRestrictID,
+                ChildID = updateNotifDto.childID,
+                Link = updateNotifDto.Link,
+                Notif = notif
+            };
+
+            await _restrictRepository.DisableNotif(mosaikChildRestrict);
+            return Ok();
+        }
+
+        [HttpPost("supervise/{email}")]
+        public async Task<ActionResult> NewChildAccount(string Email, CreateSuperviseDto createSuperviseDto)
+        {
+            MosaikParentChild mosaikParentChild = new()
+            {
+                MosaikParentChildID = createSuperviseDto.MosaikChildRestrictID,
+                parentID = createSuperviseDto.ParentID,
+                childID = createSuperviseDto.ChildID
+            };
+            await _parentRepository.InsertChildAccount(Email, mosaikParentChild);
+            return Ok();
+        }
+
+        [HttpDelete("supervise/{email}")]
+        public async Task<ActionResult> DeleteChild (string Email) {
+            await _parentRepository.DeleteChildAccount(Email);
+            return Ok();
+        }
+    } 
 }

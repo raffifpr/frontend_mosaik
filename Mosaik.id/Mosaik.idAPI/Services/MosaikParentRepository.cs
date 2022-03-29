@@ -16,8 +16,12 @@ namespace Mosaik.idAPI.Services
         {
             _context = context;
         }
-        public async Task InsertChildAccount(MosaikParentChild mosaikParentChild) 
+        public async Task InsertChildAccount(string Email, MosaikParentChild mosaikParentChild) 
         {
+            var check = await _context.MosaikChildren.FindAsync(Email);
+            if (check == null)
+                throw new NullReferenceException();
+            
             _context.MosaikParentsChildren.Add(mosaikParentChild);
             await _context.SaveChangesAsync();
         }

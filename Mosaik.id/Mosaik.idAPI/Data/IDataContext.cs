@@ -12,6 +12,7 @@ namespace Mosaik.idAPI.Data
         DbSet<MosaikParent> MosaikParents {get; init; }
         DbSet<MosaikParentChild> MosaikParentsChildren {get; init; }
         DbSet<MosaikChildRestrict> MosaikChildRestricts {get; init;}
+        DbSet<MosaikDateHistory> MosaikDateHistories {get; init;}
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
