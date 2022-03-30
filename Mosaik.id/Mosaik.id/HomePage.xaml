@@ -16,7 +16,7 @@
         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
               AbsoluteLayout.LayoutFlags="SizeProportional"
               BackgroundColor="#00F0F0F0"
-              Padding="25,30,25,20">
+              Padding="25,30,25,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="1*" />

@@ -128,6 +128,7 @@ namespace Mosaik.id
                             HorizontalOptions = LayoutOptions.FillAndExpand,
                             BackgroundColor = Color.White,
                             Placeholder = "childEmail@example.com",
+                            Keyboard = Keyboard.Email,
                             FontSize = 15,
                             TextColor = Color.Black,
                             PlaceholderColor = Color.FromRgb(111,111,111)
