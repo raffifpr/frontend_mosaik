@@ -163,4 +163,28 @@
   <ItemGroup>
     <BundleResource Include="Resources\profileIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Bottom_Decoration1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\History.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Layer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\LayerWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\LogOutIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Magnifier.png" />
+  </ItemGroup>
 </Project>

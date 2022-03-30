@@ -1,111 +1,303 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
-using System.Collections.ObjectModel;
+using Xamarin.Forms.Xaml;
 
 namespace Mosaik.id
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        public string sauce = "";
+        //private StackLayout sideNavbar;
         public HomePage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
-            
-            var link = new Entry { };
-            var url = new Entry { };
+            removeOverlay();
+            closeSideNavbar();
         }
-        void GoBrowsing(object sender, EventArgs e)
+
+        protected override void OnSizeAllocated(double width, double height)
         {
-            bool CheckURLValid(String source)
+            base.OnSizeAllocated(width, height); //must be called
+            if (height > 550)
             {
-                if (string.IsNullOrEmpty(source))
-                    return false;
-                if (!Regex.IsMatch(source, @"^https?:\/\/", RegexOptions.IgnoreCase))
-                    source = "https://" + source;
-                return Regex.IsMatch(source, @"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", RegexOptions.IgnoreCase);
-            }
-            if (CheckURLValid(link.Text))
-            {
-                if (!Regex.IsMatch(link.Text, @"^https?:\/\/", RegexOptions.IgnoreCase))
-                    link.Text = "https://" + link.Text;
-                sauce = link.Text;
+                navbarBodyHeight.Height = new GridLength(1, GridUnitType.Star);
             }
             else
             {
-                sauce = "https://www.google.com/search?q=" + link.Text;
+                navbarBodyHeight.Height = 500;
             }
-            link.Text = "";
-            Navigation.PushAsync(new BrowserPage(sauce));
-        }      
-
-        private void GoToHistoryPage(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new HistoryPage());
-        }
-        protected override bool OnBackButtonPressed()
-        {
-            Device.BeginInvokeOnMainThread(async () =>
+            if (height < width)
             {
-                var result = await this.DisplayAlert("Exit", "Do you want to exit?", "Yes", "No");
-                if (result) await this.Navigation.PopAsync();
-            });
-            return true;
-        }
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-                if (width > height)
-                {
-                //Landscape
-                StackLv2.Margin = new Thickness(30, -620, 30, 0);
-                StackLv3.Margin = new Thickness(0, -50, 0, 0);
-                StackLv5_2.IsVisible = true;
-                StackLv5.IsVisible = false;
-                History_Button.Margin = new Thickness(0, 0, 0, 0);
-                Title.FontSize = 34;
-                Title.Padding = new Thickness(0, 44, 0, 0);
-                SubTitle.FontSize = 26;
-                SubTitle.Padding = new Thickness(27, 0, 0, 0);
-                SubTitile2.FontSize = 18;
-                FrameLv1.WidthRequest = 600;
-                FrameLv1.MinimumWidthRequest = 600;
-                FrameLv1.HeightRequest = 20;
-                FrameLv1.MinimumHeightRequest = 20;
-
-                link.WidthRequest = 600;
-                link.Margin = new Thickness(0, -25, 0, -25);
+                scrollSupervisedAccount.VerticalOptions = LayoutOptions.StartAndExpand;
             }
-                else
-                {
-                //Portrait
-                StackLv2.Margin = new Thickness(30, 36, 30, 0);
-                StackLv3.Margin = new Thickness(0, 0, 0, 0);
-                StackLv5_2.IsVisible = false;
-                StackLv5.IsVisible = true;
-                History_Button.Margin = new Thickness(0, 0, 0, 50);
-                Title.FontSize = 48;
-                Title.Padding = new Thickness(0, 44, 0, 0);
-                SubTitle.FontSize = 36;
-                SubTitle.Padding = new Thickness(27, 71, 0, 0);
-                SubTitile2.FontSize = 22;
-                FrameLv1.WidthRequest = 313;
-                FrameLv1.MinimumWidthRequest = 313;
-                FrameLv1.HeightRequest = 62;
-                FrameLv1.MinimumHeightRequest = 40;
-
-                link.WidthRequest = 250;
-                link.Margin = new Thickness(0, 0, 0, 0);
-
-                }
-            
+            else
+            {
+                scrollSupervisedAccount.VerticalOptions = LayoutOptions.Start;
+            }
         }
-    }
 
+        private void logOut(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
+
+        // Side Navbar Functions
+        // =====================
+        private void openNavbar(object sender, EventArgs e)
+        {
+            openSideNavbar();
+            addOverlay();
+        }
+
+        private void closeNavbar(object sender, EventArgs e)
+        {
+            removeOverlay();
+            closeSideNavbar();
+        }
+
+        private async void addOverlay()
+        {
+            Overlay.IsVisible = true;
+            await Overlay.FadeTo(255, 250, Easing.CubicOut);
+        }
+
+        private async void removeOverlay()
+        {
+            await Overlay.FadeTo(0, 250, Easing.CubicOut);
+            Overlay.IsVisible = false;
+        }
+
+        private async void openSideNavbar()
+        {
+            await sideNavbar.TranslateTo(0, 0, 250, Easing.CubicOut);
+        }
+
+        private async void closeSideNavbar()
+        {
+            await sideNavbar.TranslateTo(-DeviceDisplay.MainDisplayInfo.Width * 0.6, 0, 250, Easing.CubicOut);
+        }
+
+        // Add More Account Modal Functions
+        // ================================
+        private void AddMoreAccount(string email, string username)
+        {
+            StackLayout newAccount = new StackLayout
+            {
+                VerticalOptions = LayoutOptions.Start,
+                BackgroundColor = Color.FromHex("#2269AA"),
+                Padding = new Thickness(15, 10, 15, 10),
+                Children =
+                {
+                    new Label
+                    {
+                        Text = "TODO: " + username,
+                        TextColor = Color.White,
+                        FontSize = 15,
+                        FontAttributes = FontAttributes.Bold,
+                        Padding = new Thickness(0,0,0,-5)
+                    },
+                    new Label
+                    {
+                        Text = email,
+                        TextColor = Color.White,
+                        FontSize = 15,
+                        Padding = new Thickness(0,-5,0,0)
+                    }
+                }
+            };
+
+            supervisedAccountStack.Children.Insert(supervisedAccountStack.Children.Count - 1, newAccount);
+        }
+
+        private void OpenAddMoreAccountModal(object sender, EventArgs e)
+        {
+            addAddMoreAccountOverlay();
+
+            // reset pesan error jika ada sblmnya
+            newEmail.Text = String.Empty;
+            newEmailFrame.BorderColor = Color.FromHex("#0D477C");
+            addChildEmailEntryError.IsVisible = false;
+
+            AddMoreAccountModal.IsVisible = true;
+        }
+
+        private void CloseAddMoreAccountModal(object sender, EventArgs e)
+        {
+            removeAddMoreAccountOverlay();
+            AddMoreAccountModal.IsVisible = false;
+        }
+
+        private void SendRequestAddMoreAccountModal(object sender, EventArgs e)
+        {
+            if (newEmail.Text == null || newEmail.Text == String.Empty)
+            {
+                newEmailFrame.BorderColor = Color.FromHex("#E39F1B");
+                addChildEmailEntryError.IsVisible = true;
+                addChildEmailEntryError.Text = "Add the child's E-mail first";
+            }
+            else if (utils.IsValidEmail(newEmail.Text) == false)
+            {
+                newEmailFrame.BorderColor = Color.FromHex("#E39F1B");
+                addChildEmailEntryError.IsVisible = true;
+                addChildEmailEntryError.Text = "Child's E-mail is invalid";
+            }
+            else
+            {
+                // TODO: Post request link ke backend, return username anak
+                AddMoreAccount(newEmail.Text, "username");
+                removeAddMoreAccountOverlay();
+                AddMoreAccountModal.IsVisible = false;
+            }
+        }
+
+        private async void addAddMoreAccountOverlay()
+        {
+            AddMoreAccountOverlay.IsVisible = true;
+            await AddMoreAccountOverlay.FadeTo(255, 250, Easing.CubicOut);
+        }
+
+        private async void removeAddMoreAccountOverlay()
+        {
+            await AddMoreAccountOverlay.FadeTo(0, 250, Easing.CubicOut);
+            AddMoreAccountOverlay.IsVisible = false;
+        }
+
+        // Change Password Modal Functions
+        // ===============================
+        private void OpenChangePasswordModal(object sender, EventArgs e)
+        {
+            ResetChangePasswordForm();
+            addChangePasswordOverlay();
+            ChangePasswordModal.IsVisible = true;
+        }
+
+        private void CloseChangePasswordModal(object sender, EventArgs e)
+        {
+            removeChangePasswordOverlay();
+            ChangePasswordModal.IsVisible = false;
+        }
+
+        private void ResetChangePasswordForm()
+        {
+            prevPasswordFrame.BorderColor = Color.FromHex("#0D477C");
+            newPasswordFrame.BorderColor = Color.FromHex("#0D477C");
+            RePasswordFrame.BorderColor = Color.FromHex("#0D477C");
+            errorPrevPassword.IsVisible = false;
+            errorNewPassword.IsVisible = false;
+            errorRePassword.IsVisible = false;
+            prevPassword.Text = String.Empty;
+            newPassword.Text = String.Empty;
+            RePassword.Text = String.Empty;
+        }
+
+        private void ChangePassword(object sender, EventArgs e)
+        {
+            ResetChangePasswordForm();
+            if (prevPassword.Text == null || prevPassword.Text == String.Empty)
+            {
+                prevPasswordFrame.BorderColor = Color.FromHex("#E39F1B");
+                errorPrevPassword.IsVisible = true;
+                errorPrevPassword.Text = "Please type the old password";
+            }
+            else if (newPassword.Text == null || newPassword.Text == String.Empty)
+            {
+                newPasswordFrame.BorderColor = Color.FromHex("#E39F1B");
+                errorNewPassword.IsVisible = true;
+                errorNewPassword.Text = "Please type the new password";
+            }
+            else if (RePassword.Text == null || RePassword.Text == String.Empty)
+            {
+                RePasswordFrame.BorderColor = Color.FromHex("#E39F1B");
+                errorRePassword.IsVisible = true;
+                errorRePassword.Text = "Please re-type the new password";
+            }
+            else if (RePassword.Text != newPassword.Text)
+            {
+                RePasswordFrame.BorderColor = Color.FromHex("#E39F1B");
+                errorRePassword.IsVisible = true;
+                errorRePassword.Text = "Re-type password doesn't match";
+            }
+            else
+            {
+                removeChangePasswordOverlay();
+                ChangePasswordModal.IsVisible = false;
+            }
+        }
+
+        private async void addChangePasswordOverlay()
+        {
+            ChangePasswordOverlay.IsVisible = true;
+            await ChangePasswordOverlay.FadeTo(255, 250, Easing.CubicOut);
+        }
+
+        private async void removeChangePasswordOverlay()
+        {
+            await ChangePasswordOverlay.FadeTo(0, 250, Easing.CubicOut);
+            ChangePasswordOverlay.IsVisible = false;
+        }
+
+        // Change Username Modal Functions
+        // ===============================
+        private void ResetUSernameModal()
+        {
+            newUsername.Text = String.Empty;
+            newUsernameFrame.BorderColor = Color.FromHex("#0D477C");
+            errorUsername.IsVisible = false;
+        }
+
+        private void ChangeUsername(object sender, EventArgs e)
+        {
+            if (newUsername.Text == null || newUsername.Text == String.Empty)
+            {
+                newUsernameFrame.BorderColor = Color.FromHex("#E39F1B");
+                errorUsername.IsVisible = true;
+            }
+        }
+
+        private void OpenChangeUsernameModal(object sender, EventArgs e)
+        {
+            ResetUSernameModal();
+            addChangeUsernameOverlay();
+            ChangeUsernameModal.IsVisible = true;
+        }
+
+        private void CloseChangeUsernameModal(object sender, EventArgs e)
+        {
+            removeChangeUsernameOverlay();
+            ChangeUsernameModal.IsVisible = false;
+        }
+
+        private async void addChangeUsernameOverlay()
+        {
+            ChangeUsernameOverlay.IsVisible = true;
+            await ChangeUsernameOverlay.FadeTo(255, 250, Easing.CubicOut);
+        }
+
+        private async void removeChangeUsernameOverlay()
+        {
+            await ChangeUsernameOverlay.FadeTo(0, 250, Easing.CubicOut);
+            ChangeUsernameOverlay.IsVisible = false;
+        }
+
+        // Incoming Supervising Request Modal Functions
+        // ============================================
+        private void CloseRequestOverlayModal(object sender, EventArgs e)
+        {
+            removeRequestOverlayModal();
+            RequestModal.IsVisible = false;
+        }
+
+        private async void removeRequestOverlayModal()
+        {
+            await RequestOverlay.FadeTo(0, 250, Easing.CubicOut);
+            RequestOverlay.IsVisible = false;
+        }
+
+    }
 }
