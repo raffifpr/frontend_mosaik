@@ -8,5 +8,6 @@ namespace Mosaik.idAPI.Interfaces
         Task<IEnumerable<MosaikHistory>> getAll();
 
         Task InsertHistory(MosaikHistory mosaikHistory);
+        Task InsertDateHistory(MosaikDateHistory mosaikDateHistory);
     }
 }

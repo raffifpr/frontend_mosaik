@@ -7,9 +7,11 @@ namespace Mosaik.idAPI.Interfaces
     {
         // bool IsAccountValid(MosaikItem mosaikItem);
 
-        Task<IEnumerable<MosaikItem>> getAll();
+        Task<IEnumerable<MosaikParent>> getAll();
 
-        Task InsertAccount(MosaikItem mosaikItem);
+        Task InsertAccount(MosaikParent mosaikParent);
+
+        Task InsertAccount(MosaikChild mosaikChild);
 
         Task<bool> AuthenticateAccount(string Email, string password);
 
