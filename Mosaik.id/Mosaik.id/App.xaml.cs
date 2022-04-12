@@ -24,7 +24,7 @@ namespace Mosaik.id
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new Testing());
         }
 
         protected override void OnStart()

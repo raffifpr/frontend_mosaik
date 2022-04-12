@@ -6,6 +6,7 @@ public class MonoPackageManager_Resources {
 		"FormsViewGroup.dll",
 		"Microsoft.Bcl.AsyncInterfaces.dll",
 		"Mosaik.id.dll",
+		"Newtonsoft.Json.dll",
 		"Npgsql.dll",
 		"SQLite-net.dll",
 		"SQLitePCLRaw.batteries_v2.dll",

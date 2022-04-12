@@ -41,23 +41,24 @@
                         TextColor="White"
                         HorizontalOptions="CenterAndExpand"
                         Margin="0,0,0,20"/>
-                    <Frame x:Name="usernameFrame"
+                    <Frame x:Name="emailFrame"
                         CornerRadius="50"
                         BackgroundColor="White"
                         Padding="20, 12, 30, 12">
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="profileIcon"/>
-                            <Entry x:Name="usernameEntry"
-                            HorizontalOptions="FillAndExpand"
-                            BackgroundColor="White"
-                            Placeholder="username"
-                            FontSize="15"
-                            TextColor="Black"
-                            PlaceholderColor="#6F6F6F"/>
+                            <Image Source="emailIcon"/>
+                            <Entry x:Name="emailEntry"
+                                   Keyboard="Email"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="White"
+                                    Placeholder="username"
+                                    FontSize="15"
+                                    TextColor="Black"
+                                    PlaceholderColor="#6F6F6F"/>
                         </StackLayout>
                     </Frame>
-                    <Label x:Name="errorUsernameLabel" Padding="0,-5,0,0"
-                            Text="Input your username first" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
+                    <Label x:Name="errorEmailLabel" Padding="0,-5,0,0"
+                            TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
                     <Frame x:Name="passwordFrame"
                         CornerRadius="50"
                         BackgroundColor="White"

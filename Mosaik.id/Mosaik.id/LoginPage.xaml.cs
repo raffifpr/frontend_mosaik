@@ -26,15 +26,22 @@ namespace Mosaik.id
 
         private void ContinueClicked(object sender, EventArgs e)
         {
-            usernameFrame.BorderColor = Color.Transparent;
+            emailFrame.BorderColor = Color.Transparent;
             passwordFrame.BorderColor = Color.Transparent;
-            errorUsernameLabel.IsVisible = false;
+            errorEmailLabel.IsVisible = false;
             errorPasswordLabel.IsVisible = false;
 
-            if (usernameEntry.Text == null || usernameEntry.Text == String.Empty)
+            if (emailEntry.Text == null || emailEntry.Text == String.Empty)
             {
-                usernameFrame.BorderColor = Color.Red;
-                errorUsernameLabel.IsVisible = true;
+                emailFrame.BorderColor = Color.Red;
+                errorEmailLabel.Text = "Please input your account email first";
+                errorEmailLabel.IsVisible = true;
+            }
+            else if (utils.IsValidEmail(emailEntry.Text) == false)
+            {
+                emailFrame.BorderColor = Color.Red;
+                errorEmailLabel.Text = "Email is Invalid";
+                errorEmailLabel.IsVisible = true;
             }
             else if (passwordEntry.Text == null || passwordEntry.Text == String.Empty)
             {

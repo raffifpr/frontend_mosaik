@@ -113,3 +113,4 @@ C:\Users\Nicholas Chen\Desktop\sem 6\PPL\proyek\if3250_2022_15_alkademi_rhb\Mosa
 C:\Users\Nicholas Chen\Desktop\sem 6\PPL\proyek\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\ref\Mosaik.id.dll
 C:\Users\Nicholas Chen\Desktop\sem 6\PPL\proyek\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.pdb
 C:\Users\Nicholas Chen\Desktop\sem 6\PPL\proyek\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Mosaik.id.csproj.AssemblyReference.cache
+C:\Users\Nicholas Chen\Desktop\sem 6\PPL\if3250_2022_15_alkademi_rhb\Mosaik.id\Mosaik.id\obj\Debug\netstandard2.0\Testing.xaml.g.cs
