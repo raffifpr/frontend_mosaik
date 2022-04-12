@@ -26,23 +26,23 @@ namespace Mosaik.id
             {
                 loginResponse = loginResp;
             }
-            emailUser.Text = loginResponse.email;
-            usernameUser.Text = loginResponse.username;
-            if (loginResponse.accountStatus == "child")
-            {
-                supervisedAccount.IsVisible = false;
-                if (loginResponse.supervisorRequests.Length > 0)
-                {
-                    OpenRequestOverlayModal(loginResponse.supervisorRequests[0].username, loginResponse.supervisorRequests[0].email);
-                }
-            }
-            if (loginResponse.accountStatus == "supervisor"){
-                supervisedAccount.IsVisible = true;
-                for (int i = 0; i < loginResponse.supervisedAccounts.Length; i++)
-                {
-                    AddMoreAccount(loginResponse.supervisedAccounts[i].email, loginResponse.supervisedAccounts[i].username);
-                }
-            }
+            //emailUser.Text = loginResponse.email;
+            //usernameUser.Text = loginResponse.username;
+            //if (loginResponse.accountStatus == "child")
+            //{
+            //    supervisedAccount.IsVisible = false;
+            //    if (loginResponse.supervisorRequests.Length > 0)
+            //    {
+            //        OpenRequestOverlayModal(loginResponse.supervisorRequests[0].username, loginResponse.supervisorRequests[0].email);
+            //    }
+            //}
+            //if (loginResponse.accountStatus == "supervisor"){
+            //    supervisedAccount.IsVisible = true;
+            //    for (int i = 0; i < loginResponse.supervisedAccounts.Length; i++)
+            //    {
+            //        AddMoreAccount(loginResponse.supervisedAccounts[i].email, loginResponse.supervisedAccounts[i].username);
+            //    }
+            //}
             removeOverlay();
             closeSideNavbar();
         }
@@ -315,13 +315,13 @@ namespace Mosaik.id
         // ============================================
         private async void AcceptRequestOverlayModal(object sender, EventArgs e)
         {
-            SupervisorLinkResponse response = await MosaikAPIService.PostSupervisorLinkAccept(loginResponse.email, reqFromEmail.Text, "accept");
+            //SupervisorLinkResponse response = await MosaikAPIService.PostSupervisorLinkAccept(loginResponse.email, reqFromEmail.Text, "accept");
             CloseRequestOverlayModal();
         }
 
         private async void DenyRequestOverlayModal(object sender, EventArgs e)
         {
-            SupervisorLinkResponse response = await MosaikAPIService.PostSupervisorLinkAccept(loginResponse.email, reqFromEmail.Text, "deny");
+            //SupervisorLinkResponse response = await MosaikAPIService.PostSupervisorLinkAccept(loginResponse.email, reqFromEmail.Text, "deny");
             CloseRequestOverlayModal();
         }
 

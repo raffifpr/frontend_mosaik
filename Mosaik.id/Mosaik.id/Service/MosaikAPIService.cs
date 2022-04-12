@@ -10,7 +10,7 @@ namespace Mosaik.id.Service
 {
     internal class MosaikAPIService
     {
-        static string BaseUrl = "TODO";
+        static string BaseUrl = "http://mosaik-id-ppl.herokuapp.com/api/Mosaik";
         // static string BaseUrl = "https://simple-books-api.glitch.me";
         static HttpClient client;
 
