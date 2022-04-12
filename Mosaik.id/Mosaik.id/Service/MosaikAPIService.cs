@@ -104,6 +104,77 @@ namespace Mosaik.id.Service
             return jsonResponse;
         }
 
+        public static async Task<ChangeUsernameResponse> PostChangeUsername(string email, string newUsername)
+        {
+            // Send request
+            var changeUsernameRequest = new ChangeUsernameRequest
+            {
+                Email = email,
+                NewUsername = newUsername
+            };
+            var json = JsonConvert.SerializeObject(changeUsernameRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+            // Recieve response
+            var response = await client.PostAsync("TODO", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<ChangeUsernameResponse>(stringResponse);
+            return jsonResponse;
+        }
+
+        public static async Task<ChangePasswordResponse> PostChangePassword(string email, string oldPassword, string newPassword)
+        {
+            // Send request
+            var changePasswordRequest = new ChangePasswordRequest
+            {
+                Email = email,
+                OldPassword = oldPassword,
+                NewPassword = newPassword
+            };
+            var json = JsonConvert.SerializeObject(changePasswordRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("TODO", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<ChangePasswordResponse>(stringResponse);
+            return jsonResponse;
+        }
+
+        public static async Task<AddMoreChildResponse> PostAddMoreChild(string email, string childEmail)
+        {
+            // Send request
+            var addMoreChildRequest = new AddMoreChildRequest
+            {
+                Email = email,
+                ChildEmail = childEmail
+            };
+            var json = JsonConvert.SerializeObject(addMoreChildRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("TODO", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<AddMoreChildResponse>(stringResponse);
+            return jsonResponse;
+        }
+
+        public static async Task<RemoveChildResponse> PostRemoveChild(string email, string childEmail)
+        {
+            // Send request
+            var removeChildRequest = new RemoveChildRequest
+            {
+                Email = email,
+                ChildEmail = childEmail
+            };
+            var json = JsonConvert.SerializeObject(removeChildRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("TODO", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<RemoveChildResponse>(stringResponse);
+            return jsonResponse;
+        }
     }
 }
