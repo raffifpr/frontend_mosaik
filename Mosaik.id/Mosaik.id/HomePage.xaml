@@ -677,7 +677,7 @@
                                FontAttributes="Bold"
                                Margin="7">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="CloseRequestOverlayModal" />
+                                <TapGestureRecognizer Tapped="AcceptRequestOverlayModal" />
                             </Label.GestureRecognizers>
                         </Label>
                         <Label Text="Deny"
@@ -686,7 +686,7 @@
                                FontAttributes="Bold"
                                Margin="7">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="CloseRequestOverlayModal" />
+                                <TapGestureRecognizer Tapped="DenyRequestOverlayModal" />
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>

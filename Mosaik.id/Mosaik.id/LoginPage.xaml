@@ -51,7 +51,7 @@
                                    Keyboard="Email"
                                     HorizontalOptions="FillAndExpand"
                                     BackgroundColor="White"
-                                    Placeholder="username"
+                                    Placeholder="email"
                                     FontSize="15"
                                     TextColor="Black"
                                     PlaceholderColor="#6F6F6F"/>
@@ -77,7 +77,7 @@
                     </Frame>
                     <Label x:Name="errorPasswordLabel" Padding="0,-5,0,0"
                             Text="Input your password" TextColor="Red" FontAttributes="Italic" IsVisible="false"/>
-                    <Button
+                    <Button x:Name="continueButton"
                         HorizontalOptions="FillAndExpand"
                         Text="Continue"
                         TextColor="White"

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Mosaik.id.Model;
+using Mosaik.id.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +15,34 @@ namespace Mosaik.id
     public partial class HomePage : ContentPage
     {
         //private StackLayout sideNavbar;
-        public HomePage()
+        private LoginResponse loginResponse;
+        public HomePage(LoginResponse loginResp = null)
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+
+            // HomePage Initial Setup
+            if (loginResp != null)
+            {
+                loginResponse = loginResp;
+            }
+            emailUser.Text = loginResponse.email;
+            usernameUser.Text = loginResponse.username;
+            if (loginResponse.accountStatus == "child")
+            {
+                supervisedAccount.IsVisible = false;
+                if (loginResponse.supervisorRequests.Length > 0)
+                {
+                    OpenRequestOverlayModal(loginResponse.supervisorRequests[0].username, loginResponse.supervisorRequests[0].email);
+                }
+            }
+            if (loginResponse.accountStatus == "supervisor"){
+                supervisedAccount.IsVisible = true;
+                for (int i = 0; i < loginResponse.supervisedAccounts.Length; i++)
+                {
+                    AddMoreAccount(loginResponse.supervisedAccounts[i].email, loginResponse.supervisedAccounts[i].username);
+                }
+            }
             removeOverlay();
             closeSideNavbar();
         }
@@ -287,10 +313,41 @@ namespace Mosaik.id
 
         // Incoming Supervising Request Modal Functions
         // ============================================
-        private void CloseRequestOverlayModal(object sender, EventArgs e)
+        private async void AcceptRequestOverlayModal(object sender, EventArgs e)
+        {
+            SupervisorLinkResponse response = await MosaikAPIService.PostSupervisorLinkAccept(loginResponse.email, reqFromEmail.Text, "accept");
+            CloseRequestOverlayModal();
+        }
+
+        private async void DenyRequestOverlayModal(object sender, EventArgs e)
+        {
+            SupervisorLinkResponse response = await MosaikAPIService.PostSupervisorLinkAccept(loginResponse.email, reqFromEmail.Text, "deny");
+            CloseRequestOverlayModal();
+        }
+
+        private void OpenRequestOverlayModal(string supervisorUsername, string supervisorEmail)
+        {
+            reqFromUsername.Text = supervisorUsername;
+            reqFromEmail.Text = supervisorEmail;
+            addRequestOverlayModal();
+            RequestModal.IsVisible = true;
+        }
+
+        private void CloseRequestOverlayModal()
         {
             removeRequestOverlayModal();
             RequestModal.IsVisible = false;
+            loginResponse.supervisorRequests = loginResponse.supervisorRequests.Where((item, index) => index != 0).ToArray();
+            if (loginResponse.supervisorRequests.Length > 0)
+            {
+                OpenRequestOverlayModal(loginResponse.supervisorRequests[0].username, loginResponse.supervisorRequests[0].email);
+            }
+        }
+
+        private async void addRequestOverlayModal()
+        {
+            RequestOverlay.IsVisible = true;
+            await RequestOverlay.FadeTo(255, 250, Easing.CubicOut);
         }
 
         private async void removeRequestOverlayModal()

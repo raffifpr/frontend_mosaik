@@ -8,6 +8,7 @@ namespace Mosaik.id.Model
     {
         public string email { get; set; }
         public string emailSupervisor { get; set; }
+        // statusAccept = ("accept", "deny")
         public string statusAccept { get; set; }
     }
 }

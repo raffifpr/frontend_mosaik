@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Mosaik.id.Model;
+using Mosaik.id.Service;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,8 +27,9 @@ namespace Mosaik.id
             Navigation.PushAsync(new RegisterPage());
         }
 
-        private void ContinueClicked(object sender, EventArgs e)
+        private async void ContinueClicked(object sender, EventArgs e)
         {
+            continueButton.IsEnabled = false;
             emailFrame.BorderColor = Color.Transparent;
             passwordFrame.BorderColor = Color.Transparent;
             errorEmailLabel.IsVisible = false;
@@ -50,10 +54,27 @@ namespace Mosaik.id
             }
             else
             {
-                //TODO: navigate ke homePage
-                Navigation.PushAsync(new HomePage());
-                //tampilkan modal kalo error
+                //await Task.Delay(1000);
+                LoginResponse response = await MosaikAPIService.PostLogin(emailEntry.Text, passwordEntry.Text);
+                if (response.status == "Wrong")
+                {
+                    emailFrame.BorderColor = Color.Red;
+                    errorEmailLabel.Text = "This account doesn't exist or Wrong Password";
+                    errorEmailLabel.IsVisible = true;
+                }
+                else if (response.status == "Failed")
+                {
+                    emailFrame.BorderColor = Color.Red;
+                    errorEmailLabel.Text = "There are currently some problem in the server right now";
+                    errorEmailLabel.IsVisible = true;
+                }
+                else
+                {
+                    await Navigation.PushAsync(new HomePage(response));
+                }
+                
             }
+            continueButton.IsEnabled = true;
         }
     }
 }
