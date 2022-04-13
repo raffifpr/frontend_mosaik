@@ -117,7 +117,7 @@ namespace Mosaik.id
             {
                 VerticalOptions = LayoutOptions.Start,
                 BackgroundColor = Color.FromHex("#2269AA"),
-                Padding = new Thickness(15, 10, 15, 10),
+                Padding = new Thickness(25, 10, 15, 10),
                 Children =
                 {
                     new Label
@@ -277,13 +277,22 @@ namespace Mosaik.id
             errorUsername.IsVisible = false;
         }
 
-        private void ChangeUsername(object sender, EventArgs e)
+        private async void ChangeUsername(object sender, EventArgs e)
         {
             if (newUsername.Text == null || newUsername.Text == String.Empty)
             {
                 newUsernameFrame.BorderColor = Color.FromHex("#E39F1B");
                 errorUsername.IsVisible = true;
             }
+            //else
+            //{
+            //    ChangeUsernameResponse response = await MosaikAPIService.PostChangeUsername(loginResponse.email, newUsername.Text);
+            //    if (response.Status == "success")
+            //    {
+            //        usernameUser.Text = newUsername.Text;
+            //    }
+            //}
+            usernameUser.Text = newUsername.Text;
         }
 
         private void OpenChangeUsernameModal(object sender, EventArgs e)

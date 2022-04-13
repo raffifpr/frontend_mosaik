@@ -6,6 +6,7 @@ namespace Mosaik.id.Model
 {
     public class ChangeUsernameResponse
     {
+        // status = ("success", "failed")
         public string Status { get; set; }
     }
 }

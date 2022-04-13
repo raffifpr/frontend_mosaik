@@ -181,7 +181,7 @@
                     BackgroundColor="#00000000"
                     WidthRequest="30"
                     HeightRequest="30"
-                    Margin="0,0,15,0"
+                    Margin="0,0,15,10"
                     Clicked="closeNavbar" />
             <!--Navbar Body-->
             <ScrollView HorizontalOptions="FillAndExpand"
@@ -193,14 +193,10 @@
                     </Grid.RowDefinitions>
                     <AbsoluteLayout Grid.Row="0">
                         <!--Email & Username Label-->
-                        <StackLayout AbsoluteLayout.LayoutBounds="0,0.2,1,0.15"
+                        <StackLayout AbsoluteLayout.LayoutBounds="0,0.15,1,0.15"
                                      AbsoluteLayout.LayoutFlags="All"
                                      Orientation="Vertical"
                                      Padding="15,0">
-                            <Label x:Name="emailUser"
-                                   Text="example@gmail.com"
-                                   FontSize="17"
-                                   TextColor="White" />
                             <StackLayout Orientation="Horizontal"
                                          HorizontalOptions="FillAndExpand">
                                 <Label x:Name="usernameUser"
@@ -216,6 +212,10 @@
                                         HeightRequest="30"
                                         Clicked="OpenChangeUsernameModal" />
                             </StackLayout>
+                            <Label x:Name="emailUser"
+                                   Text="example@gmail.com"
+                                   FontSize="15"
+                                   TextColor="White" />
                         </StackLayout>
 
                         <!--Supervised Accounts List-->
