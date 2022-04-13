@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Mosaik.id.Model;
+using Mosaik.id.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +14,25 @@ namespace Mosaik.id
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignupSupervisorPage : ContentPage
     {
+        string username;
+        string email; 
+        string password;
+        List<string> supervisedEmail = new List<string>();
+
         int errorMsgIndex = -1;
         double bodyOrientationHeight = 0;
         double bodyTempHeight = 0;
         double bodyHeightLimit = 280;
 
         double pageMinHeight = 700;
-        public SignupSupervisorPage()
+        public SignupSupervisorPage(string _username, string _email, string _password)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            username = _username;
+            email = _email;
+            password = _password;
+            createButton.IsEnabled = true;
         }
 
         protected override void OnSizeAllocated(double width, double height)
@@ -49,8 +60,10 @@ namespace Mosaik.id
             TCCheckbox.IsChecked = !TCCheckbox.IsChecked;
         }
 
-        private void CreateButton(object sender, EventArgs e)
+        private async void CreateButton(object sender, EventArgs e)
         {
+            createButton.IsEnabled = false;
+
             errorTCLabel.IsVisible = false;
             bool emailError = false;
             if (errorMsgIndex != -1)
@@ -78,7 +91,7 @@ namespace Mosaik.id
                     {
                         Label errorMsg = new Label
                         {
-                            Text = "this email is invalid",
+                            Text = "This email is invalid",
                             Padding = new Thickness(0, -5, 0, 0),
                             TextColor = Color.Red,
                             FontAttributes = FontAttributes.Italic
@@ -92,12 +105,32 @@ namespace Mosaik.id
                 }
                 if (emailError == false)
                 {
-                    //TODO: bikin akun supervisor
-                    //tampilkan modal gagal/berhasil
-                    Navigation.PopAsync();
-                    Navigation.PopAsync();
+                    //for (int i = 0; i < EmailStackLayout.Children.Count - 2; i++)
+                    //{
+                    //    supervisedEmail.Add(
+                    //        ((Entry)((StackLayout)((Frame)EmailStackLayout.Children[i]).Content).Children).Text
+                    //        );
+                    //}
+                    //RegisterSupervisorResponse response = await MosaikAPIService.PostRegisterSupervisor(username, email, password, supervisedEmail.ToArray());
+                    //if (response.status.StartsWith("index "))
+                    //{
+                    //    char[] separator = { ' ' };
+                    //    Int32 count = 2;
+                    //    String[] strlist = response.status.Split(separator, count, StringSplitOptions.RemoveEmptyEntries);
+
+                    //    int indexEmailError = int.Parse(strlist[1]);
+                    //    ((Frame)EmailStackLayout.Children[indexEmailError]).BorderColor = Color.Red;
+                    //}
+                    //else if (response.status == "success")
+                    //{
+                    //    await Navigation.PopAsync();
+                    //    await Navigation.PopAsync();
+                    //}
+                    await Navigation.PopAsync();
+                    await Navigation.PopAsync();
                 }
             }
+            createButton.IsEnabled = true;
         }
 
         private void LoginClicked(object sender, EventArgs e)

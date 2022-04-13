@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Mosaik.id.Model
 {
-    public class RegisterResponse
+    public class EmailCheckResponse
     {
-        // status = ("success", "failed", "email already exist")
+        // status = ("exist", "not exist")
         public string status { get; set; }
     }
 }

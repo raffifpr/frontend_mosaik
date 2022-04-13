@@ -65,7 +65,14 @@ namespace Mosaik.id.Service
             return jsonResponse;
         }
 
-        public static async Task<RegisterResponse> PostRegisterSupervisor(string username, string email, string password, string[] supervisedEmail)
+        public static async Task<EmailCheckResponse> GetCheckEmail(string email)
+        {
+            var response = await client.GetStringAsync("TODO");
+            EmailCheckResponse objResponse = JsonConvert.DeserializeObject<EmailCheckResponse>(response);
+            return objResponse; 
+        }
+
+        public static async Task<RegisterSupervisorResponse> PostRegisterSupervisor(string username, string email, string password, string[] supervisedEmail)
         {
             // Send request
             var registerSupervisorRequest = new RegisterSupervisorRequest
@@ -81,7 +88,7 @@ namespace Mosaik.id.Service
             // Recieve response
             var response = await client.PostAsync("TODO", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
-            var jsonResponse = JsonConvert.DeserializeObject<RegisterResponse>(stringResponse);
+            var jsonResponse = JsonConvert.DeserializeObject<RegisterSupervisorResponse>(stringResponse);
             return jsonResponse;
         }
 

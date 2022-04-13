@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Mosaik.id.Model;
+using Mosaik.id.Service;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +13,8 @@ namespace Mosaik.id
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            supervisorButton.IsEnabled = true;
+            userButton.IsEnabled = true;
         }
 
         protected override void OnSizeAllocated(double width, double height)
@@ -53,8 +57,10 @@ namespace Mosaik.id
             Navigation.PopAsync();
         }
 
-        private void UserCreateButton(object sender, EventArgs e)
+        private async void UserCreateButton(object sender, EventArgs e)
         {
+            userButton.IsEnabled = false;
+
             UserUsernameFrame.BorderColor = Color.Transparent;
             UserEmailFrame.BorderColor = Color.Transparent;
             UserPasswordFrame.BorderColor = Color.Transparent;
@@ -69,19 +75,20 @@ namespace Mosaik.id
             if (UserUsernameEntry.Text == null || UserUsernameEntry.Text == String.Empty)
             {
                 UserUsernameFrame.BorderColor = Color.Red;
+                errorUserUsernameLabel.Text = "Please input your username";
                 errorUserUsernameLabel.IsVisible = true;
             }
             else if (UserEmailEntry.Text == null || UserEmailEntry.Text == String.Empty)
             {
                 UserEmailFrame.BorderColor = Color.Red;
                 errorUserEmailLabel.IsVisible = true;
-                errorUserEmailLabel.Text = "Input your email";
+                errorUserEmailLabel.Text = "Please input your email";
             }
             else if (utils.IsValidEmail(UserEmailEntry.Text) == false)
             {
                 UserEmailFrame.BorderColor = Color.Red;
                 errorUserEmailLabel.IsVisible = true;
-                errorUserEmailLabel.Text = "this email is invalid";
+                errorUserEmailLabel.Text = "This email is invalid";
             }
             else if (UserPasswordEntry.Text == null || UserPasswordEntry.Text == String.Empty)
             {
@@ -99,14 +106,26 @@ namespace Mosaik.id
             }
             else
             {
-                //TODO: bikin akun
-                //Tampilin modal berhasil/gagal
-                Navigation.PopAsync();
+                //RegisterResponse response = await MosaikAPIService.PostRegisterChild(UserUsernameEntry.Text, UserEmailEntry.Text, UserPasswordEntry.Text);
+                //if (response.status == "email already exist")
+                //{
+                //    UserEmailFrame.BorderColor = Color.Red;
+                //    errorUserEmailLabel.IsVisible = true;
+                //    errorUserEmailLabel.Text = "This email already exist";
+                //}
+                //else if (response.status == "success")
+                //{
+                //    await Navigation.PopAsync();
+                //}
+                await Navigation.PopAsync();
             }
+            userButton.IsEnabled = true;
         }
 
-        private void SupervisorCreateButton(object sender, EventArgs e)
+        private async void SupervisorCreateButton(object sender, EventArgs e)
         {
+            supervisorButton.IsEnabled = false;
+
             SupervisorUsernameFrame.BorderColor = Color.Transparent;
             SupervisorEmailFrame.BorderColor = Color.Transparent;
             SupervisorPasswordFrame.BorderColor = Color.Transparent;
@@ -126,13 +145,13 @@ namespace Mosaik.id
             {
                 SupervisorEmailFrame.BorderColor = Color.Red;
                 errorSupervisorEmailLabel.IsVisible = true;
-                errorSupervisorEmailLabel.Text = "Input your email";
+                errorSupervisorEmailLabel.Text = "Please input your email";
             }
             else if (utils.IsValidEmail(SupervisorEmailEntry.Text) == false)
             {
                 SupervisorEmailFrame.BorderColor = Color.Red;
                 errorSupervisorEmailLabel.IsVisible = true;
-                errorSupervisorEmailLabel.Text = "this email is invalid";
+                errorSupervisorEmailLabel.Text = "This email is invalid";
             }
             else if (SupervisorPasswordEntry.Text == null || SupervisorPasswordEntry.Text == String.Empty)
             {
@@ -146,8 +165,22 @@ namespace Mosaik.id
             }
             else
             {
-                Navigation.PushAsync(new SignupSupervisorPage());
+                //EmailCheckResponse response = await MosaikAPIService.GetCheckEmail(SupervisorEmailEntry.Text);
+                //if (response.status == "exist")
+                //{
+                //    SupervisorEmailFrame.BorderColor = Color.Red;
+                //    errorSupervisorEmailLabel.IsVisible = true;
+                //    errorSupervisorEmailLabel.Text = "This email already exist";
+                //}
+                //else
+                //{
+                //    await Navigation.PushAsync(new SignupSupervisorPage(SupervisorUsernameEntry.Text,
+                //        SupervisorEmailEntry.Text, SupervisorPasswordEntry.Text));
+                //}
+                await Navigation.PushAsync(new SignupSupervisorPage(SupervisorUsernameEntry.Text,
+                        SupervisorEmailEntry.Text, SupervisorPasswordEntry.Text));
             }
+            supervisorButton.IsEnabled = true;
         }
     }
 }

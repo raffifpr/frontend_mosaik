@@ -99,7 +99,8 @@
                                TextColor="Red"
                                FontAttributes="Italic"
                                IsVisible="false" />
-                        <Button HorizontalOptions="FillAndExpand"
+                        <Button x:Name="createButton" 
+                                HorizontalOptions="FillAndExpand"
                                 Text="Create Account"
                                 TextColor="White"
                                 FontSize="15"
