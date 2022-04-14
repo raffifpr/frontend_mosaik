@@ -70,6 +70,7 @@ namespace Mosaik.id
 
         private void logOut(object sender, EventArgs e)
         {
+            loginResponse = null;
             Navigation.PopAsync();
         }
 
@@ -122,7 +123,7 @@ namespace Mosaik.id
                 {
                     new Label
                     {
-                        Text = "TODO: " + username,
+                        Text = username,
                         TextColor = Color.White,
                         FontSize = 15,
                         FontAttributes = FontAttributes.Bold,
@@ -159,7 +160,7 @@ namespace Mosaik.id
             AddMoreAccountModal.IsVisible = false;
         }
 
-        private void SendRequestAddMoreAccountModal(object sender, EventArgs e)
+        private async void SendRequestAddMoreAccountModal(object sender, EventArgs e)
         {
             if (newEmail.Text == null || newEmail.Text == String.Empty)
             {
@@ -175,7 +176,17 @@ namespace Mosaik.id
             }
             else
             {
-                // TODO: Post request link ke backend, return username anak
+                //AddMoreChildResponse response = await MosaikAPIService.PostAddMoreChild(loginResponse.email, newEmail.Text);
+                //if (response.status == "don't exist")
+                //{
+                //    newEmailFrame.BorderColor = Color.FromHex("#E39F1B");
+                //    addChildEmailEntryError.IsVisible = true;
+                //    addChildEmailEntryError.Text = "Child's E-mail doesn't exist";
+                //} 
+                //else if (response.status == "success")
+                //{
+                //    // TODO: Show request sudah dikirim
+                //}
                 AddMoreAccount(newEmail.Text, "username");
                 removeAddMoreAccountOverlay();
                 AddMoreAccountModal.IsVisible = false;
@@ -222,7 +233,7 @@ namespace Mosaik.id
             RePassword.Text = String.Empty;
         }
 
-        private void ChangePassword(object sender, EventArgs e)
+        private async void ChangePassword(object sender, EventArgs e)
         {
             ResetChangePasswordForm();
             if (prevPassword.Text == null || prevPassword.Text == String.Empty)
@@ -251,6 +262,17 @@ namespace Mosaik.id
             }
             else
             {
+                //ChangePasswordResponse response = await MosaikAPIService.PostChangePassword(loginResponse.email, prevPassword.Text, newPassword.Text);
+                //if (response.Status == "wrong password")
+                //{
+                //    prevPasswordFrame.BorderColor = Color.FromHex("#E39F1B");
+                //    errorPrevPassword.IsVisible = true;
+                //    errorPrevPassword.Text = "Old password wrong";
+                //} 
+                //else if (response.Status == "success")
+                //{
+
+                //}
                 removeChangePasswordOverlay();
                 ChangePasswordModal.IsVisible = false;
             }
