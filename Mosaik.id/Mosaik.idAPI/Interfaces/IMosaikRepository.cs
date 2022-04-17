@@ -13,7 +13,9 @@ namespace Mosaik.idAPI.Interfaces
 
         Task InsertAccount(MosaikChild mosaikChild);
 
-        Task<bool> AuthenticateAccount(string Email, string password);
+        Task<Tuple<int, String, String>> AuthenticateAccount(string Email, string password);
+        Task<Tuple<String, String>[]> GetSupervisedRequests(int mosaikChildID);
+        Task<Tuple<String, String>[]> GetSupervisorAccounts(int mosaikParentID);
 
         // bool CheckUsernameUsed(string Email);
 

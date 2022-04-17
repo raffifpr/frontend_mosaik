@@ -10,16 +10,6 @@ using Mosaik.idAPI.Dtos;
 
 namespace Mosaik.idAPI.Controllers
 {
-    public enum ErrorCode
-    {
-        TodoItemNameAndNotesRequired,
-        TodoItemIDInUse,
-        RecordNotFound,
-        CouldNotCreateItem,
-        CouldNotUpdateItem,
-        CouldNotDeleteItem
-    }
-
     [ApiController]
     [Route("api/[controller]")]
     public class MosaikController : ControllerBase
@@ -42,6 +32,12 @@ namespace Mosaik.idAPI.Controllers
             _parentRepository = mosaikParentRepository;
             _restrictRepository = mosaikRestrictRepository;
         }
+        public class ErrorStatus
+        {
+            public int ErrorCode {get; set;}
+            public string ErrorMessage {get; set;}
+            public Tuple<int, String, String> Status {get; set;}
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MosaikParent>>> GetMosaikItems()
@@ -51,10 +47,51 @@ namespace Mosaik.idAPI.Controllers
         }
 
         [HttpPost("login")]
+        [Produces("application/json")]
         public async Task<ActionResult> Login (LoginAccountDto loginAccountDto)
         {
-            await _repository.AuthenticateAccount(loginAccountDto.Email, loginAccountDto.Password);
-            return Ok();
+            var status = await _repository.AuthenticateAccount(loginAccountDto.Email, loginAccountDto.Password);
+            if (status.Item2 == "false")
+            {
+                var error = new ErrorStatus
+                {
+                    ErrorCode = 1,
+                    ErrorMessage = "Wrong"
+                };
+                return new JsonResult(error);
+            } 
+            else if (status.Item2 == "child")
+            {
+                var list = await _repository.GetSupervisedRequests(status.Item1);
+                ChildAuthenticated childAuthenticated = new()
+                {
+                    Username = status.Item3,
+                    Email = loginAccountDto.Email,
+                    AccountStatus = "child",
+                    SupervisedRequests = list
+                };
+                return new JsonResult(childAuthenticated);
+            }
+            else if (status.Item2 == "supervisor")
+            {
+                var list = await _repository.GetSupervisorAccounts(status.Item1);
+                ParentAuthenticated parentAuthenticated = new()
+                {
+                    Username = status.Item3,
+                    Email = loginAccountDto.Email,
+                    AccountStatus = "supervisor",
+                    SupervisorAccounts = list
+                };
+                return new JsonResult(parentAuthenticated);
+            } else {
+                var error = new ErrorStatus
+                {
+                    ErrorCode = -1,
+                    ErrorMessage = "Failed",
+                    Status = status
+                };
+                return new JsonResult(error);
+            }
         }
 
         [HttpPost("parent")]
@@ -62,7 +99,6 @@ namespace Mosaik.idAPI.Controllers
         {
             MosaikParent mosaikParent = new()
             {
-                MosaikParentID = createAccountDto.userID,
                 Username = createAccountDto.FullName,
                 Email = createAccountDto.Email,
                 Password = createAccountDto.Password
@@ -76,7 +112,6 @@ namespace Mosaik.idAPI.Controllers
         {
             MosaikChild mosaikChild = new()
             {
-                MosaikChildID = createAccountDto.userID,
                 Username = createAccountDto.FullName,
                 Email = createAccountDto.Email,
                 Password = createAccountDto.Password
@@ -90,7 +125,6 @@ namespace Mosaik.idAPI.Controllers
         {
             MosaikHistory mosaikHistory = new()
             {
-                MosaikHistoryID = createHistoryDto.historyID,
                 userID = createHistoryDto.userID,
                 Link = createHistoryDto.Link,
                 AccessedTime = DateTime.Now.ToString()
@@ -104,8 +138,6 @@ namespace Mosaik.idAPI.Controllers
         {
             MosaikChildRestrict mosaikChildRestrict = new()
             {
-                MosaikChildRestrictID = createRestrictDto.MosaikChildRestrictID,
-                ChildID = createRestrictDto.ChildID,
                 Link = createRestrictDto.Link,
                 Notif = createRestrictDto.Notif
             };
@@ -125,8 +157,6 @@ namespace Mosaik.idAPI.Controllers
         {
             MosaikChildRestrict mosaikChildRestrict = new()
             {
-                MosaikChildRestrictID = updateNotifDto.childRestrictID,
-                ChildID = updateNotifDto.childID,
                 Link = updateNotifDto.Link,
                 Notif = notif
             };
