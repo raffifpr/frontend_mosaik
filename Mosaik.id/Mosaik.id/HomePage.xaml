@@ -60,7 +60,8 @@
                     ImageSource="History"
                     BackgroundColor="#00000000"
                     WidthRequest="30"
-                    HeightRequest="30">
+                    HeightRequest="30"
+                    Clicked="GoToHistoryPage">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal">
@@ -135,7 +136,8 @@
                             CornerRadius="30"
                             TextTransform="None"
                             ImageSource="rightArrow"
-                            ContentLayout="Right, 20">
+                            ContentLayout="Right, 20"
+                            Clicked="GoBrowsing">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal">

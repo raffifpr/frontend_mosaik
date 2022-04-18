@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mosaik.id.RestrictPage">
+    <AbsoluteLayout>
+        <StackLayout BackgroundColor="#FFF0F0F0">
+            <Frame WidthRequest="360" 
+               HeightRequest="35"
+               BackgroundColor="#FF1384B9">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Your search history" FontFamily="Roboto#600" FontSize="18" FontAttributes="None" TextColor="#FFFFFFFF"
+                   VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+            <Label Margin="20" Text="Restricted Link" FontFamily="Roboto#400" FontSize="14" FontAttributes="None" TextColor="#FF000000" />
+            <ScrollView HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                <StackLayout x:Name="RestrictList" Margin="0,0,20,0">
+                    
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <ContentView x:Name="PopUpView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="false" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <StackLayout Orientation="Vertical" WidthRequest="312" HeightRequest="176" BackgroundColor="#FFFBFBFB">
+                    <Label Text="Add new link to restrict" FontFamily="Roboto#400" FontSize="14" FontAttributes="None" TextColor="#FF000000" Margin="20,18,0,0"/>
+                    <Frame
+                       BackgroundColor="#FFFFFFFF" 
+                       CornerRadius="5"
+                       Margin="20,13,20,0"
+                       BorderColor="#FF0D477C"
+                       HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal"
+                             Margin="-10,-20,-10,-20">
+                            <Entry x:Name="restictedlink" 
+                                    Placeholder="put the link hear" 
+                                    Keyboard="Url" 
+                        HorizontalOptions="FillAndExpand"
+                        ClearButtonVisibility="WhileEditing" 
+                           FontSize="Small"/>
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="RestrictToAll"
+                                  IsChecked="False"
+                                  Color="Black"
+                                  Margin="20,0,0,0"/>
+                        <Label Text="Restrict this link to all my supervised accounts" Margin="0,0,20,0" FontFamily="Roboto#400" FontSize="12" FontAttributes="None" TextColor="#FF000000">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Add" Margin="185,0,0,0" TextColor="#FF0D477C" FontFamily="Roboto#600" FontSize="14" FontAttributes="None" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="Cancel" Margin="30,0,0,0" TextColor="#FF72BADC" FontFamily="Roboto#600" FontSize="14" FontAttributes="None"  >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ContentView>
+        <ImageButton Source="AddLink_FloatingButton.png" 
+            BackgroundColor="Transparent"
+            AbsoluteLayout.LayoutFlags="PositionProportional"  
+            AbsoluteLayout.LayoutBounds=".95,.95,80,80"
+                     Clicked="ImageButton_Clicked">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Scale"
+                            Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale"
+                            Value="0.8" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </ImageButton>
+    </AbsoluteLayout>
+</ContentPage>

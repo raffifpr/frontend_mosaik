@@ -386,6 +386,44 @@ namespace Mosaik.id
             await RequestOverlay.FadeTo(0, 250, Easing.CubicOut);
             RequestOverlay.IsVisible = false;
         }
+        // Directing to another page
+        // =========================
+        void GoBrowsing(object sender, EventArgs e)
+        {
+            bool CheckURLValid(String source)
+            {
+                if (string.IsNullOrEmpty(source))
+                    return false;
+                if (!Regex.IsMatch(source, @"^https?:\/\/", RegexOptions.IgnoreCase))
+                    source = "https://" + source;
+                return Regex.IsMatch(source, @"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", RegexOptions.IgnoreCase);
+            }
+            if (CheckURLValid(link.Text))
+            {
+                if (!Regex.IsMatch(link.Text, @"^https?:\/\/", RegexOptions.IgnoreCase))
+                    link.Text = "https://" + link.Text;
+                source = link.Text;
+            }
+            else
+            {
+                source = "https://www.google.com/search?q=" + link.Text;
+            }
+            link.Text = "";
+            Navigation.PushAsync(new BrowserPage(source));
+        }
 
+        private void GoToHistoryPage(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HistoryPage());
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Exit", "Do you want to exit?", "Yes", "No");
+                if (result) await this.Navigation.PopAsync();
+            });
+            return true;
+        }
     }
 }
