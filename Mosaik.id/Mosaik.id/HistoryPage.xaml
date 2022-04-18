@@ -2,14 +2,168 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mosaik.id.HistoryPage">
-    <StackLayout Margin="20,35,20,20">
-        <ListView x:Name="Sejarah"
-            ItemTapped="History_ItemTapped">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Link}" Detail="{Binding AccessedTime}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+
+    <AbsoluteLayout>
+        <StackLayout BackgroundColor="#FFF0F0F0">
+            <Frame WidthRequest="360" 
+               HeightRequest="35"
+               BackgroundColor="#FF1384B9">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Your search history" FontFamily="Roboto#600" FontSize="18" FontAttributes="None" TextColor="#FFFFFFFF"
+                   VerticalOptions="Center"/>
+                    <ImageButton Source="Broken_Chain.png"
+                                 BackgroundColor="Transparent"
+                                 HorizontalOptions="EndAndExpand"
+                         VerticalOptions="EndAndExpand"
+                         Margin="0,0,40,0"
+                                 Clicked="ImageButton_Clicked_1">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="Scale"
+                            Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="Scale"
+                            Value="0.8" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </ImageButton>
+                </StackLayout>
+            </Frame>
+            <Frame
+               BackgroundColor="#FFFFFFFF" 
+               CornerRadius="30"
+               Margin="10,5,50,0"
+                   BorderColor="#F2E39F1B"
+                   HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal"
+                             Margin="-10,-20,0,-20">
+                    <Image Source="Magnifier.png"
+                       WidthRequest="15"
+                       HeightRequest="15"/>
+                    <Entry x:Name="searchhistory" 
+                       Placeholder="search username1 history" 
+                            Keyboard="Url" 
+                        HorizontalOptions="FillAndExpand"
+                        ClearButtonVisibility="WhileEditing"
+                           ReturnType="Search" 
+                        Completed="searchhistory_Completed"
+                           FontSize="Small"/>
+                </StackLayout>
+            </Frame>
+            <ScrollView HeightRequest="600">
+                <StackLayout x:Name="HistoryData">
+                    <Frame IsVisible="true" BackgroundColor="#FFFBFBFB" CornerRadius="5">
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" WidthRequest="300" HeightRequest="20" BackgroundColor="#FFFBFBFB">
+                                <Label Text="Today - Tuesday, February 15, 2022" 
+                           FontFamily="Roboto#400" 
+                           FontSize="14" 
+                           FontAttributes="None" 
+                           TextColor="#FF000000" HorizontalOptions="StartAndExpand">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Image Source="DownArrow.png" x:Name="resize" HorizontalOptions="End" Margin="0,0,30,0">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+                            <StackLayout x:Name="test" IsVisible="false" Margin="0,5,0,0">
+                                <ListView x:Name="Sejarah"
+                            ItemTapped="History_ItemTapped"
+                      IsVisible="true">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextCell Text="{Binding Link}" Detail="{Binding AccessedTime}"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame IsVisible="true" BackgroundColor="#FFFBFBFB" CornerRadius="5">
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" WidthRequest="0" HeightRequest="20" BackgroundColor="#FFFBFBFB">
+                                <Label Text="Yesterday - Monday, February 14, 2022" 
+                           FontFamily="Roboto#400" 
+                           FontSize="14" 
+                           FontAttributes="None" 
+                           TextColor="#FF000000">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_3"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Image Source="DownArrow.png" x:Name="resize1">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_3"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+                            <StackLayout x:Name="test1" IsVisible="false" Margin="0,5,0,0">
+                                            <Label Text="-"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <ContentView x:Name="PopUpView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="false" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <StackLayout Orientation="Vertical" WidthRequest="312" HeightRequest="260" BackgroundColor="#FFFBFBFB">
+                    <Label Margin="20,20,0,20" Text="Remove this account from my supervision" FontFamily="Roboto#400" FontSize="14" FontAttributes="None" TextColor="#FF000000" />
+                    <Label Margin ="20,0,0,0" Text="Do you really want to remove this account from your supervision?" FontFamily="Roboto#400" FontSize="11" FontAttributes="None" TextColor="#FF3F3F3F" />
+                    <Label HorizontalOptions="Center" Text="username1" FontFamily="Roboto#500" FontSize="24" FontAttributes="None" TextColor="#FF000000" />
+                    <Label HorizontalOptions="Center" Text="example1@gmail.com" FontFamily="Roboto#300" FontSize="14" FontAttributes="None" TextColor="#FF000000" />
+                    <Label Margin="20,0,0,0" Text="Once you remove this from your supervision, you have to resend another request to be able to supervise again" FontFamily="Roboto#400" FontSize="11" FontAttributes="None" TextColor="#FFFF0202" />
+                    <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                        <Label Text="Remove" Margin="165,0,0,0" TextColor="#FF0D477C" FontFamily="Roboto#600" FontSize="14" FontAttributes="None">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="Cancel" Margin="20,0,0,0" TextColor="#FF72BADC" FontFamily="Roboto#600" FontSize="14" FontAttributes="None">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ContentView>
+        <ImageButton Source="RestrictedLink_FloatingButton.png" 
+            BackgroundColor="Transparent"
+            AbsoluteLayout.LayoutFlags="PositionProportional"  
+            AbsoluteLayout.LayoutBounds=".95,.95,80,80"
+                     Clicked="ImageButton_Clicked_2">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Scale"
+                            Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale"
+                            Value="0.8" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </ImageButton>
+    </AbsoluteLayout>
 </ContentPage>

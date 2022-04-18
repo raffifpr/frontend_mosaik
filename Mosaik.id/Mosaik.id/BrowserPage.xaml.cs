@@ -21,6 +21,12 @@ namespace Mosaik.id
             InitializeComponent();
             Browser.Source = sauce;
         }
+        bool CheckURLValid(String source)
+        {
+            if (!Regex.IsMatch(source, @"^https?:\/\/", RegexOptions.IgnoreCase))
+                source = "https://" + source;
+            return Regex.IsMatch(source, @"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", RegexOptions.IgnoreCase);
+        }
         private void PreviousPage(object sender, EventArgs e)
         {
             if (Browser.CanGoBack)
@@ -40,13 +46,28 @@ namespace Mosaik.id
         }
         private async void Browser_Navigating(object sender, WebNavigatingEventArgs e)
         {
+            var X = e.Url;
             Loading.IsVisible = true;
-            url.Text = e.Url;
+            url.Text = X;
             await App.Database.SavePersonAsync(new Person
             {
                 Link = url.Text,
                 AccessedTime = DateTime.Now.ToString()
             });
+            CekDuluYa(X);
+        }
+        private void CekDuluYa(string x)
+        {
+            if (Regex.IsMatch(x, @"xxx", RegexOptions.IgnoreCase))
+            {
+                Browser.IsVisible = false;
+                EhApaTuh.IsVisible = true;
+            }
+            else
+            {
+                Browser.IsVisible = true;
+                EhApaTuh.IsVisible = false; 
+            }
         }
         private void Browser_Navigated(object sender, WebNavigatedEventArgs e)
         {
@@ -55,12 +76,7 @@ namespace Mosaik.id
 
         private void url_Completed(object sender, EventArgs e)
         {
-            bool CheckURLValid(String source)
-            {
-                if (!Regex.IsMatch(source, @"^https?:\/\/", RegexOptions.IgnoreCase))
-                    source = "https://" + source;
-                return Regex.IsMatch(source, @"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", RegexOptions.IgnoreCase);
-            }
+
             if (CheckURLValid(url.Text))
             {
                 if (!Regex.IsMatch(url.Text, @"^https?:\/\/", RegexOptions.IgnoreCase))

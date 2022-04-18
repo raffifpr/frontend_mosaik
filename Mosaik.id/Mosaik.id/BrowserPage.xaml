@@ -34,6 +34,7 @@
                BackgroundColor="#FFFFFFFF" 
                CornerRadius="30"
                Margin="0,5,5,0"
+                WidthRequest="0"
                    BorderColor="#F2E39F1B"
                    HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal"
@@ -46,7 +47,9 @@
                         ReturnType="Search" 
                         Completed="url_Completed" 
                         ClearButtonVisibility="WhileEditing"
-                           FontSize="Small"/>
+                           FontSize="Small"
+                           WidthRequest="0"
+                           Margin="0,0,0,0"/>
                 </StackLayout>
             </Frame>
             <ImageButton Source="Right_Arrow.png"
@@ -84,5 +87,19 @@
                     Navigating="Browser_Navigating"
                     Navigated="Browser_Navigated"
                  IsVisible="true"/>
+        <StackLayout WidthRequest="360" HeightRequest="700" BackgroundColor="#FFF0F0F0" 
+                     IsVisible="false"
+                     x:Name="EhApaTuh">
+            <Image Source="AnnoyedEmoji.png" WidthRequest="83.333" HeightRequest="83.333" 
+                   BackgroundColor="#FFF0F0F0" VerticalOptions="EndAndExpand"/>
+            <Label Text="It seems this page contain some inappropriate contents"
+                   FontFamily="Roboto#600" FontSize="24" FontAttributes="None"
+                   VerticalOptions="Start"
+                   TextColor="#FF000000" Margin="34,0,34,0" HorizontalTextAlignment="Center"/>
+            <Label Text="Like they always say, safety first!" 
+                   FontFamily="Roboto#400" FontSize="18"
+                   FontAttributes="None" VerticalOptions="StartAndExpand"
+                   TextColor="#FF000000" Margin="58,0,58,0" HorizontalTextAlignment="Center"/>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

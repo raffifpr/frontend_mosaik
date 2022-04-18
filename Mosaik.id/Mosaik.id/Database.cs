@@ -20,6 +20,10 @@ namespace Mosaik.id
         {
             return _database.Table<Person>().ToListAsync();
         }
+        public Task<List<Person>> GetSearchResult( string keyword)
+        {
+            return _database.QueryAsync<Person>("SELECT * FROM [Person] WHERE Link LIKE '%?%'", keyword);
+        }
 
         public Task<int> SavePersonAsync(Person person)
         {
