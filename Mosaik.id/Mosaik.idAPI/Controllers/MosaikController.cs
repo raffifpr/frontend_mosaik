@@ -50,15 +50,12 @@ namespace Mosaik.idAPI.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> Login (LoginAccountDto loginAccountDto)
         {
+            String Status;
             var status = await _repository.AuthenticateAccount(loginAccountDto.Email, loginAccountDto.Password);
             if (status.Item2 == "false")
             {
-                var error = new ErrorStatus
-                {
-                    ErrorCode = 1,
-                    ErrorMessage = "Wrong"
-                };
-                return new JsonResult(error);
+                Status = "wrong";
+                return new JsonResult(Status);
             } 
             else if (status.Item2 == "child")
             {
@@ -68,13 +65,13 @@ namespace Mosaik.idAPI.Controllers
                     Username = status.Item3,
                     Email = loginAccountDto.Email,
                     AccountStatus = "child",
-                    SupervisedRequests = list
+                    SupervisedRequests = list,
                 };
                 return new JsonResult(childAuthenticated);
             }
             else if (status.Item2 == "supervisor")
             {
-                var list = await _repository.GetSupervisorAccounts(status.Item1);
+                var list = await _repository.GetSupervisorAccounts(status.Item1);   
                 ParentAuthenticated parentAuthenticated = new()
                 {
                     Username = status.Item3,
@@ -84,40 +81,78 @@ namespace Mosaik.idAPI.Controllers
                 };
                 return new JsonResult(parentAuthenticated);
             } else {
-                var error = new ErrorStatus
-                {
-                    ErrorCode = -1,
-                    ErrorMessage = "Failed",
-                    Status = status
-                };
-                return new JsonResult(error);
+                Status = "failed";
+                return new JsonResult(Status);
             }
         }
 
         [HttpPost("parent")]
-        public async Task<ActionResult> CreateParentAccount (CreateAccountDto createAccountDto)
+        [Produces("application/json")]
+        public async Task<ActionResult> CreateParentAccount (CreateAccountDtoParent createAccountDtoParent)
         {
-            MosaikParent mosaikParent = new()
+            try
             {
-                Username = createAccountDto.FullName,
-                Email = createAccountDto.Email,
-                Password = createAccountDto.Password
-            };
-            await _repository.InsertAccount(mosaikParent);
-            return Ok();
+                string Status;
+                MosaikParent mosaikParent = new()
+                {
+                    Username = createAccountDtoParent.FullName,
+                    Email = createAccountDtoParent.Email,
+                    Password = createAccountDtoParent.Password
+                };
+                await _repository.InsertAccount(mosaikParent);
+
+                MosaikParent mosaikParentReceive = await _parentRepository.Get(createAccountDtoParent.Email);
+
+                foreach (var email in createAccountDtoParent.SupervisorEmails)
+                {
+                    MosaikChild mosaikChild = await _childRepository.GetChildAccount(email);
+                    if (mosaikChild == null || mosaikParentReceive == null)
+                    {
+                        Status = "failed";
+                        return new JsonResult(Status);
+                    }
+                    else
+                    {
+                        MosaikParentChild mosaikParentChild = new()
+                        {
+                            parentID = mosaikParentReceive.MosaikParentID,
+                            childID = mosaikChild.MosaikChildID,
+                            Authorized = false
+                        };
+                        await _parentRepository.InsertChildAccount(email, mosaikParentChild);
+                    }
+                }
+                Status = "success";
+                return new JsonResult(Status);
+            }
+            catch 
+            {
+                string Status = "failed";
+                return new JsonResult(Status);
+            }
+            
         }
 
         [HttpPost("child")]
         public async Task<ActionResult> CreateChildAccount (CreateAccountDto createAccountDto)
         {
-            MosaikChild mosaikChild = new()
+            try
             {
-                Username = createAccountDto.FullName,
-                Email = createAccountDto.Email,
-                Password = createAccountDto.Password
-            };
-            await _repository.InsertAccount(mosaikChild);
-            return Ok();
+                MosaikChild mosaikChild = new()
+                {
+                    Username = createAccountDto.FullName,
+                    Email = createAccountDto.Email,
+                    Password = createAccountDto.Password
+                };
+                await _repository.InsertAccount(mosaikChild);
+                string Status = "success";
+                return new JsonResult(Status);
+            }
+            catch 
+            {
+                string Status = "failed ";
+                return new JsonResult(Status);
+            }
         }
 
         [HttpPost("history")]
@@ -165,12 +200,11 @@ namespace Mosaik.idAPI.Controllers
             return Ok();
         }
 
-        [HttpPost("supervise/{email}")]
+        [HttpPost("supervise")]
         public async Task<ActionResult> NewChildAccount(string Email, CreateSuperviseDto createSuperviseDto)
         {
             MosaikParentChild mosaikParentChild = new()
             {
-                MosaikParentChildID = createSuperviseDto.MosaikChildRestrictID,
                 parentID = createSuperviseDto.ParentID,
                 childID = createSuperviseDto.ChildID
             };
@@ -178,7 +212,7 @@ namespace Mosaik.idAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete("supervise/{email}")]
+        [HttpDelete("supervise")]
         public async Task<ActionResult> DeleteChild (string Email) {
             await _parentRepository.DeleteChildAccount(Email);
             return Ok();

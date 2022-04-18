@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mosaik.idAPI.Models
 {
+    [Index(nameof(Email), IsUnique=true)]
     public class MosaikChild
     {
         [Required]

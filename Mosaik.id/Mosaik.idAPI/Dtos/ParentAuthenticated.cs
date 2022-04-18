@@ -1,3 +1,4 @@
+using static Mosaik.idAPI.Services.MosaikRepository;
 namespace Mosaik.idAPI.Dtos
 {
     public class ParentAuthenticated
@@ -5,6 +6,6 @@ namespace Mosaik.idAPI.Dtos
         public string Username {get; set;}
         public string Email {get; set;}
         public string AccountStatus {get; set;}
-        public Tuple<String, String>[] SupervisorAccounts {get; set;}
+        public List<Account> SupervisorAccounts {get; set;}
     }
 }

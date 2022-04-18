@@ -16,10 +16,32 @@ namespace Mosaik.idAPI.Services
         {
             _context = context;
         }
+        
+        public async Task <MosaikParent> Get (string Email)
+        {
+            var list = await _context.MosaikParents.ToListAsync();
+            foreach (var item in list)
+            {
+                if (item.Email == Email)
+                {
+                    return item;
+                }
+            }
+            return null;
+            // return await _context.MosaikParents.FindAsync(Email);
+        }
         public async Task InsertChildAccount(string Email, MosaikParentChild mosaikParentChild) 
         {
-            var check = await _context.MosaikChildren.FindAsync(Email);
-            if (check == null)
+            var list = await _context.MosaikChildren.ToListAsync();
+            MosaikChild mosaikChild = null;
+            foreach (var item in list)
+            {
+                if (item.Email == Email)
+                {
+                    mosaikChild = item;
+                }
+            }
+            if (mosaikChild == null)
                 throw new NullReferenceException();
             
             _context.MosaikParentsChildren.Add(mosaikParentChild);

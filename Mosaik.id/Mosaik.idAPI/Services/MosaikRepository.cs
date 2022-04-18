@@ -11,6 +11,11 @@ namespace Mosaik.idAPI.Services
     public class MosaikRepository : IMosaikRepository
     {
         private readonly IDataContext _context;
+        public class Account
+        {
+            public string Email {get; set;}
+            public string Username {get; set;}
+        }
 
         public MosaikRepository(IDataContext context)
         {
@@ -57,26 +62,18 @@ namespace Mosaik.idAPI.Services
                         var children = await _context.MosaikChildren.ToListAsync();
                         foreach (var mosaikChild in children)
                         {
-                            if (mosaikChild.Password == password) 
+                            if (mosaikChild.Password == password && mosaikChild.Email == Email) 
                             {
                                 return new Tuple<int, string, string> (mosaikChild.MosaikChildID, "child", mosaikChild.Username);
-                            }
-                            else
-                            {
-                                return new Tuple<int, string, string> (0, "false", "null");
                             }
                         }
                     } else if (mosaikItem.AccountStatus == "Parent") {
                         var parents = await _context.MosaikParents.ToListAsync();
                         foreach (var mosaikParent in parents)
                         {
-                            if (mosaikParent.Password == password) 
+                            if (mosaikParent.Password == password && mosaikParent.Email == Email) 
                             {
                                 return new Tuple<int, string, string> (mosaikParent.MosaikParentID, "supervisor", mosaikParent.Username);
-                            }
-                            else 
-                            {
-                                return new Tuple<int, string, string> (0, "false", "null");
                             }
                         }
                     }
@@ -85,34 +82,44 @@ namespace Mosaik.idAPI.Services
             return new Tuple<int, string, string> (0, "false", "null");
         }
 
-        public async Task<Tuple<String, String>[]> GetSupervisedRequests(int mosaikChildID) 
+        public async Task<List<Account>> GetSupervisedRequests(int mosaikChildID) 
         {
             var list = await _context.MosaikParentsChildren.ToListAsync();
-            Tuple<String, String>[] supervisedRequests = {};
+            List<Account> supervisedRequests = new List<Account>();
             foreach (var mosaikParentChild in list) 
             {
                 if (mosaikParentChild.childID == mosaikChildID)
                 {
-                    supervisedRequests.Append<Tuple<String, String>>
-                    (
-                        new Tuple<String, String> (_context.MosaikChildren.Find(mosaikChildID).Email, _context.MosaikChildren.Find(mosaikChildID).Username)
-                    );
+                    
+                    MosaikParent mosaikParent = await _context.MosaikParents.FindAsync(mosaikParentChild.parentID);
+
+                    Account account = new()
+                    {
+                        Email = mosaikParent.Email,
+                        Username = mosaikParent.Username
+                    };
+                    supervisedRequests.Add(account);
                 } 
             }
             return supervisedRequests;
         }
-        public async Task<Tuple<String, String>[]> GetSupervisorAccounts(int mosaikParentID)
+        public async Task<List<Account>> GetSupervisorAccounts(int mosaikParentID)
         {
             var list = await _context.MosaikParentsChildren.ToListAsync();
-            Tuple<String, String>[] supervisorAccounts = {};
+            List<Account> supervisorAccounts = new List<Account>();
             foreach (var mosaikParentChild in list) 
             {
-                if (mosaikParentChild.parentID == mosaikParentID)
+                if (mosaikParentChild.parentID == mosaikParentID && mosaikParentChild.Authorized)
                 {
-                    supervisorAccounts.Append<Tuple<String, String>>
-                    (
-                        new Tuple<String, String> (_context.MosaikParents.Find(mosaikParentID).Email, _context.MosaikParents.Find(mosaikParentID).Username)
-                    );
+                    
+                    MosaikChild mosaikChild = await _context.MosaikChildren.FindAsync(mosaikParentChild.childID);
+
+                    Account account = new()
+                    {
+                        Email = mosaikChild.Email,
+                        Username = mosaikChild.Username
+                    };
+                    supervisorAccounts.Add(account);
                 } 
             }
             return supervisorAccounts;

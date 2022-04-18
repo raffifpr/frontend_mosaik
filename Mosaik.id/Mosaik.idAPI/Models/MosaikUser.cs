@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Mosaik.idAPI.Models
 {
+    [Index(nameof(Email), IsUnique=true)]
     public class MosaikUser
     {
         public int MosaikUserID { get; set; }
