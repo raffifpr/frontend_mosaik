@@ -124,5 +124,87 @@ namespace Mosaik.idAPI.Services
             }
             return supervisorAccounts;
         }
+        public async Task<String> Update(string Email, string Username)
+        {
+            var list = await _context.MosaikUsers.ToListAsync();
+            foreach (var item in list)
+            {
+                if (item.Email == Email)
+                {
+                    if (item.AccountStatus == "Child")
+                    {
+                        var children = await _context.MosaikChildren.ToListAsync();
+                        foreach (var mosaikChild in children)
+                        {
+                            if (mosaikChild.Email == Email) 
+                            {
+                                mosaikChild.Username = Username;
+                                await _context.SaveChangesAsync();
+                                return "success";
+                            }
+                        }
+                    } 
+                    else if (item.AccountStatus == "Parent")
+                    {
+                        var parents = await _context.MosaikParents.ToListAsync();
+                        foreach (var mosaikParent in parents)
+                        {
+                            if (mosaikParent.Email == Email) 
+                            {
+                                mosaikParent.Username = Username;
+                                await _context.SaveChangesAsync();
+                                return "success";
+                            }
+                        }
+                    }
+                }
+            }
+            return "failed";
+        }
+        public async Task<String> UpdatePass(string Email, string OldPassword, string NewPassword)
+        {
+            var list = await _context.MosaikUsers.ToListAsync();
+            foreach (var item in list)
+            {
+                if (item.Email == Email)
+                {
+                    if (item.AccountStatus == "Child")
+                    {
+                        var children = await _context.MosaikChildren.ToListAsync();
+                        foreach (var mosaikChild in children)
+                        {
+                            if (mosaikChild.Email == Email && mosaikChild.Password != OldPassword)
+                            {
+                                return "wrong password";
+                            }
+                            else if (mosaikChild.Email == Email && mosaikChild.Password == OldPassword) 
+                            {
+                                mosaikChild.Password = NewPassword;
+                                await _context.SaveChangesAsync();
+                                return "success";
+                            }
+                        }
+                    } 
+                    else if (item.AccountStatus == "Parent")
+                    {
+                        var parents = await _context.MosaikParents.ToListAsync();
+                        foreach (var mosaikParent in parents)
+                        {
+                            if (mosaikParent.Email == Email && mosaikParent.Password != OldPassword)
+                            {
+                                return "wrong password";
+                            }
+                            else if (mosaikParent.Email == Email && mosaikParent.Password == OldPassword) 
+                            {
+                                mosaikParent.Password = NewPassword;
+                                await _context.SaveChangesAsync();
+                                return "success";
+                            }
+                        }
+                    }
+                }
+            }
+            return "failed";
+        }
     }
 }

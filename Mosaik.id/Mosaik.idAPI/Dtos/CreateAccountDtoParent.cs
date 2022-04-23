@@ -2,7 +2,7 @@ namespace Mosaik.idAPI.Dtos
 {
     public class CreateAccountDtoParent
     {
-        public string FullName {get; set;}
+        public string Username {get; set;}
 
         public string Email {get; set;}
 

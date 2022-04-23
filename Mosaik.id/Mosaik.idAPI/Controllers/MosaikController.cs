@@ -95,7 +95,7 @@ namespace Mosaik.idAPI.Controllers
                 string Status;
                 MosaikParent mosaikParent = new()
                 {
-                    Username = createAccountDtoParent.FullName,
+                    Username = createAccountDtoParent.Username,
                     Email = createAccountDtoParent.Email,
                     Password = createAccountDtoParent.Password
                 };
@@ -103,25 +103,30 @@ namespace Mosaik.idAPI.Controllers
 
                 MosaikParent mosaikParentReceive = await _parentRepository.Get(createAccountDtoParent.Email);
 
-                foreach (var email in createAccountDtoParent.SupervisorEmails)
+                if (createAccountDtoParent.SupervisorEmails.Length > 0)
                 {
-                    MosaikChild mosaikChild = await _childRepository.GetChildAccount(email);
-                    if (mosaikChild == null || mosaikParentReceive == null)
+                    foreach (var email in createAccountDtoParent.SupervisorEmails)
                     {
-                        Status = "failed";
-                        return new JsonResult(Status);
-                    }
-                    else
-                    {
-                        MosaikParentChild mosaikParentChild = new()
+                        MosaikChild mosaikChild = await _childRepository.GetChildAccount(email);
+                        if (mosaikChild == null || mosaikParentReceive == null)
                         {
-                            parentID = mosaikParentReceive.MosaikParentID,
-                            childID = mosaikChild.MosaikChildID,
-                            Authorized = false
-                        };
-                        await _parentRepository.InsertChildAccount(email, mosaikParentChild);
+                            Status = "failed";
+                            return new JsonResult(Status);
+                        }
+                        else
+                        {
+                            MosaikParentChild mosaikParentChild = new()
+                            {
+                                parentID = mosaikParentReceive.MosaikParentID,
+                                childID = mosaikChild.MosaikChildID,
+                                Authorized = false
+                            };
+                            await _parentRepository.InsertChildAccount(email, mosaikParentChild);
+                        }
                     }
-                }
+                    Status = "success";
+                    return new JsonResult(Status);
+                }    
                 Status = "success";
                 return new JsonResult(Status);
             }
@@ -140,7 +145,7 @@ namespace Mosaik.idAPI.Controllers
             {
                 MosaikChild mosaikChild = new()
                 {
-                    Username = createAccountDto.FullName,
+                    Username = createAccountDto.Username,
                     Email = createAccountDto.Email,
                     Password = createAccountDto.Password
                 };
@@ -153,6 +158,22 @@ namespace Mosaik.idAPI.Controllers
                 string Status = "failed ";
                 return new JsonResult(Status);
             }
+        }
+
+        [HttpPost("changeuser")]
+        [Produces("application/json")]
+        public async Task<ActionResult> ChangeUsername (ChangeUsernameDto changeUsernameDto)
+        {
+            string Status = await _repository.Update(changeUsernameDto.Email, changeUsernameDto.Username);
+            return new JsonResult(Status);
+        }
+
+        [HttpPost("changepass")]
+        [Produces("application/json")]
+        public async Task<ActionResult> ChangePassword (ChangePasswordDto changePasswordDto)
+        {
+            string Status = await _repository.UpdatePass(changePasswordDto.Email, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
+            return new JsonResult(Status);
         }
 
         [HttpPost("history")]
