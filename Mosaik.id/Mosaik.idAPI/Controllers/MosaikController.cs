@@ -32,13 +32,7 @@ namespace Mosaik.idAPI.Controllers
             _parentRepository = mosaikParentRepository;
             _restrictRepository = mosaikRestrictRepository;
         }
-        public class ErrorStatus
-        {
-            public int ErrorCode {get; set;}
-            public string ErrorMessage {get; set;}
-            public Tuple<int, String, String> Status {get; set;}
-        }
-
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MosaikParent>>> GetMosaikItems()
         {
@@ -92,7 +86,6 @@ namespace Mosaik.idAPI.Controllers
         {
             try
             {
-                string Status;
                 MosaikParent mosaikParent = new()
                 {
                     Username = createAccountDtoParent.Username,
@@ -110,8 +103,11 @@ namespace Mosaik.idAPI.Controllers
                         MosaikChild mosaikChild = await _childRepository.GetChildAccount(email);
                         if (mosaikChild == null || mosaikParentReceive == null)
                         {
-                            Status = "failed";
-                            return new JsonResult(Status);
+                            Response newresponse = new()
+                            {
+                                Status = "failed",
+                            };
+                            return new JsonResult(newresponse);
                         }
                         else
                         {
@@ -124,21 +120,31 @@ namespace Mosaik.idAPI.Controllers
                             await _parentRepository.InsertChildAccount(email, mosaikParentChild);
                         }
                     }
-                    Status = "success";
-                    return new JsonResult(Status);
+                    Response response2 = new()
+                    {
+                        Status = "success",
+                    };
+                    return new JsonResult(response2);
                 }    
-                Status = "success";
-                return new JsonResult(Status);
+                Response response = new()
+                {
+                    Status = "success",
+                };
+                return new JsonResult(response);
             }
             catch 
             {
-                string Status = "failed";
-                return new JsonResult(Status);
+                Response response = new()
+                {
+                    Status = "failed",
+                };
+                return new JsonResult(response);
             }
             
         }
 
         [HttpPost("child")]
+        [Produces("application/json")]
         public async Task<ActionResult> CreateChildAccount (CreateAccountDto createAccountDto)
         {
             try
@@ -150,13 +156,19 @@ namespace Mosaik.idAPI.Controllers
                     Password = createAccountDto.Password
                 };
                 await _repository.InsertAccount(mosaikChild);
-                string Status = "success";
-                return new JsonResult(Status);
+                Response response = new()
+                {
+                    Status = "success",
+                };
+                return new JsonResult(response);
             }
             catch 
             {
-                string Status = "failed ";
-                return new JsonResult(Status);
+                Response response = new()
+                {
+                    Status = "failed",
+                };
+                return new JsonResult(response);
             }
         }
 
@@ -164,50 +176,124 @@ namespace Mosaik.idAPI.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> ChangeUsername (ChangeUsernameDto changeUsernameDto)
         {
-            string Status = await _repository.Update(changeUsernameDto.Email, changeUsernameDto.Username);
-            return new JsonResult(Status);
+            string _status = await _repository.Update(changeUsernameDto.Email, changeUsernameDto.Username);
+            Response response = new()
+            {
+                Status = _status,
+            };
+            return new JsonResult(response);
         }
 
         [HttpPost("changepass")]
         [Produces("application/json")]
         public async Task<ActionResult> ChangePassword (ChangePasswordDto changePasswordDto)
         {
-            string Status = await _repository.UpdatePass(changePasswordDto.Email, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
-            return new JsonResult(Status);
+            string _status = await _repository.UpdatePass(changePasswordDto.Email, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
+            Response response = new()
+            {
+                Status = _status,
+            };
+            return new JsonResult(response);
+        }
+
+        [HttpPost("addsupervise")]
+        [Produces("application/json")]
+        public async Task<ActionResult> NewChildAccount(CreateSuperviseDto createSuperviseDto)
+        {
+            string _status = await _parentRepository.InsertChildAccount(createSuperviseDto.Email, createSuperviseDto.ChildEmail);
+            Response response = new()
+            {
+                Status = _status,
+            };
+            return new JsonResult(response);
+        }
+
+        [HttpPost("deletesupervise")]
+        [Produces("application/json")]
+        public async Task<ActionResult> DeleteChild (CreateSuperviseDto createSuperviseDto) {
+            string _status = await _parentRepository.DeleteChildAccount(createSuperviseDto.Email, createSuperviseDto.ChildEmail);
+            Response response = new()
+            {
+                Status = _status,
+            };
+            return new JsonResult(response);
         }
 
         [HttpPost("history")]
+        [Produces("application/json")]
         public async Task<ActionResult> CreateHistory (CreateHistoryDto createHistoryDto)
         {
-            MosaikHistory mosaikHistory = new()
+            string _status = await _historyRepository.InsertHistory(createHistoryDto.Email, createHistoryDto.Link, createHistoryDto.Time, createHistoryDto.Date);
+            Response response = new()
             {
-                userID = createHistoryDto.userID,
-                Link = createHistoryDto.Link,
-                AccessedTime = DateTime.Now.ToString()
+                Status = _status,
             };
-            await _historyRepository.InsertHistory(mosaikHistory);
-            return Ok();
+            return new JsonResult(response);
+        }
+
+        
+        [HttpPost("datehistory")]
+        [Produces("application/json")]
+        public async Task<ActionResult> DateOfHistoryData (DateHistoryRequest dateHistoryRequest)
+        {
+            DateHistoryResponse dateHistoryResponse = new()
+            {
+                Total = await _historyRepository.GetTotalDateHistory(dateHistoryRequest.Email),
+                DateList = await _historyRepository.GetListDateHistory(dateHistoryRequest.Email)
+            };
+            return new JsonResult(dateHistoryResponse);
+        }
+
+        [HttpPost("historydataperdate")]
+        [Produces("application/json")]
+        public async Task<ActionResult> HistoryDataPerDate (HistoryDataPerDateRequest historyDataPerDateRequest)
+        {
+            HistoryDataPerDateResponse historyDataPerDateResponse = new()
+            {
+                Total = await _historyRepository.GetTotalHistoryPerDate(historyDataPerDateRequest.Email, historyDataPerDateRequest.Date),
+                Data = await _historyRepository.GetListDateHistoryPerDate(historyDataPerDateRequest.Email, historyDataPerDateRequest.Date)
+            };
+            return new JsonResult(historyDataPerDateResponse);
         }
 
         [HttpPost("restrict")]
+        [Produces("application/json")]
         public async Task<ActionResult> CreateRestrict (CreateRestrictDto createRestrictDto)
         {
-            MosaikChildRestrict mosaikChildRestrict = new()
+            string _status = await _restrictRepository.InsertRestrictedLink(createRestrictDto.Email, createRestrictDto.Link);
+            Response response = new()
             {
-                Link = createRestrictDto.Link,
-                Notif = createRestrictDto.Notif
+                Status = _status
             };
-            await _restrictRepository.InsertRestrictedLink(mosaikChildRestrict);
-            return Ok();
+            return new JsonResult(response);
         }
 
-        [HttpDelete("restrict/{id}")]
-        public async Task<ActionResult> DeleteLink (int id)
+        [HttpPost("deleterestrict")]
+        [Produces("application/json")]
+        public async Task<ActionResult> DeleteLink (CreateRestrictDto createRestrictDto)
         {
-            await _restrictRepository.DeleteRestrictedLink(id);
-            return Ok();
+            string _status = await _restrictRepository.DeleteRestrictedLink(createRestrictDto.Email, createRestrictDto.Link);
+            Response response = new()
+            {
+                Status = _status
+            };
+            return new JsonResult(response);
         }
 
+        [HttpPost("restrictdata")]
+        [Produces("application/json")]
+        public async Task<ActionResult> RestrictData (DateHistoryRequest dateHistoryRequest)
+        {
+            LinkAndNotif linkAndNotif = await _restrictRepository.RestrictedLinkData(dateHistoryRequest.Email);
+            int count = await _restrictRepository.GetTotalRestrictedLinkData(dateHistoryRequest.Email);
+            RestrictDataResponse restrictDataResponse = new()
+            {
+                Total = count,
+                LinkAndNotif = linkAndNotif
+            };
+            return new JsonResult(restrictDataResponse);
+        }
+        
         [HttpPut("restrict/{id}")]
         public async Task<ActionResult> UpdateNotif(bool notif, UpdateNotifDto updateNotifDto)
         {
@@ -219,24 +305,6 @@ namespace Mosaik.idAPI.Controllers
 
             await _restrictRepository.DisableNotif(mosaikChildRestrict);
             return Ok();
-        }
-
-        [HttpPost("supervise")]
-        public async Task<ActionResult> NewChildAccount(string Email, CreateSuperviseDto createSuperviseDto)
-        {
-            MosaikParentChild mosaikParentChild = new()
-            {
-                parentID = createSuperviseDto.ParentID,
-                childID = createSuperviseDto.ChildID
-            };
-            await _parentRepository.InsertChildAccount(Email, mosaikParentChild);
-            return Ok();
-        }
-
-        [HttpDelete("supervise")]
-        public async Task<ActionResult> DeleteChild (string Email) {
-            await _parentRepository.DeleteChildAccount(Email);
-            return Ok();
-        }
+        }   
     } 
 }

@@ -47,18 +47,67 @@ namespace Mosaik.idAPI.Services
             _context.MosaikParentsChildren.Add(mosaikParentChild);
             await _context.SaveChangesAsync();
         }
+        public async Task<String> InsertChildAccount(string Email, string ChildEmail) 
+        {
+            var list = await _context.MosaikParents.ToListAsync();
+            foreach (var item in list)
+            {
+                if (item.Email == Email)
+                {
+                    var mosaikChildren = await _context.MosaikChildren.ToListAsync();
+                    foreach (var mosaikChild in mosaikChildren)
+                    {
+                        if (mosaikChild.Email == ChildEmail)
+                        {
+                            MosaikParentChild mosaikParentChild = new()
+                            {
+                                parentID = item.MosaikParentID,
+                                childID = mosaikChild.MosaikChildID,
+                                Authorized = false,
+                            };
+                            _context.MosaikParentsChildren.Add(mosaikParentChild);
+                            await _context.SaveChangesAsync();
+                            return "success";
+                        }
+                    }
+                    return "don't exist";
+                }
+            }
+            return "failed";
+        }
         public async Task<IEnumerable<MosaikParentChild>> GetMosaikChildrenParent()
         {
             return await _context.MosaikParentsChildren.ToListAsync();
         }
-        public async Task DeleteChildAccount(string Email)
+        public async Task<String> DeleteChildAccount(string Email, string ChildEmail)
         {
-            var itemToRemove = await _context.MosaikParentsChildren.FindAsync(Email);
-            if (itemToRemove == null)
-                throw new NullReferenceException();
-            
-            _context.MosaikParentsChildren.Remove(itemToRemove);
-            await _context.SaveChangesAsync();
+            var list = await _context.MosaikParents.ToListAsync();
+            foreach (var item in list)
+            {
+                if (item.Email == Email)
+                {
+                    var mosaikChildren = await _context.MosaikChildren.ToListAsync();
+                    foreach (var mosaikChild in mosaikChildren)
+                    {
+                        if (mosaikChild.Email == ChildEmail)
+                        {
+                            var mosaikParentsChildren = await _context.MosaikParentsChildren.ToListAsync();
+                            foreach (var mosaikParentChild in mosaikParentsChildren)
+                            {
+                                if (mosaikParentChild.parentID == item.MosaikParentID && mosaikParentChild.childID == mosaikChild.MosaikChildID)
+                                {    
+                                    _context.MosaikParentsChildren.Remove(mosaikParentChild);
+                                    await _context.SaveChangesAsync();
+                                    return "success";
+                                }
+                            }
+                            return "don't exist";
+                        }
+                    }
+                    return "don't exist";
+                }
+            }
+            return "failed";
         }
     }
 }

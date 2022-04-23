@@ -7,6 +7,7 @@ namespace Mosaik.idAPI.Interfaces
         Task InsertChildAccount(string Email, MosaikParentChild mosaikParentChild);
         Task<MosaikParent> Get(string Email);
         Task<IEnumerable<MosaikParentChild>> GetMosaikChildrenParent();
-        Task DeleteChildAccount(string Email);
+        Task<String> InsertChildAccount(string Email, string ChildEmail);
+        Task<String> DeleteChildAccount(string Email, string ChildEmail);
     }
 }
