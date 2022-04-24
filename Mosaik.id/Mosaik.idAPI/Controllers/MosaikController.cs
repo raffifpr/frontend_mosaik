@@ -45,11 +45,12 @@ namespace Mosaik.idAPI.Controllers
         public async Task<ActionResult> Login (LoginAccountDto loginAccountDto)
         {
             String Status;
+            Response response = new Dtos.Response();
             var status = await _repository.AuthenticateAccount(loginAccountDto.Email, loginAccountDto.Password);
             if (status.Item2 == "false")
             {
-                Status = "wrong";
-                return new JsonResult(Status);
+                response.Status = "wrong";
+                return new JsonResult(response);
             } 
             else if (status.Item2 == "child")
             {
@@ -75,8 +76,8 @@ namespace Mosaik.idAPI.Controllers
                 };
                 return new JsonResult(parentAuthenticated);
             } else {
-                Status = "failed";
-                return new JsonResult(Status);
+                response.Status = "failed";
+                return new JsonResult(response);
             }
         }
 
@@ -294,6 +295,30 @@ namespace Mosaik.idAPI.Controllers
             return new JsonResult(restrictDataResponse);
         }
         
+        [HttpPost("authorizerequest")]
+        [Produces("application/json")]
+        public async Task<ActionResult> AuthorizeRequest (AuthorizeRequestDto authorizeRequestDto)
+        {
+            string result = await _childRepository.AuthorizeRequest(authorizeRequestDto.Email, authorizeRequestDto.EmailSupervisor, authorizeRequestDto.StatusAccept);
+            Response response = new()
+            {
+                Status = result,
+            };
+            return new JsonResult(response);
+        }
+
+        [HttpGet("exists/{Email}")]
+        [Produces("application/json")]
+        public async Task<ActionResult> GetCheckEmail(string Email)
+        {
+            MosaikChild mosaikChild = await _childRepository.GetChildAccount(Email);
+            Response response = new()
+            {
+                Status = mosaikChild == null ? "not exist" : "exist",
+            };
+            return new JsonResult(response);
+        }
+
         [HttpPut("restrict/{id}")]
         public async Task<ActionResult> UpdateNotif(bool notif, UpdateNotifDto updateNotifDto)
         {
