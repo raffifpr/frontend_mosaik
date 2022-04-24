@@ -19,7 +19,16 @@ namespace Mosaik.idAPI.Services
         }
         public async Task<MosaikChild> GetChildAccount(string Email) 
         {
-            return await _context.MosaikChildren.FindAsync(Email);
+            var list = await _context.MosaikChildren.ToListAsync();
+            MosaikChild mosaikChild = null;
+            foreach (var item in list)
+            {
+                if (item.Email == Email)
+                {
+                    mosaikChild = item;
+                }
+            }
+            return mosaikChild;
         }
     }
 }

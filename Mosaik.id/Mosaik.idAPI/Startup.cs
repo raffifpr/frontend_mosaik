@@ -32,7 +32,8 @@ namespace Mosaik.idAPI
             services.AddScoped<IMosaikParentRepository, MosaikParentRepository>();
             services.AddScoped<IMosaikChildRepository, MosaikChildRepository>();
             services.AddScoped<IMosaikRestrictRepository, MosaikRestrictRepository>();
-            services.AddControllers();    
+            services.AddControllers();
+            services.AddMvc();    
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MosaikApi", Version = "v1" });

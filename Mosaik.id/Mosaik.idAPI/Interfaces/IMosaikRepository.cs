@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Mosaik.idAPI.Models;
+using static Mosaik.idAPI.Services.MosaikRepository;
 
 namespace Mosaik.idAPI.Interfaces
 {
@@ -13,8 +14,11 @@ namespace Mosaik.idAPI.Interfaces
 
         Task InsertAccount(MosaikChild mosaikChild);
 
-        Task<bool> AuthenticateAccount(string Email, string password);
-
+        Task<Tuple<int, String, String>> AuthenticateAccount(string Email, string password);
+        Task<List<Account>> GetSupervisedRequests(int mosaikChildID);
+        Task<List<Account>> GetSupervisorAccounts(int mosaikParentID);
+        Task<String> Update(string Email, string Username);
+        Task<String> UpdatePass(string Email, string OldPassword, string NewPassword);
         // bool CheckUsernameUsed(string Email);
 
         // bool DoesItemExist(int ID);
