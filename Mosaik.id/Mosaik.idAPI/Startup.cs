@@ -25,7 +25,7 @@ namespace Mosaik.idAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("HerokuConnection")));
             services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
             services.AddScoped<IMosaikRepository, MosaikRepository>();
             services.AddScoped<IMosaikHistoryRepository, MosaikHistoryRepository>();
