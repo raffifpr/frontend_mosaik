@@ -1,12 +1,4 @@
-﻿
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Mosaik.idAPI.Interfaces;
+﻿using Mosaik.idAPI.Interfaces;
 using Mosaik.idAPI.Services;
 using Mosaik.idAPI.Data;
 using Microsoft.EntityFrameworkCore;

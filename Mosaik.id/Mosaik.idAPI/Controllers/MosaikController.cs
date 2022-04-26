@@ -113,6 +113,7 @@ namespace Mosaik.idAPI.Controllers
 
                 if (createAccountDtoParent.SupervisorEmails.Length > 0)
                 {
+                    int index = 0;
                     foreach (var email in createAccountDtoParent.SupervisorEmails)
                     {
                         MosaikChild mosaikChild = await _childRepository.GetChildAccount(email);
@@ -120,7 +121,7 @@ namespace Mosaik.idAPI.Controllers
                         {
                             Response newresponse = new()
                             {
-                                Status = "failed",
+                                Status = "index " + index.ToString() + " email not exist",
                             };
                             return new JsonResult(newresponse);
                         }
@@ -134,6 +135,7 @@ namespace Mosaik.idAPI.Controllers
                             };
                             await _parentRepository.InsertChildAccount(email, mosaikParentChild);
                         }
+                        index+=1;
                     }
                     Response response2 = new()
                     {

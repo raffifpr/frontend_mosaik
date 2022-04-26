@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosaik.id.Android", "Mosaik.id.Android\Mosaik.id.Android.csproj", "{3B3F6AC9-DA86-424E-96DD-253D8669234B}"
 EndProject
@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosaik.id.iOS", "Mosaik.id.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mosaik.id", "Mosaik.id\Mosaik.id.csproj", "{C8581DAD-F245-4374-A96B-7EC251BEDEF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosaik.idAPI", "Mosaik.idAPI\Mosaik.idAPI.csproj", "{F4CD37AB-B489-41A6-883F-1675A4F0927C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mosaik.idAPI", "Mosaik.idAPI\Mosaik.idAPI.csproj", "{F4CD37AB-B489-41A6-883F-1675A4F0927C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mosaik.idTest", "Mosaik.idTest\Mosaik.idTest.csproj", "{7F0D0888-940D-4277-AF5F-857AA77C3CF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,18 @@ Global
 		{F4CD37AB-B489-41A6-883F-1675A4F0927C}.Release|iPhone.Build.0 = Release|Any CPU
 		{F4CD37AB-B489-41A6-883F-1675A4F0927C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{F4CD37AB-B489-41A6-883F-1675A4F0927C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Release|iPhone.Build.0 = Release|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{7F0D0888-940D-4277-AF5F-857AA77C3CF5}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

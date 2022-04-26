@@ -45,8 +45,16 @@ namespace Mosaik.idAPI.Services
             {
                 return "failed";
             }
-            bool authorized = StatusAccept == "accept" ? true : false; 
-            mosaikParentChild.Authorized = authorized;
+            bool authorized = StatusAccept == "accept" ? true : false;
+            
+            if (authorized)
+            {
+                mosaikParentChild.Authorized = authorized;
+            } 
+            else 
+            {
+                _context.MosaikParentsChildren.Remove(mosaikParentChild);
+            }
             await _context.SaveChangesAsync();
             return "success";
         }
