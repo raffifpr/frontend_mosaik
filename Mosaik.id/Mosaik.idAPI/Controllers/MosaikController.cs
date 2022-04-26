@@ -246,7 +246,14 @@ namespace Mosaik.idAPI.Controllers
             return new JsonResult(response);
         }
 
-        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteHistory (int id)
+        {
+            await _historyRepository.DeleteHistory(id);
+            return Ok();
+        }
+
+
         [HttpPost("datehistory")]
         [Produces("application/json")]
         public async Task<ActionResult> DateOfHistoryData (DateHistoryRequest dateHistoryRequest)
@@ -330,6 +337,11 @@ namespace Mosaik.idAPI.Controllers
             {
                 Status = mosaikChild == null ? "not exist" : "exist",
             };
+            if (response.Status == "not exist")
+            {
+                MosaikParent mosaikParent = await _parentRepository.Get(Email);
+                response.Status = mosaikParent == null ? "not exist" : "exist";
+            }
             return new JsonResult(response);
         }
 

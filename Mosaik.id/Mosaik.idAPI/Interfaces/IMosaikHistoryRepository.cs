@@ -12,5 +12,6 @@ namespace Mosaik.idAPI.Interfaces
         Task<int> GetTotalDateHistory(string Email);
         Task<int> GetTotalHistoryPerDate(string Email, string Date);
         Task<LinkAndTimes> GetListDateHistoryPerDate(string Email, string Date);
+        Task DeleteHistory(int id);
     }
 }
