@@ -44,13 +44,19 @@ namespace Mosaik.idAPI.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> Login (LoginAccountDto loginAccountDto)
         {
-            String Status;
-            Response response = new Dtos.Response();
             var status = await _repository.AuthenticateAccount(loginAccountDto.Email, loginAccountDto.Password);
             if (status.Item2 == "false")
             {
-                response.Status = "wrong";
-                return new JsonResult(response);
+                WrongLogin wrongLogin = new()
+                {
+                    status = "wrong",
+                    username = "",
+                    email = "",
+                    accountStatus = "",
+                    supervisorRequests = { },
+                    supervisedAccounts = { },
+                };
+                return new JsonResult(wrongLogin);
             } 
             else if (status.Item2 == "child")
             {
@@ -76,8 +82,16 @@ namespace Mosaik.idAPI.Controllers
                 };
                 return new JsonResult(parentAuthenticated);
             } else {
-                response.Status = "failed";
-                return new JsonResult(response);
+                WrongLogin wrongLogin = new()
+                {
+                    status = "failed",
+                    username = "",
+                    email = "",
+                    accountStatus = "",
+                    supervisorRequests = { },
+                    supervisedAccounts = { },
+                };
+                return new JsonResult(wrongLogin);
             }
         }
 
@@ -232,7 +246,14 @@ namespace Mosaik.idAPI.Controllers
             return new JsonResult(response);
         }
 
-        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteHistory (int id)
+        {
+            await _historyRepository.DeleteHistory(id);
+            return Ok();
+        }
+
+
         [HttpPost("datehistory")]
         [Produces("application/json")]
         public async Task<ActionResult> DateOfHistoryData (DateHistoryRequest dateHistoryRequest)
@@ -316,6 +337,11 @@ namespace Mosaik.idAPI.Controllers
             {
                 Status = mosaikChild == null ? "not exist" : "exist",
             };
+            if (response.Status == "not exist")
+            {
+                MosaikParent mosaikParent = await _parentRepository.Get(Email);
+                response.Status = mosaikParent == null ? "not exist" : "exist";
+            }
             return new JsonResult(response);
         }
 

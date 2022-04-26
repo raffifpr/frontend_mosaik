@@ -78,7 +78,7 @@ namespace Mosaik.idAPI.Services
                             MosaikDateHistory mosaikDateHistory = new()
                             {
                                 userID = mosaikUser.MosaikUserID,
-                                Date = DateTime.Now.ToString("d"),
+                                Date = Date,
                             };
                             _context.MosaikDateHistories.Add(mosaikDateHistory);
                             await _context.SaveChangesAsync();
@@ -86,7 +86,7 @@ namespace Mosaik.idAPI.Services
                             {
                                 userID = mosaikUser.MosaikUserID,
                                 Link = Link,
-                                AccessedTime = DateTime.Now.ToString("t"),
+                                AccessedTime = Time,
                                 MosaikDateHistoryID = mosaikDateHistory.MosaikDateHistoryID
                             };
                             _context.MosaikHistories.Add(mosaikHistory);
@@ -98,6 +98,21 @@ namespace Mosaik.idAPI.Services
                 }
             }
             return "failed";
+        }
+        
+        public async Task DeleteHistory(int id)
+        {
+            var itemToRemove = await _context.MosaikHistories.FindAsync(id);
+            if (itemToRemove == null)
+                throw new NullReferenceException();
+
+            _context.MosaikHistories.Remove(itemToRemove);
+            var itemToRemove2 = await _context.MosaikDateHistories.FindAsync(itemToRemove.MosaikDateHistoryID);
+            if (itemToRemove2 == null)
+                throw new NullReferenceException();
+
+            _context.MosaikDateHistories.Remove(itemToRemove2);
+            await _context.SaveChangesAsync();
         }
         public async Task<int> GetTotalDateHistory(string Email)
         {
