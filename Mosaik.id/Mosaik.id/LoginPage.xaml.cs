@@ -55,24 +55,27 @@ namespace Mosaik.id
             else
             {
                 //await Task.Delay(1000);
-                //LoginResponse response = await MosaikAPIService.PostLogin(emailEntry.Text, passwordEntry.Text);
-                //if (response.status == "Wrong")
-                //{
-                //    emailFrame.BorderColor = Color.Red;
-                //    errorEmailLabel.Text = "This account doesn't exist or Wrong Password";
-                //    errorEmailLabel.IsVisible = true;
-                //}
-                //else if (response.status == "Failed")
-                //{
-                //    emailFrame.BorderColor = Color.Red;
-                //    errorEmailLabel.Text = "There are currently some problem in the server right now";
-                //    errorEmailLabel.IsVisible = true;
-                //}
-                //else
-                //{
-                //    await Navigation.PushAsync(new HomePage(response));
-                //}
-                await Navigation.PushAsync(new HomePage());
+                LoginResponse response = await MosaikAPIService.PostLogin(emailEntry.Text, passwordEntry.Text);
+                //String response = await MosaikAPIService.PostTestRequest();
+                //testing.Text = response;
+                if (response.status == "wrong")
+                {
+                    emailFrame.BorderColor = Color.Red;
+                    errorEmailLabel.Text = "This account doesn't exist or Wrong Password";
+                    errorEmailLabel.IsVisible = true;
+                }
+                else if (response.status == "failed")
+                {
+                    emailFrame.BorderColor = Color.Red;
+                    errorEmailLabel.Text = "There are currently some problem in the server right now";
+                    errorEmailLabel.IsVisible = true;
+                }
+                else
+                {
+                    await Navigation.PushAsync(new HomePage(response));
+                    passwordEntry.Text = "";
+                }
+                //await Navigation.PushAsync(new HomePage());
             }
             continueButton.IsEnabled = true;
         }

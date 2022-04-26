@@ -9,6 +9,6 @@ namespace Mosaik.id.Model
         public string username { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public string[] supervisedEmail { get; set; }
+        public string[] supervisorEmails { get; set; }
     }
 }

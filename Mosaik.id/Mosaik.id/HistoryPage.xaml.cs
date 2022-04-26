@@ -7,7 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SQLite;
 using System.Collections.ObjectModel;
-using Plugin.Toast;
+//using Plugin.Toast;
 
 namespace Mosaik.id
 {

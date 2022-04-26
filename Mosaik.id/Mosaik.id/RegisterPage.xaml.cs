@@ -106,18 +106,18 @@ namespace Mosaik.id
             }
             else
             {
-                //RegisterResponse response = await MosaikAPIService.PostRegisterChild(UserUsernameEntry.Text, UserEmailEntry.Text, UserPasswordEntry.Text);
-                //if (response.status == "email already exist")
-                //{
-                //    UserEmailFrame.BorderColor = Color.Red;
-                //    errorUserEmailLabel.IsVisible = true;
-                //    errorUserEmailLabel.Text = "This email already exist";
-                //}
-                //else if (response.status == "success")
-                //{
-                //    await Navigation.PopAsync();
-                //}
-                await Navigation.PopAsync();
+                RegisterResponse response = await MosaikAPIService.PostRegisterChild(UserUsernameEntry.Text, UserEmailEntry.Text, UserPasswordEntry.Text);
+                if (response.status == "failed")
+                {
+                    UserEmailFrame.BorderColor = Color.Red;
+                    errorUserEmailLabel.IsVisible = true;
+                    errorUserEmailLabel.Text = "This email already exist";
+                }
+                else if (response.status == "success")
+                {
+                    await Navigation.PopAsync();
+                }
+                //await Navigation.PopAsync();
             }
             userButton.IsEnabled = true;
         }
@@ -165,20 +165,20 @@ namespace Mosaik.id
             }
             else
             {
-                //EmailCheckResponse response = await MosaikAPIService.GetCheckEmail(SupervisorEmailEntry.Text);
-                //if (response.status == "exist")
-                //{
-                //    SupervisorEmailFrame.BorderColor = Color.Red;
-                //    errorSupervisorEmailLabel.IsVisible = true;
-                //    errorSupervisorEmailLabel.Text = "This email already exist";
-                //}
-                //else
-                //{
-                //    await Navigation.PushAsync(new SignupSupervisorPage(SupervisorUsernameEntry.Text,
-                //        SupervisorEmailEntry.Text, SupervisorPasswordEntry.Text));
-                //}
-                await Navigation.PushAsync(new SignupSupervisorPage(SupervisorUsernameEntry.Text,
+                EmailCheckResponse response = await MosaikAPIService.GetCheckEmail(SupervisorEmailEntry.Text);
+                if (response.status == "exist")
+                {
+                    SupervisorEmailFrame.BorderColor = Color.Red;
+                    errorSupervisorEmailLabel.IsVisible = true;
+                    errorSupervisorEmailLabel.Text = "This email already exist";
+                }
+                else
+                {
+                    await Navigation.PushAsync(new SignupSupervisorPage(SupervisorUsernameEntry.Text,
                         SupervisorEmailEntry.Text, SupervisorPasswordEntry.Text));
+                }
+                //await Navigation.PushAsync(new SignupSupervisorPage(SupervisorUsernameEntry.Text,
+                //    SupervisorEmailEntry.Text, SupervisorPasswordEntry.Text));
             }
             supervisorButton.IsEnabled = true;
         }

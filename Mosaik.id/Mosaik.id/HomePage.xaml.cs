@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -16,6 +17,7 @@ namespace Mosaik.id
     {
         //private StackLayout sideNavbar;
         private LoginResponse loginResponse;
+        public string source = "";
         public HomePage(LoginResponse loginResp = null)
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -26,23 +28,24 @@ namespace Mosaik.id
             {
                 loginResponse = loginResp;
             }
-            //emailUser.Text = loginResponse.email;
-            //usernameUser.Text = loginResponse.username;
-            //if (loginResponse.accountStatus == "child")
-            //{
-            //    supervisedAccount.IsVisible = false;
-            //    if (loginResponse.supervisorRequests.Length > 0)
-            //    {
-            //        OpenRequestOverlayModal(loginResponse.supervisorRequests[0].username, loginResponse.supervisorRequests[0].email);
-            //    }
-            //}
-            //if (loginResponse.accountStatus == "supervisor"){
-            //    supervisedAccount.IsVisible = true;
-            //    for (int i = 0; i < loginResponse.supervisedAccounts.Length; i++)
-            //    {
-            //        AddMoreAccount(loginResponse.supervisedAccounts[i].email, loginResponse.supervisedAccounts[i].username);
-            //    }
-            //}
+            emailUser.Text = loginResponse.email;
+            usernameUser.Text = loginResponse.username;
+            if (loginResponse.accountStatus == "child")
+            {
+                supervisedAccount.IsVisible = false;
+                //if (loginResponse.supervisedRequests.Length > 0)
+                //{
+                //    OpenRequestOverlayModal(loginResponse.supervisedRequests[0].username, loginResponse.supervisedRequests[0].email);
+                //}
+            }
+            if (loginResponse.accountStatus == "supervisor")
+            {
+                supervisedAccount.IsVisible = true;
+                //for (int i = 0; i < loginResponse.supervisorAccounts.Length; i++)
+                //{
+                //    AddMoreAccount(loginResponse.supervisorAccounts[i].email, loginResponse.supervisorAccounts[i].username);
+                //}
+            }
             removeOverlay();
             closeSideNavbar();
         }
@@ -235,7 +238,6 @@ namespace Mosaik.id
 
         private async void ChangePassword(object sender, EventArgs e)
         {
-            ResetChangePasswordForm();
             if (prevPassword.Text == null || prevPassword.Text == String.Empty)
             {
                 prevPasswordFrame.BorderColor = Color.FromHex("#E39F1B");
@@ -262,19 +264,18 @@ namespace Mosaik.id
             }
             else
             {
-                //ChangePasswordResponse response = await MosaikAPIService.PostChangePassword(loginResponse.email, prevPassword.Text, newPassword.Text);
-                //if (response.Status == "wrong password")
-                //{
-                //    prevPasswordFrame.BorderColor = Color.FromHex("#E39F1B");
-                //    errorPrevPassword.IsVisible = true;
-                //    errorPrevPassword.Text = "Old password wrong";
-                //} 
-                //else if (response.Status == "success")
-                //{
-
-                //}
-                removeChangePasswordOverlay();
-                ChangePasswordModal.IsVisible = false;
+                ChangePasswordResponse response = await MosaikAPIService.PostChangePassword(loginResponse.email, prevPassword.Text, newPassword.Text);
+                if (response.status == "wrong password")
+                {
+                    prevPasswordFrame.BorderColor = Color.FromHex("#E39F1B");
+                    errorPrevPassword.IsVisible = true;
+                    errorPrevPassword.Text = "Old password wrong";
+                }
+                else if (response.status == "success")
+                {
+                    removeChangePasswordOverlay();
+                    ChangePasswordModal.IsVisible = false;
+                }
             }
         }
 
@@ -306,21 +307,25 @@ namespace Mosaik.id
                 newUsernameFrame.BorderColor = Color.FromHex("#E39F1B");
                 errorUsername.IsVisible = true;
             }
-            //else
-            //{
-            //    ChangeUsernameResponse response = await MosaikAPIService.PostChangeUsername(loginResponse.email, newUsername.Text);
-            //    if (response.Status == "success")
-            //    {
-            //        usernameUser.Text = newUsername.Text;
-            //    }
-            //}
+            else
+            {
+                ChangeUsernameResponse response = await MosaikAPIService.PostChangeUsername(loginResponse.email, newUsername.Text);
+                if (response.status == "success")
+                {
+                    usernameUser.Text = newUsername.Text;
+                    loginResponse.username = newUsername.Text;
+                }
+            }
             usernameUser.Text = newUsername.Text;
+            removeChangeUsernameOverlay();
+            ChangeUsernameModal.IsVisible = false;
         }
 
         private void OpenChangeUsernameModal(object sender, EventArgs e)
         {
             ResetUSernameModal();
             addChangeUsernameOverlay();
+            curUserText.Text = loginResponse.username;
             ChangeUsernameModal.IsVisible = true;
         }
 
@@ -368,10 +373,10 @@ namespace Mosaik.id
         {
             removeRequestOverlayModal();
             RequestModal.IsVisible = false;
-            loginResponse.supervisorRequests = loginResponse.supervisorRequests.Where((item, index) => index != 0).ToArray();
-            if (loginResponse.supervisorRequests.Length > 0)
+            loginResponse.supervisedRequests = loginResponse.supervisedRequests.Where((item, index) => index != 0).ToArray();
+            if (loginResponse.supervisedRequests.Length > 0)
             {
-                OpenRequestOverlayModal(loginResponse.supervisorRequests[0].username, loginResponse.supervisorRequests[0].email);
+                OpenRequestOverlayModal(loginResponse.supervisedRequests[0].username, loginResponse.supervisedRequests[0].email);
             }
         }
 
@@ -406,7 +411,7 @@ namespace Mosaik.id
             }
             else
             {
-                source = "https://www.google.com/search?q=" + link.Text;
+                source = "https://www.google.com/search?q=" + link.Text; 
             }
             link.Text = "";
             Navigation.PushAsync(new BrowserPage(source));

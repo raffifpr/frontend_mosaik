@@ -6,7 +6,7 @@ namespace Mosaik.id.Model
 {
     public class ChangePasswordResponse
     {
-        // Status = "wrong password", "success", "failed"
-        public string Status { get; set; }
+        // status = "wrong password", "success", "failed"
+        public string status { get; set; }
     }
 }

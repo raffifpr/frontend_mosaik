@@ -29,7 +29,7 @@
                         TextColor="White"
                         HorizontalOptions="CenterAndExpand"
                         Margin="0, 30, 0, 30"/>
-                    <Label
+                    <Label x:Name="testing"
                         Text="Hello There!"
                         FontSize="20"
                         TextColor="White"
