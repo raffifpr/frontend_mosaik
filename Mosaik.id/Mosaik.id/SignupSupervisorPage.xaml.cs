@@ -17,7 +17,7 @@ namespace Mosaik.id
         string username;
         string email; 
         string password;
-        List<string> supervisedEmail = new List<string>();
+        //List<string> supervisedEmail = new List<string>();
 
         int errorMsgIndex = -1;
         double bodyOrientationHeight = 0;
@@ -105,29 +105,29 @@ namespace Mosaik.id
                 }
                 if (emailError == false)
                 {
-                    //for (int i = 0; i < EmailStackLayout.Children.Count - 2; i++)
-                    //{
-                    //    supervisedEmail.Add(
-                    //        ((Entry)((StackLayout)((Frame)EmailStackLayout.Children[i]).Content).Children).Text
-                    //        );
-                    //}
-                    //RegisterSupervisorResponse response = await MosaikAPIService.PostRegisterSupervisor(username, email, password, supervisedEmail.ToArray());
-                    //if (response.status.StartsWith("index "))
-                    //{
-                    //    char[] separator = { ' ' };
-                    //    Int32 count = 2;
-                    //    String[] strlist = response.status.Split(separator, count, StringSplitOptions.RemoveEmptyEntries);
-
-                    //    int indexEmailError = int.Parse(strlist[1]);
-                    //    ((Frame)EmailStackLayout.Children[indexEmailError]).BorderColor = Color.Red;
-                    //}
-                    //else if (response.status == "success")
-                    //{
-                    //    await Navigation.PopAsync();
-                    //    await Navigation.PopAsync();
-                    //}
-                    await Navigation.PopAsync();
-                    await Navigation.PopAsync();
+                    string[] supervisedEmail = new string[EmailStackLayout.Children.Count - 2];
+                    for (int i = 0; i < EmailStackLayout.Children.Count - 2; i++)
+                    {
+                        //supervisedEmail[i] = "tes" + i;
+                        supervisedEmail[i] = ((Entry)((StackLayout)((Frame)EmailStackLayout.Children[i]).Content).Children[1]).Text;
+                    }
+                    //String response = await MosaikAPIService.PostRegisterSupervisor(username, email, password, supervisedEmail);
+                    //testing.Text = response;
+                    RegisterSupervisorResponse response = await MosaikAPIService.PostRegisterSupervisor(username, email, password, supervisedEmail.ToArray());
+                    if (response.status.StartsWith("index "))
+                    {
+                        //testing.Text = response.status;
+                        string[] strlist = response.status.Split(' ');
+                        testing.Text = strlist[1];
+                        //((Frame)EmailStackLayout.Children[indexEmailError]).BorderColor = Color.Red;
+                    }
+                    else if (response.status == "success")
+                    {
+                        await Navigation.PopAsync();
+                        await Navigation.PopAsync();
+                    }
+                    //await Navigation.PopAsync();
+                    //await Navigation.PopAsync();
                 }
             }
             createButton.IsEnabled = true;

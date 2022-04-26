@@ -30,7 +30,7 @@
                                FontSize="22"
                                TextColor="White"
                                HorizontalOptions="CenterAndExpand" />
-                        <Label Text="Add the E-mail of the account you want to monitor"
+                        <Label Text="Add the E-mail of the account you want to monitor" x:Name="testing"
                                FontSize="22"
                                TextColor="White"
                                FontAttributes="Bold"

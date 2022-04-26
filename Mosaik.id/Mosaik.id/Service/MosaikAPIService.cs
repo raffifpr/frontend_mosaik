@@ -165,20 +165,36 @@ namespace Mosaik.id.Service
                 username = username,
                 email = email,
                 password = password,
-                supervisorEmails = new string[] { "nicho@gmail.com" }
+                supervisorEmails = supervisedEmail
             };
             var json = JsonConvert.SerializeObject(registerSupervisorRequest);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+            //var req = await content.ReadAsStringAsync();
 
             // Recieve response
             var response = await client.PostAsync("", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<RegisterSupervisorResponse>(stringResponse);
+            //return req;
             return jsonResponse;
         }
 
         public static async Task<SupervisorLinkResponse> PostSupervisorLinkAccept(string email, string emailSupervisor, string statusAccept)
         {
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/authorizerequest";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+            }
+
             // Send request
             var supervisorLinkRequest = new SupervisorLinkRequest
             {
@@ -190,7 +206,7 @@ namespace Mosaik.id.Service
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Recieve response
-            var response = await client.PostAsync("TODO", content);
+            var response = await client.PostAsync(" ", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<SupervisorLinkResponse>(stringResponse);
             return jsonResponse;
