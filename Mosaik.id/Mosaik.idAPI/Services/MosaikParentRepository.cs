@@ -30,6 +30,20 @@ namespace Mosaik.idAPI.Services
             return null;
             // return await _context.MosaikParents.FindAsync(Email);
         }
+
+        public async Task <MosaikParentChild> GetParentChild (int childID, int parentID)
+        {
+            var list = await _context.MosaikParentsChildren.ToListAsync();
+            foreach (var item in list)
+            {
+                if (item.childID == childID && item.parentID == parentID)
+                {
+                    return item;
+                }
+            }
+            return null;
+            // return await _context.MosaikParents.FindAsync(Email);
+        }
         public async Task InsertChildAccount(string Email, MosaikParentChild mosaikParentChild) 
         {
             var list = await _context.MosaikChildren.ToListAsync();
@@ -59,15 +73,18 @@ namespace Mosaik.idAPI.Services
                     {
                         if (mosaikChild.Email == ChildEmail)
                         {
-                            MosaikParentChild mosaikParentChild = new()
+                            if (GetParentChild(mosaikChild.MosaikChildID, item.MosaikParentID) == null)
                             {
-                                parentID = item.MosaikParentID,
-                                childID = mosaikChild.MosaikChildID,
-                                Authorized = false,
-                            };
-                            _context.MosaikParentsChildren.Add(mosaikParentChild);
-                            await _context.SaveChangesAsync();
-                            return "success";
+                                MosaikParentChild mosaikParentChild = new()
+                                {
+                                    parentID = item.MosaikParentID,
+                                    childID = mosaikChild.MosaikChildID,
+                                    Authorized = false,
+                                };
+                                _context.MosaikParentsChildren.Add(mosaikParentChild);
+                                await _context.SaveChangesAsync();
+                                return "success";
+                            }
                         }
                     }
                     return "don't exist";
