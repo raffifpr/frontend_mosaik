@@ -82,8 +82,16 @@ namespace Mosaik.idAPI.Controllers
                 };
                 return new JsonResult(parentAuthenticated);
             } else {
-                response.Status = "failed";
-                return new JsonResult(response);
+                WrongLogin wrongLogin = new()
+                {
+                    status = "failed",
+                    username = "",
+                    email = "",
+                    accountStatus = "",
+                    supervisorRequests = { },
+                    supervisedAccounts = { },
+                };
+                return new JsonResult(wrongLogin);
             }
         }
 
