@@ -120,7 +120,7 @@ namespace Mosaik.idAPI.Controllers
                         {
                             Response newresponse = new()
                             {
-                                Status = "failed",
+                                Status = "index 1 email not exist",
                             };
                             return new JsonResult(newresponse);
                         }
