@@ -12,12 +12,13 @@ build-job:
 test-job1:
   stage: test
   script:
-    - "cd Mosaik.idTest"
+    - "cd Mosaik.id/Mosaik.idTest"
     - "dotnet test"
 
 
 deploy-prod:
   stage: deploy
   script:
+    - "cd Mosaik.id"
     -  "heroku container:push -a mosaik-id-ppl web "
     -  "heroku container:release -a mosaik-id-ppl web" 
