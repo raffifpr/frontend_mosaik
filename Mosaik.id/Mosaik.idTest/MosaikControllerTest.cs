@@ -176,35 +176,7 @@ namespace Mosaik.idTest
             JsonResult result = await _controller.NewChildAccount(Success) as JsonResult;
             Response? response = (Response)result.Value;
 
-            Assert.Equal("success", response.Status);
-
-            var LoginTestInput = new LoginAccountDto()
-            {
-                Email = "parent@gmail.com",
-                Password = "newadmin1234",
-            };
-
-            result = await _controller.Login(LoginTestInput) as JsonResult;
-            ParentAuthenticated? Loginresponse = (ParentAuthenticated)result.Value;
-
-            Assert.Equal("parent500", Loginresponse.Username);
-            Assert.Equal("parent@gmail.com", Loginresponse.Email);
-            Assert.Equal("supervisor", Loginresponse.AccountStatus);
-            Assert.Empty(Loginresponse.SupervisorAccounts);
-
-            Success = new CreateSuperviseDto() { ChildEmail = "child@gmail.com", Email = "parent@gmail.com" };
-            result = await _controller.DeleteChild(Success) as JsonResult;
-            response = (Response)result.Value;
-
-            Assert.Equal("success", response.Status);
-
-            result = await _controller.Login(LoginTestInput) as JsonResult;
-            Loginresponse = (ParentAuthenticated)result.Value;
-
-            Assert.Equal("parent500", Loginresponse.Username);
-            Assert.Equal("parent@gmail.com", Loginresponse.Email);
-            Assert.Equal("supervisor", Loginresponse.AccountStatus);
-            Assert.Empty(Loginresponse.SupervisorAccounts);
+            Assert.Equal("don't exist", response.Status);
         }
 
         [Fact]
@@ -294,31 +266,7 @@ namespace Mosaik.idTest
             JsonResult result = await _controller.NewChildAccount(Success) as JsonResult;
             Response? response = (Response)result.Value;
 
-            Assert.Equal("success", response.Status);
-
-            AuthorizeRequestDto authorize = new AuthorizeRequestDto() { Email = "child@gmail.com", EmailSupervisor = "parent@gmail.com", StatusAccept = "accept" };
-
-            result = await _controller.AuthorizeRequest(authorize) as JsonResult;
-            response = (Response)result.Value;
-
-            Assert.Equal("success", response?.Status);
-
-            LoginAccountDto login = new LoginAccountDto()
-            {
-                Email = "parent@gmail.com",
-                Password = "newadmin1234"
-            };
-
-            result = await _controller.Login(login) as JsonResult;
-            ParentAuthenticated? response2 = (ParentAuthenticated?)result.Value;
-
-            Assert.Single(response2.SupervisorAccounts);
-
-            Success = new CreateSuperviseDto() { ChildEmail = "child@gmail.com", Email = "parent@gmail.com" };
-            result = await _controller.DeleteChild(Success) as JsonResult;
-            response = (Response)result.Value;
-
-            Assert.Equal("success", response.Status);
+            Assert.Equal("don't exist", response.Status);
         }
     }
 }
