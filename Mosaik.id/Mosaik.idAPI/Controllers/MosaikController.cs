@@ -44,13 +44,19 @@ namespace Mosaik.idAPI.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> Login (LoginAccountDto loginAccountDto)
         {
-            String Status;
-            Response response = new Dtos.Response();
             var status = await _repository.AuthenticateAccount(loginAccountDto.Email, loginAccountDto.Password);
             if (status.Item2 == "false")
             {
-                response.Status = "wrong";
-                return new JsonResult(response);
+                WrongLogin wrongLogin = new()
+                {
+                    status = "wrong",
+                    username = "",
+                    email = "",
+                    accountStatus = "",
+                    supervisorRequests = { },
+                    supervisedAccounts = { },
+                };
+                return new JsonResult(wrongLogin);
             } 
             else if (status.Item2 == "child")
             {
