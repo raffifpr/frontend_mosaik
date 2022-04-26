@@ -10,8 +10,8 @@ namespace Mosaik.id.Service
 {
     internal class MosaikAPIService
     {
-        static string BaseUrl = "http://mosaik-id-ppl.herokuapp.com/api/Mosaik";
-        // static string BaseUrl = "https://simple-books-api.glitch.me";
+        static string BaseUrl = "https://mosaik-id-ppl.herokuapp.com/api/Mosaik";
+        //static string BaseUrl = "https://simple-books-api.glitch.me";
         static HttpClient client;
 
         static MosaikAPIService()
@@ -28,8 +28,49 @@ namespace Mosaik.id.Service
             }
         }
 
+        public static async Task<String> PostTestRequest()
+        {
+            try
+            {
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer 392393485dab85fca3828ad54aa38f2b7ae3200badf261ee11956936c2b1aa4a");
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+            }
+            // Send request
+            var testRequest = new TestRequest
+            {
+                bookId = 5,
+                customerName = "nicholas"
+            };
+            var json = JsonConvert.SerializeObject(testRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("orders", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<TestResponse>(stringResponse);
+            return stringResponse;
+        }
+
         public static async Task<LoginResponse> PostLogin(string email, string password)
         {
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/login";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+                //return ex.ToString();
+            }
+            
             // Send request
             var loginRequest = new LoginRequest
             {
@@ -38,16 +79,32 @@ namespace Mosaik.id.Service
             };
             var json = JsonConvert.SerializeObject(loginRequest);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+            //var req = await content.ReadAsStringAsync();
 
             // Recieve response
-            var response = await client.PostAsync("TODO", content);
+            var response = await client.PostAsync("", content); // harusnya diisi disini '/login', tp ntah knp error
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<LoginResponse>(stringResponse);
+
             return jsonResponse;
         }
 
         public static async Task<RegisterResponse> PostRegisterChild(string username, string email, string password)
         {
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/child";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+            }
+
             // Send request
             var registerChildRequest = new RegisterChildRequest
             {
@@ -59,7 +116,7 @@ namespace Mosaik.id.Service
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Recieve response
-            var response = await client.PostAsync("TODO", content);
+            var response = await client.PostAsync("", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<RegisterResponse>(stringResponse);
             return jsonResponse;
@@ -67,26 +124,54 @@ namespace Mosaik.id.Service
 
         public static async Task<EmailCheckResponse> GetCheckEmail(string email)
         {
-            var response = await client.GetStringAsync("TODO");
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/exists/" + email;
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            var response = await client.GetStringAsync("");
             EmailCheckResponse objResponse = JsonConvert.DeserializeObject<EmailCheckResponse>(response);
             return objResponse; 
         }
 
         public static async Task<RegisterSupervisorResponse> PostRegisterSupervisor(string username, string email, string password, string[] supervisedEmail)
         {
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/parent";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+            }
+
             // Send request
             var registerSupervisorRequest = new RegisterSupervisorRequest
             {
                 username = username,
                 email = email,
                 password = password,
-                supervisedEmail = supervisedEmail
+                supervisorEmails = new string[] { "nicho@gmail.com" }
             };
             var json = JsonConvert.SerializeObject(registerSupervisorRequest);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Recieve response
-            var response = await client.PostAsync("TODO", content);
+            var response = await client.PostAsync("", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<RegisterSupervisorResponse>(stringResponse);
             return jsonResponse;
@@ -113,17 +198,32 @@ namespace Mosaik.id.Service
 
         public static async Task<ChangeUsernameResponse> PostChangeUsername(string email, string newUsername)
         {
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/changeuser";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+                //return ex.ToString();
+            }
+
             // Send request
             var changeUsernameRequest = new ChangeUsernameRequest
             {
-                Email = email,
-                NewUsername = newUsername
+                email = email,
+                username = newUsername
             };
             var json = JsonConvert.SerializeObject(changeUsernameRequest);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Recieve response
-            var response = await client.PostAsync("TODO", content);
+            var response = await client.PostAsync("", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<ChangeUsernameResponse>(stringResponse);
             return jsonResponse;
@@ -131,18 +231,33 @@ namespace Mosaik.id.Service
 
         public static async Task<ChangePasswordResponse> PostChangePassword(string email, string oldPassword, string newPassword)
         {
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/changepass";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+                //return ex.ToString();
+            }
+
             // Send request
             var changePasswordRequest = new ChangePasswordRequest
             {
-                Email = email,
-                OldPassword = oldPassword,
-                NewPassword = newPassword
+                email = email,
+                oldPassword = oldPassword,
+                newPassword = newPassword
             };
             var json = JsonConvert.SerializeObject(changePasswordRequest);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Recieve response
-            var response = await client.PostAsync("TODO", content);
+            var response = await client.PostAsync("", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<ChangePasswordResponse>(stringResponse);
             return jsonResponse;

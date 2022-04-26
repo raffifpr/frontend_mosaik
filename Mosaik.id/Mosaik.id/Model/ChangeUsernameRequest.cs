@@ -6,8 +6,8 @@ namespace Mosaik.id.Model
 {
     public class ChangeUsernameRequest
     {
-        public string Email { get; set; }
-        public string NewUsername { get; set; }
+        public string email { get; set; }
+        public string username { get; set; }
 
     }
 }
