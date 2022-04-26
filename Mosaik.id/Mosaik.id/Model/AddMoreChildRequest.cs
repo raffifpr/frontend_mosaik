@@ -7,8 +7,8 @@ namespace Mosaik.id.Model
     public class AddMoreChildRequest
     {
         // Parent Email
-        public string Email { get; set; }
+        public string email { get; set; }
         // Child Email
-        public string ChildEmail { get; set; }
+        public string childEmail { get; set; }
     }
 }

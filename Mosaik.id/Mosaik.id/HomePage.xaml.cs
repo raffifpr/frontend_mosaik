@@ -180,20 +180,25 @@ namespace Mosaik.id
             }
             else
             {
-                //AddMoreChildResponse response = await MosaikAPIService.PostAddMoreChild(loginResponse.email, newEmail.Text);
-                //if (response.status == "don't exist")
-                //{
-                //    newEmailFrame.BorderColor = Color.FromHex("#E39F1B");
-                //    addChildEmailEntryError.IsVisible = true;
-                //    addChildEmailEntryError.Text = "Child's E-mail doesn't exist";
-                //} 
-                //else if (response.status == "success")
-                //{
-                //    // TODO: Show request sudah dikirim
-                //}
-                AddMoreAccount(newEmail.Text, "username");
-                removeAddMoreAccountOverlay();
-                AddMoreAccountModal.IsVisible = false;
+                AddMoreChildResponse response = await MosaikAPIService.PostAddMoreChild(loginResponse.email, newEmail.Text);
+                if (response.status == "don't exist")
+                {
+                    newEmailFrame.BorderColor = Color.FromHex("#E39F1B");
+                    addChildEmailEntryError.IsVisible = true;
+                    addChildEmailEntryError.Text = "Child's E-mail doesn't exist";
+                    addChildEmailEntryError.TextColor = Color.Red;
+                } 
+                else if (response.status == "success")
+                {
+                    // TODO: Show request sudah dikirim
+                    newEmailFrame.BorderColor = Color.FromHex("#49CC90");
+                    addChildEmailEntryError.IsVisible = true;
+                    addChildEmailEntryError.Text = "Request successfully sent :D";
+                    addChildEmailEntryError.TextColor = Color.FromHex("#49CC90");
+                }
+                //AddMoreAccount(newEmail.Text, "username");
+                //removeAddMoreAccountOverlay();
+                //AddMoreAccountModal.IsVisible = false;
             }
         }
 

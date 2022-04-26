@@ -281,17 +281,32 @@ namespace Mosaik.id.Service
 
         public static async Task<AddMoreChildResponse> PostAddMoreChild(string email, string childEmail)
         {
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/addsupervise";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+                //return ex.ToString();
+            }
+
             // Send request
             var addMoreChildRequest = new AddMoreChildRequest
             {
-                Email = email,
-                ChildEmail = childEmail
+                email = email,
+                childEmail = childEmail
             };
             var json = JsonConvert.SerializeObject(addMoreChildRequest);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Recieve response
-            var response = await client.PostAsync("TODO", content);
+            var response = await client.PostAsync("", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<AddMoreChildResponse>(stringResponse);
             return jsonResponse;
