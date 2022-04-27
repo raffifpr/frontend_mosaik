@@ -73,7 +73,7 @@ namespace Mosaik.idAPI.Services
                     {
                         if (mosaikChild.Email == ChildEmail)
                         {
-                            if (GetParentChild(mosaikChild.MosaikChildID, item.MosaikParentID) == null)
+                            if (await GetParentChild(mosaikChild.MosaikChildID, item.MosaikParentID) == null)
                             {
                                 MosaikParentChild mosaikParentChild = new()
                                 {
