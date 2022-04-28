@@ -14,11 +14,3 @@ test-job1:
   script:
     - "cd Mosaik.id/Mosaik.idTest"
     - "dotnet test"
-
-
-deploy-prod:
-  stage: deploy
-  script:
-    - "cd Mosaik.id"
-    -  ./../../../../../"Program Files"/heroku/bin/heroku container:push -a mosaik-id-ppl web
-    -  ./../../../../../"Program Files"/heroku/bin/heroku container:release -a mosaik-id-ppl web 
