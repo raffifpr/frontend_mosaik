@@ -123,8 +123,7 @@ namespace Mosaik.id
                     }
                     else if (response.status == "success")
                     {
-                        await Navigation.PopAsync();
-                        await Navigation.PopAsync();
+                        await Navigation.PushAsync(new LoginPage());
                     }
                     //await Navigation.PopAsync();
                     //await Navigation.PopAsync();

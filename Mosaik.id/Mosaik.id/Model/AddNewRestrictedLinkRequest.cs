@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Mosaik.id.Model
 {
-    public class RemoveChildRequest
+    public class AddNewRestrictedLinkRequest
     {
-        // Parent Email
         public string email { get; set; }
-        public string childEmail { get; set; }
-
+        public string link { get; set; }
     }
 }

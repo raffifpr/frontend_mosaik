@@ -9,17 +9,24 @@ using Xamarin.Forms.Xaml;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
+using Mosaik.id.Service;
+using Mosaik.id.Model;
 
 namespace Mosaik.id
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class BrowserPage : ContentPage
     {
-        public BrowserPage(string sauce)
+        public string email;
+        public LoginResponse lr;
+        public BrowserPage(string sauce, LoginResponse loginResponse)
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             Browser.Source = sauce;
+            email = loginResponse.email;
+            lr = loginResponse;
         }
         bool CheckURLValid(String source)
         {
@@ -35,7 +42,7 @@ namespace Mosaik.id
             }
             else
             {
-                Navigation.PushAsync(new HomePage());
+                Navigation.PushAsync(new HomePage(lr));
             }
         }
 
@@ -49,24 +56,40 @@ namespace Mosaik.id
             var X = e.Url;
             Loading.IsVisible = true;
             url.Text = X;
-            await App.Database.SavePersonAsync(new Person
+            var link = X;
+            var time = DateTime.Now.ToLongTimeString();
+            var date = DateTime.Now.ToLongDateString();
+            AddNewHistoryResponse result = await MosaikAPIService.PostAddNewHistory(email, link, time, date);
+            if (result.status == "success")
             {
-                Link = url.Text,
-                AccessedTime = DateTime.Now.ToString()
-            });
-            CekDuluYa(X);
-        }
-        private void CekDuluYa(string x)
-        {
-            if (Regex.IsMatch(x, @"xxx", RegexOptions.IgnoreCase))
-            {
-                Browser.IsVisible = false;
-                EhApaTuh.IsVisible = true;
+                //await App.Database.SavePersonAsync(new Person
+                //{
+                //    Link = url.Text,
+                //    AccessedTime = DateTime.Now.ToString()
+                //});
+                CekDuluYa(X);
             }
-            else
+
+        }
+        private async void CekDuluYa(string x)
+        {
+            var found = 0;
+            RestrictedLinkDataResponse result = await MosaikAPIService.PostRestrictedLinkData(email);
+            string[] restrictlink = result.linkAndNotif.links;
+
+            for (int i = 0; i < restrictlink.Length; i++)
+            {
+                if (Regex.IsMatch(x, restrictlink[i], RegexOptions.IgnoreCase))
+                {
+                    found = 1;
+                    Browser.IsVisible = false;
+                    EhApaTuh.IsVisible = true;
+                }
+            }
+            if (found != 1)
             {
                 Browser.IsVisible = true;
-                EhApaTuh.IsVisible = false; 
+                EhApaTuh.IsVisible = false;
             }
         }
         private void Browser_Navigated(object sender, WebNavigatedEventArgs e)
@@ -103,7 +126,7 @@ namespace Mosaik.id
 
         private void HomeButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new HomePage());
+            Navigation.PushAsync(new HomePage(lr));
         }
     }
 }

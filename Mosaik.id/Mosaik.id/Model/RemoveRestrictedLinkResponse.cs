@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Mosaik.id.Model
 {
-    public class RemoveChildResponse
+    public class RemoveRestrictedLinkResponse
     {
-        // Status = "don't exist", "success", "failed"
         public string status { get; set; }
     }
 }

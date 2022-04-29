@@ -3794,20 +3794,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nicholas Chen\\.nuget\\packages\\": {}
+    "C:\\Users\\Raffi Fadhlurrahman\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.Android\\Mosaik.id.Android.csproj",
+      "projectUniqueName": "C:\\Users\\Raffi Fadhlurrahman\\Downloads\\if3250_2022_15_alkademi_rhb-main (5)\\Mosaik.id\\Mosaik.id.Android\\Mosaik.id.Android.csproj",
       "projectName": "Mosaik.id.Android",
-      "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.Android\\Mosaik.id.Android.csproj",
-      "packagesPath": "C:\\Users\\Nicholas Chen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id.Android\\obj\\",
+      "projectPath": "C:\\Users\\Raffi Fadhlurrahman\\Downloads\\if3250_2022_15_alkademi_rhb-main (5)\\Mosaik.id\\Mosaik.id.Android\\Mosaik.id.Android.csproj",
+      "packagesPath": "C:\\Users\\Raffi Fadhlurrahman\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Raffi Fadhlurrahman\\Downloads\\if3250_2022_15_alkademi_rhb-main (5)\\Mosaik.id\\Mosaik.id.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\Nicholas Chen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Raffi Fadhlurrahman\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3820,8 +3820,8 @@
       "frameworks": {
         "monoandroid12.0": {
           "projectReferences": {
-            "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
-              "projectPath": "C:\\Users\\Nicholas Chen\\Desktop\\sem 6\\PPL\\repo\\if3250_2022_15_alkademi_rhb\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj"
+            "C:\\Users\\Raffi Fadhlurrahman\\Downloads\\if3250_2022_15_alkademi_rhb-main (5)\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj": {
+              "projectPath": "C:\\Users\\Raffi Fadhlurrahman\\Downloads\\if3250_2022_15_alkademi_rhb-main (5)\\Mosaik.id\\Mosaik.id\\Mosaik.id.csproj"
             }
           }
         }

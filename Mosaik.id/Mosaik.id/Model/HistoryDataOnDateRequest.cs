@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Mosaik.id.Model
 {
-    public class RemoveChildRequest
+    public class HistoryDataOnDateRequest
     {
-        // Parent Email
         public string email { get; set; }
-        public string childEmail { get; set; }
-
+        public string date { get; set; }
     }
 }

@@ -1,14 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Mosaik.id.Model
 {
-    public class RemoveChildRequest
+    public class DateOfHistoryDataRequest
     {
-        // Parent Email
         public string email { get; set; }
-        public string childEmail { get; set; }
-
     }
 }

@@ -3,19 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mosaik.id.HistoryPage">
 
-    <AbsoluteLayout>
-        <StackLayout BackgroundColor="#FFF0F0F0">
-            <Frame WidthRequest="360" 
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="#FFF0F0F0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
+            <Frame VerticalOptions="FillAndExpand"
                HeightRequest="35"
                BackgroundColor="#FF1384B9">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Your search history" FontFamily="Roboto#600" FontSize="18" FontAttributes="None" TextColor="#FFFFFFFF"
-                   VerticalOptions="Center"/>
+                    <Label x:Name="title" Text="Your search history" FontFamily="Roboto#600" FontSize="18" FontAttributes="None" TextColor="#FFFFFFFF"
+                   VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                     <ImageButton Source="Broken_Chain.png"
                                  BackgroundColor="Transparent"
                                  HorizontalOptions="EndAndExpand"
                          VerticalOptions="EndAndExpand"
-                         Margin="0,0,40,0"
+                         Margin="0,0,0,0"
+                                 x:Name="blokAnak"
                                  Clicked="ImageButton_Clicked_1">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -41,7 +46,7 @@
             <Frame
                BackgroundColor="#FFFFFFFF" 
                CornerRadius="30"
-               Margin="10,5,50,0"
+               Margin="10,5,10,0"
                    BorderColor="#F2E39F1B"
                    HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal"
@@ -50,18 +55,18 @@
                        WidthRequest="15"
                        HeightRequest="15"/>
                     <Entry x:Name="searchhistory" 
-                       Placeholder="search username1 history" 
+                       Placeholder="search anything from history" 
                             Keyboard="Url" 
                         HorizontalOptions="FillAndExpand"
+                           TextChanged="searchhistory_Completed"
                         ClearButtonVisibility="WhileEditing"
                            ReturnType="Search" 
-                        Completed="searchhistory_Completed"
                            FontSize="Small"/>
                 </StackLayout>
             </Frame>
-            <ScrollView HeightRequest="600">
+            <ScrollView HorizontalOptions="FillAndExpand">
                 <StackLayout x:Name="HistoryData">
-                    <Frame IsVisible="true" BackgroundColor="#FFFBFBFB" CornerRadius="5">
+                    <!--<Frame IsVisible="true" BackgroundColor="#FFFBFBFB" CornerRadius="5">
                         <StackLayout>
                             <StackLayout Orientation="Horizontal" WidthRequest="300" HeightRequest="20" BackgroundColor="#FFFBFBFB">
                                 <Label Text="Today - Tuesday, February 15, 2022" 
@@ -114,7 +119,39 @@
                                             <Label Text="-"/>
                             </StackLayout>
                         </StackLayout>
-                    </Frame>
+                    </Frame>-->
+                    <ListView x:Name ="lstView" IsVisible="true" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Date}" ItemTapped="History_ItemTapped">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding Link}" Detail = "{Binding AccessedTime}"
+                                          TextColor="#f35e20"                           
+                                          DetailColor="#503026" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <!-- Group Header Customization-->
+                        <ListView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <!--<ViewCell>
+                                    <Label Text="{Binding Date}"
+                           FontFamily="Roboto#400" 
+                           FontSize="14" 
+                           FontAttributes="None" 
+                           TextColor="#FF000000" HorizontalOptions="StartAndExpand"/>
+                                </ViewCell>-->
+                                <TextCell Text="{Binding Date}"/>
+                            </DataTemplate>
+                        </ListView.GroupHeaderTemplate>
+                        <!-- End Group Header Customization -->
+                    </ListView>
+                    <ListView x:Name="Sejarah"
+                            ItemTapped="History_ItemTapped"
+                      IsVisible="false">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding Link}" Detail="{Binding AccessedTime}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
@@ -123,9 +160,8 @@
                 <StackLayout Orientation="Vertical" WidthRequest="312" HeightRequest="260" BackgroundColor="#FFFBFBFB">
                     <Label Margin="20,20,0,20" Text="Remove this account from my supervision" FontFamily="Roboto#400" FontSize="14" FontAttributes="None" TextColor="#FF000000" />
                     <Label Margin ="20,0,0,0" Text="Do you really want to remove this account from your supervision?" FontFamily="Roboto#400" FontSize="11" FontAttributes="None" TextColor="#FF3F3F3F" />
-                    <Label HorizontalOptions="Center" Text="username1" FontFamily="Roboto#500" FontSize="24" FontAttributes="None" TextColor="#FF000000" />
-                    <Label HorizontalOptions="Center" Text="example1@gmail.com" FontFamily="Roboto#300" FontSize="14" FontAttributes="None" TextColor="#FF000000" />
-                    <Label Margin="20,0,0,0" Text="Once you remove this from your supervision, you have to resend another request to be able to supervise again" FontFamily="Roboto#400" FontSize="11" FontAttributes="None" TextColor="#FFFF0202" />
+                    <Label x:Name="user" HorizontalOptions="Center" Text="username1" FontFamily="Roboto#500" FontSize="24" FontAttributes="None" TextColor="#FF000000" Margin="0,10,0,0"/>
+                    <Label Margin="20,20,0,0" Text="Once you remove this from your supervision, you have to resend another request to be able to supervise again" FontFamily="Roboto#400" FontSize="11" FontAttributes="None" TextColor="#FFFF0202" />
                     <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
                         <Label Text="Remove" Margin="165,0,0,0" TextColor="#FF0D477C" FontFamily="Roboto#600" FontSize="14" FontAttributes="None">
                             <Label.GestureRecognizers>
@@ -141,7 +177,7 @@
                 </StackLayout>
             </StackLayout>
         </ContentView>
-        <ImageButton Source="RestrictedLink_FloatingButton.png" 
+        <ImageButton x:Name="toRestrict" Source="RestrictedLink_FloatingButton.png" 
             BackgroundColor="Transparent"
             AbsoluteLayout.LayoutFlags="PositionProportional"  
             AbsoluteLayout.LayoutBounds=".95,.95,80,80"

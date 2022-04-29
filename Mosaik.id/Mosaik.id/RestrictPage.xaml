@@ -2,21 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mosaik.id.RestrictPage">
-    <AbsoluteLayout>
-        <StackLayout BackgroundColor="#FFF0F0F0">
+    <AbsoluteLayout VerticalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="#FFF0F0F0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
             <Frame WidthRequest="360" 
                HeightRequest="35"
                BackgroundColor="#FF1384B9">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Your search history" FontFamily="Roboto#600" FontSize="18" FontAttributes="None" TextColor="#FFFFFFFF"
+                    <Label x:Name="anak" Text="Your search history" FontFamily="Roboto#600" FontSize="18" FontAttributes="None" TextColor="#FFFFFFFF"
                    VerticalOptions="Center"/>
                 </StackLayout>
             </Frame>
             <Label Margin="20" Text="Restricted Link" FontFamily="Roboto#400" FontSize="14" FontAttributes="None" TextColor="#FF000000" />
             <ScrollView HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
-                <StackLayout x:Name="RestrictList" Margin="0,0,20,0">
-                    
+                <StackLayout x:Name="RestrictList" Margin="0,0,20,0" VerticalOptions="FillAndExpand">
+                    <!--<ListView x:Name="larang" ItemTapped="larang_ItemTapped"
+                      IsVisible="true">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding link}" Detail="{Binding bell}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>-->
                 </StackLayout>
             </ScrollView>
         </StackLayout>

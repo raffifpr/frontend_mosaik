@@ -314,19 +314,190 @@ namespace Mosaik.id.Service
 
         public static async Task<RemoveChildResponse> PostRemoveChild(string email, string childEmail)
         {
+            // Set url
+            try
+            {
+                var url = BaseUrl + "/deletesupervise";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                //client.BaseAddress = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+                //return ex.ToString();
+            }
             // Send request
             var removeChildRequest = new RemoveChildRequest
             {
-                Email = email,
-                ChildEmail = childEmail
+                email = email,
+                childEmail = childEmail
             };
             var json = JsonConvert.SerializeObject(removeChildRequest);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Recieve response
-            var response = await client.PostAsync("TODO", content);
+            var response = await client.PostAsync("", content);
             var stringResponse = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<RemoveChildResponse>(stringResponse);
+            return jsonResponse;
+        }
+        public static async Task<AddNewHistoryResponse> PostAddNewHistory(string email, string link, string time, string date)
+        {
+            try
+            {
+                var url = BaseUrl + "/history";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+            }
+            catch (Exception ex) { }
+            // Send request
+            var addNewHistoryRequest = new AddNewHistoryRequest
+            {
+                email = email,
+                link = link,
+                time = time,
+                date = date
+            };
+            var json = JsonConvert.SerializeObject(addNewHistoryRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<AddNewHistoryResponse>(stringResponse);
+            return jsonResponse;
+        }
+
+        public static async Task<DateOfHistoryDataResponse> PostDateOfHistoryData(string email)
+        {
+            try
+            {
+                var url = BaseUrl + "/datehistory";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+            }
+            catch (Exception ex) { }
+            // Send request
+            var dateOfHistoryDataRequest = new DateOfHistoryDataRequest
+            {
+                email = email
+            };
+            var json = JsonConvert.SerializeObject(dateOfHistoryDataRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<DateOfHistoryDataResponse>(stringResponse);
+            return jsonResponse;
+        }
+        public static async Task<HistoryDataOnDateResponse> PostHistoryDataOnDate(string email, string date)
+        {
+            try
+            {
+                var url = BaseUrl + "/historydataperdate";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+            }
+            catch (Exception ex) { }
+            // Send request
+            var historyDataOnDateRequest = new HistoryDataOnDateRequest
+            {
+                email = email,
+                date = date
+            };
+            var json = JsonConvert.SerializeObject(historyDataOnDateRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<HistoryDataOnDateResponse>(stringResponse);
+            return jsonResponse;
+        }
+        public static async Task<AddNewRestrictedLinkResponse> PostAddNewRestrictedLink(string email, string link)
+        {
+            try
+            {
+                var url = BaseUrl + "/restrict";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+            }
+            catch (Exception ex) { }
+            // Send request
+            var addNewRestrictedLinkRequest = new AddNewRestrictedLinkRequest
+            {
+                email = email,
+                link = link
+            };
+            var json = JsonConvert.SerializeObject(addNewRestrictedLinkRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<AddNewRestrictedLinkResponse>(stringResponse);
+            return jsonResponse;
+        }
+        public static async Task<RemoveRestrictedLinkResponse> PostRemoveRestrictedLink(string email, string link)
+        {
+            try
+            {
+                var url = BaseUrl + "/deleterestrict";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+            }
+            catch (Exception ex) { }
+            // Send request
+            var removeRestrictedLinkRequest = new RemoveRestrictedLinkRequest
+            {
+                email = email,
+                link = link
+            };
+            var json = JsonConvert.SerializeObject(removeRestrictedLinkRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<RemoveRestrictedLinkResponse>(stringResponse);
+            return jsonResponse;
+        }
+        public static async Task<RestrictedLinkDataResponse> PostRestrictedLinkData(string email)
+        {
+            try
+            {
+                var url = BaseUrl + "/restrictdata";
+                client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+            }
+            catch (Exception ex) { }
+            // Send request
+            var restrictedLinkDataRequest = new RestrictedLinkDataRequest
+            {
+                email = email
+            };
+            var json = JsonConvert.SerializeObject(restrictedLinkDataRequest);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Recieve response
+            var response = await client.PostAsync("", content);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject<RestrictedLinkDataResponse>(stringResponse);
             return jsonResponse;
         }
     }

@@ -75,7 +75,7 @@ namespace Mosaik.id
         private void logOut(object sender, EventArgs e)
         {
             loginResponse = null;
-            Navigation.PopAsync();
+            Navigation.PushAsync( new LoginPage());
         }
 
         // Side Navbar Functions
@@ -118,6 +118,12 @@ namespace Mosaik.id
         // ================================
         private void AddMoreAccount(string email, string username)
         {
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s,e) =>
+            {
+                Navigation.PushAsync(new HistoryPage(loginResponse, email));
+            };
+
             StackLayout newAccount = new StackLayout
             {
                 VerticalOptions = LayoutOptions.Start,
@@ -142,6 +148,7 @@ namespace Mosaik.id
                     }
                 }
             };
+            newAccount.GestureRecognizers.Add(tapGestureRecognizer);
 
             supervisedAccountStack.Children.Insert(supervisedAccountStack.Children.Count - 1, newAccount);
         }
@@ -403,6 +410,7 @@ namespace Mosaik.id
         // =========================
         void GoBrowsing(object sender, EventArgs e)
         {
+            var email = loginResponse.email;
             bool CheckURLValid(String source)
             {
                 if (string.IsNullOrEmpty(source))
@@ -422,12 +430,13 @@ namespace Mosaik.id
                 source = "https://www.google.com/search?q=" + link.Text; 
             }
             link.Text = "";
-            Navigation.PushAsync(new BrowserPage(source));
+            Navigation.PushAsync(new BrowserPage(source, loginResponse));
         }
 
         private void GoToHistoryPage(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new HistoryPage());
+            var target = loginResponse.email;
+            Navigation.PushAsync(new HistoryPage(loginResponse, target));
         }
         protected override bool OnBackButtonPressed()
         {
